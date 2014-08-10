@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Change these accordingly.
-RUBY_VERSION="2.0.0-p247"
+RUBY_VERSION="2.1.2"
 ZURB_FOUNDATION_VERSION="4.3.2"
 POSTGRESQL_VERSION="9.2.4"
 REDIS_VERSION="2.8.0"
