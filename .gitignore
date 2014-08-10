@@ -1,0 +1,4 @@
+.vagrant
+*.swp
+*.swo
+.DS_Store
