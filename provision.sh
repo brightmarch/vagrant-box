@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 
-# Change these accordingly.
-RUBY_VERSION="2.1.2"
-ZURB_FOUNDATION_VERSION="4.3.2"
+# Global version numbers.
+NODE_VERSION="0.10.30"
+PHP_VERSION="5.5.12"
+PHP_REDIS_VERSION="2.2.5"
+PHP_ZMQ_VERSION="1.1.2"
 POSTGRESQL_VERSION="9.2.4"
 REDIS_VERSION="2.8.0"
-PHP_VERSION="5.5.12"
+RUBY_VERSION="2.1.2"
+ZEROMQ_VERSION="4.0.4"
+ZURB_FOUNDATION_VERSION="4.3.2"
 
 # Install some basic libraries and tools.
 apt-get update
@@ -29,7 +33,7 @@ wget -qO /etc/skel/.profile https://s3.amazonaws.com/brightmarch.build/.profile
 
 # We will manually compile the most important packages ourselves
 # and the code for them is stored in /opt/src.
-mkdir -p /opt/src/{ruby,php,php-redis,php-oauth,redis,postgresql}
+mkdir -p /opt/src/{node,php,php-redis,php-zmq,postgres,redis,ruby,zeromq}
 
 cd /opt/src/ruby
 wget -q https://s3.amazonaws.com/brightmarch.build/ruby-$RUBY_VERSION.tar.gz
@@ -58,6 +62,7 @@ wget -qO /etc/init.d/postgres https://s3.amazonaws.com/brightmarch.build/postgre
 chmod +x /etc/init.d/postgres
 update-rc.d postgres defaults
 
+# Install the Redis service.
 cd /opt/src/redis
 wget -q https://s3.amazonaws.com/brightmarch.build/redis-$REDIS_VERSION.tar.gz
 tar -xzf redis-$REDIS_VERSION.tar.gz
@@ -72,6 +77,15 @@ wget -qO /etc/init.d/redis https://s3.amazonaws.com/brightmarch.build/redis
 chmod +x /etc/init.d/redis
 update-rc.d redis defaults
 
+# Install the ZeroMQ library.
+cd /opt/src/zeromq
+wget -q https://s3.amazonaws.com/brightmarch.build/zeromq-4.0.4.tar.gz
+tar -xzf zeromq-$ZEROMQ_VERSION.tar.gz
+cd zeromq-$ZEROMQ_VERSION
+./configure
+make && make install
+
+# Install PHP.
 cd /opt/src/php
 wget -q https://s3.amazonaws.com/brightmarch.build/php-$PHP_VERSION.tar.gz
 tar -xzf php-$PHP_VERSION.tar.gz
@@ -80,16 +94,36 @@ cd php-$PHP_VERSION
 make && make install
 cp php.ini-development /usr/local/lib/php.ini
 
+# Install the php-redis extension.
 cd /opt/src/php-redis
-git clone git://github.com/nicolasff/phpredis.git
-cd phpredis
+wget -q https://s3.amazonaws.com/brightmarch.build/php-redis-$PHP_REDIS_VERSION.tar.gz
+tar -xzf php-redis-$PHP_REDIS_VERSION.tar.gz
+cd phpredis-$PHP_REDIS_VERSION
 phpize
 ./configure
 make && make install
 
-# Add redis.so to the list of extensions so PHP will pick it up.
+# Install the php-zmq extension.
+cd /opt/src/php-zmq
+wget -q https://s3.amazonaws.com/brightmarch.build/php-zmq-$PHP_ZMQ_VERSION.tar.gz
+tar -xzf php-redis-$PHP_ZMQ_VERSION.tar.gz
+cd phpredis-$PHP_ZMQ_VERSION
+phpize
+./configure
+make && make install
+
+# Add all of the PHP extensions.
 echo "extension=redis.so" >> /usr/local/lib/php.ini
+echo "extension=zmq.so" >> /usr/local/lib/php.ini
 echo "date.timezone=UTC" >> /usr/local/lib/php.ini
+
+# Install Node.
+cd /opt/src/node
+wget -q https://s3.amazonaws.com/brightmarch.build/node-v$NODE_VERSION.tar.gz
+tar -xzf node-v$NODE_VERSION.tar.gz
+cd node-v$NODE_VERSION
+./configure
+make && make install
 
 # Add some helpful bash and vim files.
 cp /etc/skel/.profile /home/vagrant/.profile
