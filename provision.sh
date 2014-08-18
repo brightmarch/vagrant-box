@@ -106,7 +106,7 @@ make && make install
 # Install the php-zmq extension.
 cd /opt/src/php-zmq
 wget -q https://s3.amazonaws.com/brightmarch.build/php-zmq-$PHP_ZMQ_VERSION.tgz
-tar -xzf php-redis-$PHP_ZMQ_VERSION.tgz
+tar -xzf php-zmq-$PHP_ZMQ_VERSION.tgz
 cd zmq-$PHP_ZMQ_VERSION
 phpize
 ./configure
