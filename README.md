@@ -6,7 +6,7 @@ An Ubuntu 12.04 64-bit box that includes:
 * PHP 5.5.12
 * php-redis 2.2.5
 * php-zmq 1.1.2
-* Postgres 9.2.4
+* Postgres 9.3.4
 * Redis 2.8.0
 * Ruby 2.1.2
 * ZeroMQ 4.0.4
