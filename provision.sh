@@ -47,7 +47,7 @@ gem install zurb-foundation -v $ZURB_FOUNDATION_VERSION
 # Create a postgres user that will manage everything Postgres.
 useradd --home-dir /home/postgres --create-home --shell /bin/bash --user-group postgres
 
-cd /opt/src/postgresql
+cd /opt/src/postgres
 wget -q https://s3.amazonaws.com/brightmarch.build/postgresql-$POSTGRESQL_VERSION.tar.bz2
 tar -xjf postgresql-$POSTGRESQL_VERSION.tar.bz2
 cd postgresql-$POSTGRESQL_VERSION
