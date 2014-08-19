@@ -20,3 +20,12 @@ $ vagrant package --output precise64-<VERSION>.box
 ```
 
 The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file associated with this repository.
+
+## Changelog
+
+### 1.1.0
+* Upgraded Postgres to 9.3.4.
+* Fixed path issues when compiling php-zmq.
+
+### 1.0.0
+* Initial release of Bright March Vagrant box.
