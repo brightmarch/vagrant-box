@@ -1,7 +1,8 @@
 # Bright March Vagrant Box
 An Ubuntu 12.04 64-bit box that includes:
 
-* Compass and SASS
+* Compass 0.12.4
+* God 0.13.4
 * Node 0.10.30
 * PHP 5.5.12
 * php-redis 2.2.5
@@ -9,6 +10,7 @@ An Ubuntu 12.04 64-bit box that includes:
 * Postgres 9.3.4
 * Redis 2.8.0
 * Ruby 2.1.2
+* SASS 3.3.4
 * ZeroMQ 4.0.4
 * ZURB Foundation 4.3.2
 
@@ -31,6 +33,7 @@ The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file
 
 ### 1.1.0
 * Upgraded Postgres to 9.3.4.
+* Locked down versions of Compass, God, and SASS.
 * Fixed path issues when compiling php-zmq.
 
 ### 1.0.0

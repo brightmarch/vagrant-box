@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 # Global version numbers.
+COMPASS_VERSION="0.12.4"
+GOD_VERSION="0.13.4"
 NODE_VERSION="0.10.30"
 PHP_VERSION="5.5.12"
 PHP_REDIS_VERSION="2.2.5"
@@ -8,6 +10,7 @@ PHP_ZMQ_VERSION="1.1.2"
 POSTGRESQL_VERSION="9.3.4"
 REDIS_VERSION="2.8.0"
 RUBY_VERSION="2.1.2"
+SASS_VERSION="3.3.4"
 ZEROMQ_VERSION="4.0.4"
 ZURB_FOUNDATION_VERSION="4.3.2"
 
@@ -41,8 +44,10 @@ tar -xzf ruby-$RUBY_VERSION.tar.gz
 cd ruby-$RUBY_VERSION
 ./configure
 make && make install
-gem install sass compass god
+gem install sass -v $SASS_VERSION
+gem install compass -v $COMPASS_VERSION
 gem install zurb-foundation -v $ZURB_FOUNDATION_VERSION
+gem install god -v $GOD_VERSION
 
 # Create a postgres user that will manage everything Postgres.
 useradd --home-dir /home/postgres --create-home --shell /bin/bash --user-group postgres
