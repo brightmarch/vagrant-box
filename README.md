@@ -15,7 +15,7 @@ An Ubuntu 12.04 64-bit box that includes:
 * ZURB Foundation 4.3.2
 
 ## Boxes
-You are free to use our boxes if you like. Below are the direct links to the .box files stores on Amazon AWS.
+You are free to use our boxes if you like. Below are the direct links to the .box files stored on Amazon AWS.
 
 * [2014-08-19] [precise64-1.1.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.1.0.box)
 * [2014-08-10] [precise64-1.0.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.0.0.box)
