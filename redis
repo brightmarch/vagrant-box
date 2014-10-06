@@ -1,0 +1,55 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:             redis
+# Required-Start:       $all
+# Required-Stop:        $all
+# Default-Start:        2 3 4 5
+# Default-Stop:         0 1 6
+# Short-Description:    Redis Server
+### END INIT INFO
+
+NAME=redis-server
+DESC=redis-server
+REDIS_CONFIG=/etc/redis/redis.conf
+REDIS_SERVER_BIN=/usr/local/bin/redis-server
+REDIS_CLI_BIN=/usr/local/bin/redis-cli
+
+set -e
+
+# Make sure the binary are present before proceeding.
+test -x $REDIS_SERVER_BIN || exit 1
+
+RETVAL=0
+
+case "$1" in
+    start)
+        echo -n "Starting $DESC: "
+        $REDIS_SERVER_BIN $REDIS_CONFIG
+        RETVAL=$?
+        echo "Started"
+        ;;
+    stop)
+        echo -n "Stopping $DESC: "
+        $REDIS_CLI_BIN shutdown
+        RETVAL=$?
+        echo "Stopped"
+        ;;
+    restart)
+        echo -n "Restarting $DESC: "
+        $REDIS_CLI_BIN shutdown
+        $REDIS_SERVER_BIN $REDIS_CONFIG
+        RETVAL=$?
+        echo "Restarted"
+        ;;
+    status)
+        $REDIS_CLI_BIN info
+        RETVAL=$?
+        ;;
+    *)
+        echo "Usage: redis-server {start|stop|restart|status}"
+        exit 1
+        ;;
+esac
+
+exit 0
