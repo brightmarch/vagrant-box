@@ -22,3 +22,4 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 PATH="$PATH:/usr/local/pgsql/bin:/usr/local/go/bin"
+GOROOT="$HOME/go"
