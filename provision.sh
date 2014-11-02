@@ -39,7 +39,7 @@ wget -qO /etc/skel/.profile https://raw.githubusercontent.com/brightmarch/vagran
 mkdir -p /opt/src/{node,php,php-redis,php-zmq,postgres,redis,ruby,zeromq}
 
 cd /opt/src/ruby
-wget -q https://github.com/brightmarch/vagrant-box/raw/master/ruby-$RUBY_VERSION.tar.gz
+wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/ruby-$RUBY_VERSION.tar.gz
 tar -xzf ruby-$RUBY_VERSION.tar.gz
 cd ruby-$RUBY_VERSION
 ./configure
@@ -53,7 +53,7 @@ gem install god -v $GOD_VERSION
 useradd --home-dir /home/postgres --create-home --shell /bin/bash --user-group postgres
 
 cd /opt/src/postgres
-wget -q https://github.com/brightmarch/vagrant-box/raw/master/postgresql-$POSTGRESQL_VERSION.tar.bz2
+wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/postgresql-$POSTGRESQL_VERSION.tar.bz2
 tar -xjf postgresql-$POSTGRESQL_VERSION.tar.bz2
 cd postgresql-$POSTGRESQL_VERSION
 ./configure --disable-debug --enable-thread-safety --with-gssapi --with-openssl --with-libxml --with-libxslt --with-ossp-uuid --with-python --without-bonjour
@@ -69,7 +69,7 @@ update-rc.d postgres defaults
 
 # Install the Redis service.
 cd /opt/src/redis
-wget -q https://github.com/brightmarch/vagrant-box/raw/master/redis-$REDIS_VERSION.tar.gz
+wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/redis-$REDIS_VERSION.tar.gz
 tar -xzf redis-$REDIS_VERSION.tar.gz
 cd redis-$REDIS_VERSION
 make && make install
@@ -84,7 +84,7 @@ update-rc.d redis defaults
 
 # Install the ZeroMQ library.
 cd /opt/src/zeromq
-wget -q https://github.com/brightmarch/vagrant-box/raw/master/zeromq-$ZEROMQ_VERSION.tar.gz
+wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/zeromq-$ZEROMQ_VERSION.tar.gz
 tar -xzf zeromq-$ZEROMQ_VERSION.tar.gz
 cd zeromq-$ZEROMQ_VERSION
 ./configure
@@ -92,7 +92,7 @@ make && make install
 
 # Install PHP.
 cd /opt/src/php
-wget -q https://github.com/brightmarch/vagrant-box/raw/master/php-$PHP_VERSION.tar.gz
+wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/php-$PHP_VERSION.tar.gz
 tar -xzf php-$PHP_VERSION.tar.gz
 cd php-$PHP_VERSION
 ./configure --with-openssl --with-zlib --with-curl --enable-zip --with-xmlrpc --enable-soap --enable-sockets --with-pgsql --with-pdo-pgsql --with-mcrypt --enable-mbstring --with-libxml-dir --enable-intl --enable-pcntl --enable-opcache --with-gd --with-jpeg-dir=/usr --enable-exif
@@ -101,7 +101,7 @@ cp php.ini-development /usr/local/lib/php.ini
 
 # Install the php-redis extension.
 cd /opt/src/php-redis
-wget -q https://github.com/brightmarch/vagrant-box/raw/master/php-redis-$PHP_REDIS_VERSION.tar.gz
+wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/php-redis-$PHP_REDIS_VERSION.tar.gz
 tar -xzf php-redis-$PHP_REDIS_VERSION.tar.gz
 cd phpredis-$PHP_REDIS_VERSION
 phpize
@@ -110,7 +110,7 @@ make && make install
 
 # Install the php-zmq extension.
 cd /opt/src/php-zmq
-wget -q https://github.com/brightmarch/vagrant-box/raw/master/php-zmq-$PHP_ZMQ_VERSION.tgz
+wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/php-zmq-$PHP_ZMQ_VERSION.tgz
 tar -xzf php-zmq-$PHP_ZMQ_VERSION.tgz
 cd zmq-$PHP_ZMQ_VERSION
 phpize
@@ -124,7 +124,7 @@ echo "date.timezone=UTC" >> /usr/local/lib/php.ini
 
 # Install Node.
 cd /opt/src/node
-wget -q https://github.com/brightmarch/vagrant-box/raw/master/node-v$NODE_VERSION.tar.gz
+wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/node-v$NODE_VERSION.tar.gz
 tar -xzf node-v$NODE_VERSION.tar.gz
 cd node-v$NODE_VERSION
 ./configure
