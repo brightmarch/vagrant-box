@@ -7,6 +7,7 @@ GOD_VERSION="0.13.4"
 NODE_VERSION="0.10.30"
 PHP_VERSION="5.5.12"
 PHP_REDIS_VERSION="2.2.5"
+PHP_SSH2_VERSION="0.12"
 PHP_ZMQ_VERSION="1.1.2"
 POSTGRESQL_VERSION="9.3.4"
 REDIS_VERSION="2.8.0"
@@ -23,7 +24,7 @@ apt-get install -y bash-completion build-essential vim libssl-dev openssl git bi
 apt-get install -y libkrb5-dev libxml2 libxml2-dev libxslt1-dev libossp-uuid-dev uuid python-dev libreadline6 libreadline-dev
 
 # PHP libraries
-apt-get install -y autoconf libcurl4-openssl-dev libmcrypt4 libmcrypt-dev libicu48 libicu-dev libpng12-dev libjpeg8-dev
+apt-get install -y autoconf libcurl4-openssl-dev libmcrypt4 libmcrypt-dev libicu48 libicu-dev libpng12-dev libjpeg8-dev libldap2-dev libssh2-1-dev
 
 # Ensure we are using UTF-8 and in UTC for everything.
 echo UTC > /etc/timezone
@@ -37,7 +38,7 @@ wget -qO /etc/skel/.profile https://raw.githubusercontent.com/brightmarch/vagran
 
 # We will manually compile the most important packages ourselves
 # and the code for them is stored in /opt/src.
-mkdir -p /opt/src/{go,node,php,php-redis,php-zmq,postgres,redis,ruby,zeromq}
+mkdir -p /opt/src/{go,node,php,php-redis,php-ssh2,php-zmq,postgres,redis,ruby,zeromq}
 
 cd /opt/src/ruby
 wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/ruby-$RUBY_VERSION.tar.gz
@@ -113,6 +114,15 @@ phpize
 ./configure
 make && make install
 
+# Install the php-ssh2 extension.
+cd /opt/src/php-ssh2
+wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/php-ssh2-$PHP_SSH2_VERSION.tgz
+tar -xzf php-ssh2-$PHP_SSH2_VERSION.tgz
+cd ssh2-$PHP_SSH2_VERSION
+phpize
+./configure
+make && make install
+
 # Install the php-zmq extension.
 cd /opt/src/php-zmq
 wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/php-zmq-$PHP_ZMQ_VERSION.tgz
@@ -124,6 +134,7 @@ make && make install
 
 # Add all of the PHP extensions.
 echo "extension=redis.so" >> /usr/local/lib/php.ini
+echo "extension=ssh2.so" >> /usr/local/lib/php.ini
 echo "extension=zmq.so" >> /usr/local/lib/php.ini
 echo "date.timezone=UTC" >> /usr/local/lib/php.ini
 
