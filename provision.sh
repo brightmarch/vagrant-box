@@ -2,6 +2,7 @@
 
 # Global version numbers.
 COMPASS_VERSION="0.12.4"
+GO_VERSION="1.4.1"
 GOD_VERSION="0.13.4"
 NODE_VERSION="0.10.30"
 PHP_VERSION="5.5.12"
@@ -36,7 +37,7 @@ wget -qO /etc/skel/.profile https://raw.githubusercontent.com/brightmarch/vagran
 
 # We will manually compile the most important packages ourselves
 # and the code for them is stored in /opt/src.
-mkdir -p /opt/src/{node,php,php-redis,php-zmq,postgres,redis,ruby,zeromq}
+mkdir -p /opt/src/{go,node,php,php-redis,php-zmq,postgres,redis,ruby,zeromq}
 
 cd /opt/src/ruby
 wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/ruby-$RUBY_VERSION.tar.gz
@@ -129,6 +130,12 @@ tar -xzf node-v$NODE_VERSION.tar.gz
 cd node-v$NODE_VERSION
 ./configure
 make && make install
+
+# Install Go.
+mkdir ~/go
+cd /opt/src/go
+wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/go$GO_VERSION.linux-amd64.tar.gz
+tar -C /usr/local -xzf go$GO_VERSION.linux-amd64.tar.gz
 
 # Add some helpful bash files.
 cp /etc/skel/.profile /home/vagrant/.profile
