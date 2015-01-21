@@ -2,6 +2,7 @@
 An Ubuntu 12.04 64-bit box that includes:
 
 * Compass 0.12.4
+* Go 1.4.1
 * God 0.13.4
 * Node 0.10.30
 * PHP 5.5.12
@@ -17,6 +18,7 @@ An Ubuntu 12.04 64-bit box that includes:
 ## Boxes
 You are free to use our boxes if you like. Below are the direct links to the .box files stored on Amazon AWS.
 
+* [2015-01-21] [precise64-1.1.1.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.1.1.box)
 * [2014-08-19] [precise64-1.1.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.1.0.box)
 * [2014-08-10] [precise64-1.0.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.0.0.box)
 
@@ -30,6 +32,10 @@ $ vagrant package --output precise64-<VERSION>.box
 The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file associated with this repository.
 
 ## Changelog
+
+### 1.1.1
+* Added the `php-ldap` extension.
+* Added Go 1.4.1.
 
 ### 1.1.0
 * Upgraded Postgres to 9.3.4.
