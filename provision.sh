@@ -91,6 +91,10 @@ cd zeromq-$ZEROMQ_VERSION
 ./configure
 make && make install
 
+# Symlink the LDAP libraries for compiling with PHP.
+ln -fs /usr/lib/x86_64-linux-gnu/liblber.a /usr/lib/
+ln -fs /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/
+
 # Install PHP.
 cd /opt/src/php
 wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/php-$PHP_VERSION.tar.gz
