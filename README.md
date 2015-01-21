@@ -40,7 +40,7 @@ The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file
 ### 1.1.0
 * Upgraded Postgres to 9.3.4.
 * Locked down versions of Compass, God, and SASS.
-* Fixed path issues when compiling php-zmq.
+* Fixed path issues when compiling `php-zmq`.
 * Set PHP `memory_limit` value to `512MB`.
 * Set PHP `upload_max_filesize` value to `32MB`.
 
