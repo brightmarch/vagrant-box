@@ -96,7 +96,7 @@ cd /opt/src/php
 wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/php-$PHP_VERSION.tar.gz
 tar -xzf php-$PHP_VERSION.tar.gz
 cd php-$PHP_VERSION
-./configure --with-openssl --with-zlib --with-curl --enable-zip --with-xmlrpc --enable-soap --enable-sockets --with-pgsql --with-pdo-pgsql --with-mcrypt --enable-mbstring --with-libxml-dir --enable-intl --enable-pcntl --enable-opcache --with-gd --with-jpeg-dir=/usr --enable-exif
+./configure --with-openssl --with-zlib --with-curl --enable-zip --with-xmlrpc --enable-soap --enable-sockets --with-pgsql --with-pdo-pgsql --with-mcrypt --enable-mbstring --with-libxml-dir --enable-intl --enable-pcntl --enable-opcache --with-gd --with-jpeg-dir=/usr --enable-exif --with-ldap=/usr
 make && make install
 cp php.ini-development /usr/local/lib/php.ini
 
