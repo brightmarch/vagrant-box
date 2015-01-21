@@ -4,7 +4,7 @@
 COMPASS_VERSION="0.12.4"
 GOD_VERSION="0.13.4"
 NODE_VERSION="0.10.30"
-PHP_VERSION="5.6.2"
+PHP_VERSION="5.5.12"
 PHP_REDIS_VERSION="2.2.5"
 PHP_ZMQ_VERSION="1.1.2"
 POSTGRESQL_VERSION="9.3.4"
@@ -130,7 +130,7 @@ cd node-v$NODE_VERSION
 ./configure
 make && make install
 
-# Add some helpful bash and vim files.
+# Add some helpful bash files.
 cp /etc/skel/.profile /home/vagrant/.profile
 wget -qO /home/vagrant/.bash_aliases https://raw.githubusercontent.com/brightmarch/vagrant-box/master/.bash_aliases
 wget -qO /home/vagrant/.bash_envvars https://raw.githubusercontent.com/brightmarch/vagrant-box/master/.bash_envvars
