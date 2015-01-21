@@ -7,6 +7,7 @@ An Ubuntu 12.04 64-bit box that includes:
 * Node 0.10.30
 * PHP 5.5.12
 * php-redis 2.2.5
+* php-ssh2 0.12
 * php-zmq 1.1.2
 * Postgres 9.3.4
 * Redis 2.8.0
@@ -18,7 +19,7 @@ An Ubuntu 12.04 64-bit box that includes:
 ## Boxes
 You are free to use our boxes if you like. Below are the direct links to the .box files stored on Amazon AWS.
 
-* [2015-01-21] [precise64-1.1.1.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.1.1.box)
+* [2015-01-21] [precise64-1.2.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.2.0.box)
 * [2014-08-19] [precise64-1.1.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.1.0.box)
 * [2014-08-10] [precise64-1.0.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.0.0.box)
 
@@ -26,7 +27,7 @@ You are free to use our boxes if you like. Below are the direct links to the .bo
 After bringing up the provisioned box, run:
 
 ```sh
-$ vagrant package --output precise64-<VERSION>.box
+$ vagrant package --output precise64-`cat VERSION`.box
 ```
 
 The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file associated with this repository.
@@ -35,6 +36,7 @@ The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file
 
 ### 1.1.1
 * Added the `php-ldap` extension.
+* Added the `php-ssh2` extension.
 * Added Go 1.4.1.
 
 ### 1.1.0
