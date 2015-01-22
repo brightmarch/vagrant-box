@@ -34,7 +34,7 @@ The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file
 
 ## Changelog
 
-### 1.1.1
+### 1.2.0
 * Added the `php-ldap` extension.
 * Added the `php-ssh2` extension.
 * Added Go 1.4.1.
