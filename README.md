@@ -6,6 +6,7 @@ An Ubuntu 12.04 64-bit box that includes:
 * God 0.13.4
 * Node 0.10.30
 * PHP 5.5.12
+* php-imagick 3.1.2
 * php-redis 2.2.5
 * php-ssh2 0.12
 * php-zmq 1.1.2
@@ -19,6 +20,7 @@ An Ubuntu 12.04 64-bit box that includes:
 ## Boxes
 You are free to use our boxes if you like. Below are the direct links to the .box files stored on Amazon AWS.
 
+* [2015-02-09] [precise64-1.3.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.3.0.box)
 * [2015-01-21] [precise64-1.2.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.2.0.box)
 * [2014-08-19] [precise64-1.1.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.1.0.box)
 * [2014-08-10] [precise64-1.0.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.0.0.box)
@@ -33,6 +35,10 @@ $ vagrant package --output precise64-`cat VERSION`.box
 The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file associated with this repository.
 
 ## Changelog
+
+### 1.3.0
+* Upgraded PHP to 5.6.5.
+* Added the `php-imagick` extension.
 
 ### 1.2.0
 * Added the `php-ldap` extension.

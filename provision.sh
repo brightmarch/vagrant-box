@@ -6,6 +6,7 @@ GO_VERSION="1.4.1"
 GOD_VERSION="0.13.4"
 NODE_VERSION="0.10.30"
 PHP_VERSION="5.6.5"
+PHP_IMAGICK_VERSION="3.1.2"
 PHP_REDIS_VERSION="2.2.5"
 PHP_SSH2_VERSION="0.12"
 PHP_ZMQ_VERSION="1.1.2"
@@ -24,7 +25,7 @@ apt-get install -y bash-completion build-essential vim libssl-dev openssl git bi
 apt-get install -y libkrb5-dev libxml2 libxml2-dev libxslt1-dev libossp-uuid-dev uuid python-dev libreadline6 libreadline-dev
 
 # PHP libraries
-apt-get install -y autoconf libcurl4-openssl-dev libmcrypt4 libmcrypt-dev libicu48 libicu-dev libpng12-dev libjpeg8-dev libldap2-dev libssh2-1-dev
+apt-get install -y autoconf libcurl4-openssl-dev libmcrypt4 libmcrypt-dev libicu48 libicu-dev libpng12-dev libjpeg8-dev libldap2-dev libssh2-1-dev imagemagick libmagickwand-dev libmagickcore-dev
 
 # Ensure we are using UTF-8 and in UTC for everything.
 echo UTC > /etc/timezone
@@ -38,7 +39,7 @@ wget -qO /etc/skel/.profile https://raw.githubusercontent.com/brightmarch/vagran
 
 # We will manually compile the most important packages ourselves
 # and the code for them is stored in /opt/src.
-mkdir -p /opt/src/{go,node,php,php-redis,php-ssh2,php-zmq,postgres,redis,ruby,zeromq}
+mkdir -p /opt/src/{go,node,php,php-imagick,php-redis,php-ssh2,php-zmq,postgres,redis,ruby,zeromq}
 
 cd /opt/src/ruby
 wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/ruby-$RUBY_VERSION.tar.gz
@@ -105,6 +106,15 @@ cd php-$PHP_VERSION
 make && make install
 cp php.ini-development /usr/local/lib/php.ini
 
+# Install the php-imagick extension.
+cd /opt/src/php-imagick
+wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/php-imagick-$PHP_IMAGICK_VERSION.tgz
+tar -xzf php-imagick-$PHP_IMAGICK_VERSION.tgz
+cd imagick-$PHP_IMAGICK_VERSION
+phpize
+./configure
+make && make install
+
 # Install the php-redis extension.
 cd /opt/src/php-redis
 wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/php-redis-$PHP_REDIS_VERSION.tar.gz
@@ -133,6 +143,7 @@ phpize
 make && make install
 
 # Add all of the PHP extensions.
+echo "extension=imagick.so" >> /usr/local/lib/php.ini
 echo "extension=redis.so" >> /usr/local/lib/php.ini
 echo "extension=ssh2.so" >> /usr/local/lib/php.ini
 echo "extension=zmq.so" >> /usr/local/lib/php.ini
