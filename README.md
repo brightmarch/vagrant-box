@@ -5,7 +5,7 @@ An Ubuntu 12.04 64-bit box that includes:
 * Go 1.4.1
 * God 0.13.4
 * Node 0.10.30
-* PHP 5.5.12
+* PHP 5.6.5
 * php-imagick 3.1.2
 * php-redis 2.2.5
 * php-ssh2 0.12
