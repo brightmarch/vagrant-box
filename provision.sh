@@ -158,7 +158,6 @@ cd node-v$NODE_VERSION
 make && make install
 
 # Install Go.
-mkdir ~/go
 cd /opt/src/go
 wget -q https://github.com/brightmarch/vagrant-box/raw/master/packages/go$GO_VERSION.linux-amd64.tar.gz
 tar -C /usr/local -xzf go$GO_VERSION.linux-amd64.tar.gz
