@@ -1,0 +1,98 @@
+---
+- hosts: all
+  vars:
+      ruby_version: 2.1.2
+  remote_user: vagrant
+  sudo: yes
+  tasks:
+    - name: Update the Aptitude Cache
+      apt: update_cache=yes
+
+    - name: Install Basic Packages
+      apt:  name={{ item }} state=present
+      with_items:
+        - bash-completion
+        - build-essential
+        - vim
+        - libssl-dev
+        - openssl
+        - git
+        - bison
+        - flex
+        - curl
+        - libxml2-utils
+        - htop
+
+    - name: Install PHP Libraries
+      apt:  name={{ item }} state=present
+      with_items:
+        - autoconf
+        - libcurl4-openssl-dev
+        - libmcrypt4
+        - libmcrypt-dev
+        - libicu48
+        - libicu-dev
+        - libpng12-dev
+        - libjpeg8-dev
+        - libldap2-dev
+        - libssh2-1-dev
+        - imagemagick
+        - libmagickwand-dev
+        - libmagickcore-dev
+
+    - name: Set the timezone
+      copy: content='UTC'
+        dest=/etc/timzone
+        owner=root
+        group=root
+        mode=0644
+        backup=no
+      notify:
+        - update timezone
+
+    - name: Generate the Locale
+      locale_gen: name=en_US.UTF-8 state=present
+
+    - name: Update the Locale
+      command: 'update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8'
+
+    - name: Update the default profile
+      copy: src=.profile
+        dest=/etc/skel/.profile
+
+    # Vagrant specific
+    - name: Add bash aliases
+      copy: src=.bash_aliases
+        dest=/etc/skel/.aliases
+
+    - name: Update the default profile
+      copy: src=.bash_envvars
+        dest=/etc/skel/.envvars
+
+    # Vagrant specific
+    - name: Set up the vagrant user
+      copy: src={{ item }}
+        dest=/home/vagrant/{{ item }}
+        owner=vagrant
+        group=vagrant
+      with_items:
+          - .profile
+          - .bash_aliases
+          - .bash_envvars
+
+    - include: playbooks/tasks/postgres.yml postgresql_version=9.3.4
+
+    # - include: playbooks/tasks/ruby.yml ruby_version={{ ruby_version }}
+
+  handlers:
+    - name: update timezone
+      command: dpkg-reconfigure --frontend noninteractive tzdata
+
+    - name: update locale
+      command: 'update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8'
+
+
+# Postgres libraries
+# PHP libraries
+
+

@@ -1,0 +1,42 @@
+---
+- name: Install Postgres Libraries
+  apt:  name={{ item }} state=present
+  with_items:
+    - libkrb5-dev
+    - libxml2
+    - libxml2-dev
+    - libxslt1-dev
+    - libossp-uuid-dev
+    - uuid
+    - python-dev
+    - libreadline6
+    - libreadline-dev
+
+- command: mkdir -p /opt/src/postgres
+
+- name: Unpack Postgres Source
+  unarchive: src=postgresql-{{ postgresql_version }}.tar.bz2
+      dest=/opt/src/postgres
+
+- name: Compile Postgres 
+  command: '{{ item }} chdir=/opt/src/postgres/postgresql-{{ postgresql_version }}'
+  with_items:
+      - ./configure --disable-debug --enable-thread-safety --with-gssapi --with-openssl --with-libxml --with-libxslt --with-ossp-uuid --with-python --without-bonjour
+      - make world
+      - make install
+
+
+- name: Add the postgres User
+  user: name=postgres
+      shell=/bin/bash
+
+- name: Setup the Database Cluster
+  shell: su - postgres -c "initdb -D /home/postgres/cluster -E 'UTF-8'"
+
+- name: Install the Postgres init.d service script
+  copy: src=postgres
+      dest=/etc/init.d/postgres
+      mode=u+x
+
+- command: update-rc.d postgres defaults
+

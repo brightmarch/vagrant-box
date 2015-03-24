@@ -1,0 +1,13 @@
+---
+- command: mkdir -p /opt/src/ruby
+
+- name: Unpack Ruby Source
+  unarchive: src=ruby-{{ ruby_version }}.tar.gz
+      dest=/opt/src/ruby
+
+- name: Compile Ruby
+  command: '{{ item }} chdir=/opt/src/ruby/ruby-{{ ruby_version }}'
+  with_items:
+      - ./configure
+      - make
+      - make install
