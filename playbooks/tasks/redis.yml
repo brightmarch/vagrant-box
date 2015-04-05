@@ -1,0 +1,24 @@
+---
+- command: mkdir -p /opt/src/redis
+
+- name: Unpack Redis Source
+  unarchive: src=redis-{{ redis_version }}.tar.gz
+      dest=/opt/src/redis
+
+- command: mkdir -p /etc/redis
+
+- name: Install Redis
+  command: '{{ item }} chdir=/opt/src/redis/redis-{{ redis_version }}'
+  with_items:
+      - make 
+      - make install
+      - cp redis.conf /etc/redis/redis.conf
+
+- command: sed -i 's/daemonize no/daemonize yes/g' /etc/redis/redis.conf
+
+- name: Install the Redis init.d service script
+  copy: src=redis
+      dest=/etc/init.d/redis
+      mode=u+x
+
+- command: update-rc.d redis defaults
