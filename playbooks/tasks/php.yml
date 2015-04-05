@@ -1,0 +1,45 @@
+---
+- name: Install PHP Libraries
+  apt:  name={{ item }} state=present
+  with_items:
+    - autoconf
+    - libcurl4-openssl-dev
+    - libmcrypt4
+    - libmcrypt-dev
+    - libicu48
+    - libicu-dev
+    - libpng12-dev
+    - libjpeg8-dev
+    - libldap2-dev
+      # Move these
+    - libssh2-1-dev
+    - imagemagick
+    - libmagickwand-dev
+    - libmagickcore-dev
+
+- command: mkdir -p /opt/src/php
+
+- name: Unpack PHP
+  unarchive: src=php-{{ php_version }}.tar.gz
+        dest=/opt/src/php
+
+- name: Install PHP
+  command: '{{ item }} chdir=/opt/src/php/php-{{ php_version }}'
+  with_items:
+      - ./configure --with-openssl --with-zlib --with-curl 
+            --enable-zip --with-xmlrpc --enable-soap --enable-sockets
+            --with-pgsql --with-pdo-pgsql --with-mcrypt --enable-mbstring
+            --with-libxml-dir --enable-intl --enable-pcntl
+            --enable-opcache --with-gd --with-jpeg-dir=/usr --enable-exif
+            --with-ldap=/usr
+      - make
+      - make install
+
+- name: Copy the php.ini-development file
+  command: cp php.ini-development /usr/local/lib/php.ini
+  when: not production
+
+- name: Copy the php.ini-production file
+  command: cp php.ini-production /usr/local/lib/php.ini
+  when: production
+      
