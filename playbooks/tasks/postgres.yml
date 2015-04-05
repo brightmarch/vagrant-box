@@ -21,7 +21,9 @@
 - name: Compile Postgres 
   command: '{{ item }} chdir=/opt/src/postgres/postgresql-{{ postgresql_version }}'
   with_items:
-      - ./configure --disable-debug --enable-thread-safety --with-gssapi --with-openssl --with-libxml --with-libxslt --with-ossp-uuid --with-python --without-bonjour
+      - ./configure --disable-debug --enable-thread-safety --with-gssapi
+            --with-openssl --with-libxml --with-libxslt --with-ossp-uuid
+            --with-python --without-bonjour
       - make world
       - make install
 
