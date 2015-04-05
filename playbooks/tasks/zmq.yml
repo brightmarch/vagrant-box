@@ -1,0 +1,13 @@
+---
+- command: mkdir -p /opt/src/zeromq
+
+- name: Unpack Zero MQ Source
+  unarchive: src=zeromq-{{ zeromq_version }}.tar.gz
+      dest=/opt/src/zeromq
+
+- name: Compile Zero MQ 
+  command: '{{ item }} chdir=/opt/src/zeromq/zeromq-{{ zeromq_version }}'
+  with_items:
+      - ./configure
+      - make
+      - make install
