@@ -1,0 +1,6 @@
+---
+php_source: php-{{ php_version }}
+
+php_source_path: '{{ php_source_location + php_source }}'
+
+php_tarball: '{{ php_source }}.tar.gz'

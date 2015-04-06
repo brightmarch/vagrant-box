@@ -1,0 +1,7 @@
+---
+production: false
+
+php_version: 5.6.5
+
+php_source_location: /opt/src/php/
+

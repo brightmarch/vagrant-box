@@ -1,0 +1,66 @@
+---
+- name: install php libraries
+  apt:  name={{ item }} state=present update_cache=yes
+  with_items:
+    - build-essential
+    - autoconf
+    - libcurl4-openssl-dev
+    - libmcrypt4
+    - libmcrypt-dev
+    - libicu48
+    - libicu-dev
+    - libpng12-dev
+    - libjpeg8-dev
+    - libldap2-dev
+      # Move these
+    - libssh2-1-dev
+    - imagemagick
+    - libmagickwand-dev
+    - libmagickcore-dev
+
+
+- name: symlink the ldap libraries for compiling with php
+  command: ln -fs /usr/lib/x86_64-linux-gnu/{{ item }} /usr/lib/
+      creates=/usr/lib/{{ item }}
+  with_items:
+    - liblber.a
+    - liblber.so
+
+- name: create destination for source
+  command: mkdir -p {{ php_source_location }}
+      creates={{ php_source_location }}
+
+- name: copy php tarball
+  copy: src={{ php_tarball }}
+    dest={{ php_source_location }}
+
+- name: unpack php source
+  command: tar xf {{ php_tarball }}
+    chdir={{ php_source_location }}
+    creates={{ php_source_path }}
+
+- name: install php
+  command: '{{ item }}
+      chdir={{ php_source_path }}
+      creates=/usr/local/bin/php'
+  with_items:
+      - ./configure --with-openssl --with-zlib --with-curl
+            --enable-zip --with-xmlrpc --enable-soap --enable-sockets
+            --with-pgsql --with-pdo-pgsql --with-mcrypt --enable-mbstring
+            --with-libxml-dir --enable-intl --enable-pcntl
+            --enable-opcache --with-gd --with-jpeg-dir=/usr --enable-exif
+            --with-ldap=/usr
+      - make
+      - make install
+
+- name: copy the php.ini-development file
+  command: cp php.ini-development /usr/local/lib/php.ini
+      chdir={{ php_source_path }}
+      creates=/usr/local/lib/php.ini
+  when: not production
+
+- name: copy the php.ini-production file
+      chdir={{ php_source_path }}
+      creates=/usr/local/lib/php.ini
+  command: cp php.ini-production /usr/local/lib/php.ini
+  when: production
