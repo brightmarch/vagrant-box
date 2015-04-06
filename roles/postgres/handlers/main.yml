@@ -1,0 +1,6 @@
+---
+- name: enable postgres
+  service: name=postgres enabled=yes state=started
+
+- name: restart postgres
+  service: name=postgres state=started

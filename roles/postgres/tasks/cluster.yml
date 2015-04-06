@@ -1,0 +1,10 @@
+---
+- name: add the postgres user
+  user: name={{ postgres_user }}
+      shell=/bin/bash
+
+  # Specifing su: yes and su_user: postgres does not always behave
+  # as we would expect it for this command.
+- name: setup the database cluster
+  shell: su - {{ postgres_user }} -c '/usr/local/pgsql/bin/initdb -D /home/{{ postgres_user }}/cluster -E {{ postgres_encoding }}'
+      creates=/home/{{ postgres_user }}/cluster

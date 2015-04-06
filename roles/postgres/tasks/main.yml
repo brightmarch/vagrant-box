@@ -1,0 +1,9 @@
+---
+- include: install.yml
+
+- include: cluster.yml
+
+- include: service.yml
+  notify:
+    - enable postgres
+    
