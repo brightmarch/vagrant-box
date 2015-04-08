@@ -60,7 +60,7 @@
   when: not production
 
 - name: copy the php.ini-production file
+  command: cp php.ini-production /usr/local/lib/php.ini
       chdir={{ php_source_path }}
       creates=/usr/local/lib/php.ini
-  command: cp php.ini-production /usr/local/lib/php.ini
   when: production
