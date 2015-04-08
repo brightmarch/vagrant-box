@@ -1,0 +1,24 @@
+---
+- name: create destination for php-redis source
+  command: mkdir -p {{ php_redis_source_location }}
+      creates={{ php_redis_source_location }}
+
+- name: copy php-redis tarball
+  copy: src={{ php_redis_tarball }}
+    dest={{ php_redis_source_location }}
+
+- name: unpack php-redis source
+  command: tar xf {{ php_redis_tarball }}
+    chdir={{ php_redis_source_location }}
+    creates={{ php_redis_source_path }}
+
+- name: compile php-redis
+  shell: '{{ item }} chdir={{ php_redis_source_path }}
+       creates={{ php_redis_source_path }}/modules/redis.so'
+  with_items:
+      - phpize
+      - ./configure
+      - make && make install  # Make this a one-liner so we can use the 
+                              # modules/redis.so to check that it has already
+                              # executed. That file is created during make not
+                              # make install.
