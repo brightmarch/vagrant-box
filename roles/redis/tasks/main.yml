@@ -1,0 +1,8 @@
+---
+- include: install.yml
+
+- include: conf.yml
+
+- include: service.yml
+  notify:
+      - enable redis

@@ -1,0 +1,12 @@
+---
+- command: mkdir -p /etc/redis
+    creates=/etc/redis
+
+- command: cp redis.conf /etc/redis/redis.conf
+    chdir={{ redis_source_path }}
+    creates=/etc/redis/redis.conf
+  register: result
+
+- command: sed -i 's/daemonize no/daemonize yes/g' /etc/redis/redis.conf
+  when: result|changed
+
