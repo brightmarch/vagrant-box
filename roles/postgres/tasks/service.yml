@@ -3,6 +3,3 @@
   copy: src=postgres
       dest=/etc/init.d/postgres
       mode=u+x
-
-- name: enable the postgres service
-  service: name=postgres enabled=yes
