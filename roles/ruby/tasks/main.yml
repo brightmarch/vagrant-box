@@ -1,0 +1,27 @@
+---
+- name: install ruby dependencies
+  apt:  name={{ item }} state=present update_cache=yes
+  with_items:
+    - build-essential
+
+- name: create destination for source
+  command: mkdir -p {{ ruby_source_location }}
+      creates={{ ruby_source_location }}
+
+- name: copy ruby tarball
+  copy: src={{ ruby_tarball }}
+    dest={{ ruby_source_location }}
+
+- name: unpack ruby source
+  command: tar xf {{ ruby_tarball }}
+    chdir={{ ruby_source_location }}
+    creates={{ ruby_source_path }}
+
+- name: Compile Ruby
+  command: '{{ item }}
+      chdir={{ ruby_source_path }}
+      creates=/usr/local/bin/ruby'
+  with_items:
+      - ./configure
+      - make
+      - make install

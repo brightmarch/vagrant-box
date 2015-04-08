@@ -1,0 +1,6 @@
+---
+ruby_source: ruby-{{ ruby_version }}
+
+ruby_source_path: '{{ ruby_source_location + ruby_source }}'
+
+ruby_tarball: '{{ ruby_source }}.tar.gz'
