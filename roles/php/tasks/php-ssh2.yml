@@ -22,3 +22,6 @@
                               # modules/ssh2.so to check that it has already 
                               # executed. That file is created during make not
                               # make install.
+
+- name: add the extension to php.ini
+  lineinfile: dest=/usr/local/lib/php.ini line="extension=ssh2.so"
