@@ -64,3 +64,6 @@
       chdir={{ php_source_path }}
       creates=/usr/local/lib/php.ini
   when: production
+
+- name: set the date.timezone in php.ini
+  lineinfile: dest=/usr/local/lib/php.ini line="date.timezone=UTC"
