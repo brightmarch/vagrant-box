@@ -13,7 +13,7 @@
     creates={{ php_imagick_source_path }}
 
 - name: compile php imagick
-  command: '{{ item }} chdir={{ php_imagick_source_path }}
+  shell: '{{ item }} chdir={{ php_imagick_source_path }}
       creates={{ php_imagick_source_path }}/modules/imagick.so'
   with_items:
       - phpize
@@ -22,3 +22,6 @@
                               # modules/imagick.so to check that it has already
                               # executed. That file is created during make not
                               # make install.
+
+- name: add the extension to php.ini
+  lineinfile: dest=/usr/local/lib/php.ini line="extension=imagick.so"
