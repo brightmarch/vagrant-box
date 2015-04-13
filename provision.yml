@@ -15,7 +15,7 @@
         file: owner=vagrant group=vagrant path=/home/vagrant recurse=yes
 
       - name: set up the vagrant user
-        copy: src={{ item }}
+        copy: src=roles/common/files/{{ item }}
           dest=/home/vagrant/{{ item }}
           owner=vagrant
           group=vagrant
