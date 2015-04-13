@@ -22,22 +22,17 @@
     - liblber.so
 
 - name: create destination for source
-  command: mkdir -p {{ php_source_location }}
-      creates={{ php_source_location }}
+  command: mkdir -p {{ php_source_location }} creates={{ php_source_location }}
 
 - name: copy php tarball
-  copy: src={{ php_tarball }}
-    dest={{ php_source_location }}
+  copy: src={{ php_tarball }} dest={{ php_source_location }}
 
 - name: unpack php source
-  command: tar xf {{ php_tarball }}
-    chdir={{ php_source_location }}
+  command: tar xf {{ php_tarball }} chdir={{ php_source_location }}
     creates={{ php_source_path }}
 
 - name: install php
-  command: '{{ item }}
-      chdir={{ php_source_path }}
-      creates=/usr/local/bin/php'
+  command: '{{ item }} chdir={{ php_source_path }} creates=/usr/local/bin/php'
   with_items:
       - ./configure --with-openssl --with-zlib --with-curl
             --enable-zip --with-xmlrpc --enable-soap --enable-sockets

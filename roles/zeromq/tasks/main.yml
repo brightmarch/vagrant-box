@@ -8,12 +8,10 @@
     creates={{ zeromq_source_location }}
 
 - name: copy zeromq tarball
-  copy: src={{ zeromq_tarball }}
-    dest={{ zeromq_source_location }}
+  copy: src={{ zeromq_tarball }} dest={{ zeromq_source_location }}
 
 - name: unpack zeromq source
-  command: tar xf {{ zeromq_tarball }}
-    chdir={{ zeromq_source_location }}
+  command: tar xf {{ zeromq_tarball }} chdir={{ zeromq_source_location }}
     creates={{ zeromq_source_path }}
 
 - name: Compile Zero MQ 

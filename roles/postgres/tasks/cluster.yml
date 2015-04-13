@@ -1,7 +1,6 @@
 ---
 - name: add the postgres user
-  user: name={{ postgres_user }}
-      shell=/bin/bash
+  user: name={{ postgres_user }} shell=/bin/bash
 
   # Specifing su: yes and su_user: postgres does not always behave
   # as we would expect it for this command.

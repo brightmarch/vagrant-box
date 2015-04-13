@@ -9,17 +9,14 @@
       creates={{ ruby_source_location }}
 
 - name: copy ruby tarball
-  copy: src={{ ruby_tarball }}
-    dest={{ ruby_source_location }}
+  copy: src={{ ruby_tarball }} dest={{ ruby_source_location }}
 
 - name: unpack ruby source
-  command: tar xf {{ ruby_tarball }}
-    chdir={{ ruby_source_location }}
+  command: tar xf {{ ruby_tarball }} chdir={{ ruby_source_location }}
     creates={{ ruby_source_path }}
 
 - name: Compile Ruby
-  command: '{{ item }}
-      chdir={{ ruby_source_path }}
+  command: '{{ item }} chdir={{ ruby_source_path }}
       creates=/usr/local/bin/ruby'
   with_items:
       - ./configure

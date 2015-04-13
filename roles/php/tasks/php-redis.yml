@@ -4,12 +4,10 @@
       creates={{ php_redis_source_location }}
 
 - name: copy php-redis tarball
-  copy: src={{ php_redis_tarball }}
-    dest={{ php_redis_source_location }}
+  copy: src={{ php_redis_tarball }} dest={{ php_redis_source_location }}
 
 - name: unpack php-redis source
-  command: tar xf {{ php_redis_tarball }}
-    chdir={{ php_redis_source_location }}
+  command: tar xf {{ php_redis_tarball }} chdir={{ php_redis_source_location }}
     creates={{ php_redis_source_path }}
 
 - name: compile php-redis

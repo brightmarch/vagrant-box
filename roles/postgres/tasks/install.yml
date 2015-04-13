@@ -18,17 +18,14 @@
       creates={{ postgres_source_location }}
 
 - name: copy postgres tarball
-  copy: src={{ postgres_tarball }}
-    dest={{ postgres_source_location }}
+  copy: src={{ postgres_tarball }} dest={{ postgres_source_location }}
 
 - name: unpack postgres source
-  command: tar xjf {{ postgres_tarball }}
-    chdir={{ postgres_source_location }}
+  command: tar xjf {{ postgres_tarball }} chdir={{ postgres_source_location }}
     creates={{ postgres_source_path }}
 
 - name: compile postgres 
-  command: '{{ item }}
-      chdir={{ postgres_source_path }}
+  command: '{{ item }} chdir={{ postgres_source_path }}
       creates=/usr/local/pgsql'
   with_items:
       - ./configure --disable-debug --enable-thread-safety --with-gssapi

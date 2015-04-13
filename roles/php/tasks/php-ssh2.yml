@@ -7,12 +7,10 @@
       creates={{ php_ssh2_source_location }}
 
 - name: copy php-ssh2 tarball
-  copy: src={{ php_ssh2_tarball }}
-    dest={{ php_ssh2_source_location }}
+  copy: src={{ php_ssh2_tarball }} dest={{ php_ssh2_source_location }}
 
 - name: unpack php-ssh2 source
-  command: tar xf {{ php_ssh2_tarball }}
-    chdir={{ php_ssh2_source_location }}
+  command: tar xf {{ php_ssh2_tarball }} chdir={{ php_ssh2_source_location }}
     creates={{ php_ssh2_source_path }}
 
 - name: compile php-ssh2
