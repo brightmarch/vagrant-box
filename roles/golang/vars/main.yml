@@ -1,0 +1,4 @@
+---
+golang_source: go
+
+golang_tarball: 'go{{ golang_version }}.linux-amd64.tar.gz'
