@@ -1,106 +1,25 @@
 ---
 - hosts: all
-  vars:
-      ruby_version: 2.1.2
-      postgresql_version: 9.3.4
-      redis_version: 2.8.0
-      zeromq_version: 4.0.4
-      php_version: 5.6.5
-      php_imagick_version: 3.1.2
-  remote_user: vagrant
   sudo: yes
-  tasks:
-    - name: Update the Aptitude Cache
-      apt: update_cache=yes
+  roles: 
+      - common
+      - ruby
+      - zeromq
+      - redis
+      - postgres
+      - php
+      - golang
+      - node
+  post_tasks:
+      - name: set the vagrant user as the owner of /home/vagrant
+        file: owner=vagrant group=vagrant path=/home/vagrant recurse=yes
 
-    - name: Install Basic Packages
-      apt:  name={{ item }} state=present
-      with_items:
-        - bash-completion
-        - build-essential
-        - vim
-        - libssl-dev
-        - openssl
-        - git
-        - bison
-        - flex
-        - curl
-        - libxml2-utils
-        - htop
-
-    - name: Set the timezone
-      copy: content='UTC'
-        dest=/etc/timzone
-        owner=root
-        group=root
-        mode=0644
-        backup=no
-      notify:
-        - update timezone
-
-    - name: Generate the Locale
-      locale_gen: name=en_US.UTF-8 state=present
-
-    - name: Update the Locale
-      command: 'update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8'
-
-    - name: Update the default profile
-      copy: src=.profile
-        dest=/etc/skel/.profile
-
-    # Vagrant specific
-    - name: Add bash aliases
-      copy: src=.bash_aliases
-        dest=/etc/skel/.aliases
-
-    - name: Update the default profile
-      copy: src=.bash_envvars
-        dest=/etc/skel/.envvars
-
-    # Vagrant specific
-    - name: Set up the vagrant user
-      copy: src={{ item }}
-        dest=/home/vagrant/{{ item }}
-        owner=vagrant
-        group=vagrant
-      with_items:
-          - .profile
-          - .bash_aliases
-          - .bash_envvars
-
-    # Find a better way to check if postgres is installed
-    - name: Check if Postgres is installed
-      stat: path=/home/postgres/cluster
-      register: result
-
-    - include: playbooks/tasks/postgres.yml
-      when: not result.stat.exists
-
-    - name: Check if Ruby is installed
-      command: ruby -v
-      register: result
-      ignore_errors: True
-
-    - include: playbooks/tasks/ruby.yml
-      when: result.rc !=0 or ruby_version not in result.stdout.split()[1]
-
-    - name: Check if Redis is installed
-      command: redis-server -v
-      register: result
-      ignore_errors: True
-
-    - include: playbooks/tasks/redis.yml
-      when: result.rc !=0 or redis_version not in result.stdout.split()[2]
-
-    - include: playbooks/tasks/zmq.yml
-
-    - include: playbooks/tasks/php.yml
-
-    - include: playbooks/tasks/php-imagick.yml
-
-  handlers:
-    - name: update timezone
-      command: dpkg-reconfigure --frontend noninteractive tzdata
-
-    - name: update locale
-      command: 'update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8'
+      - name: set up the vagrant user
+        copy: src={{ item }}
+          dest=/home/vagrant/{{ item }}
+          owner=vagrant
+          group=vagrant
+        with_items:
+            - .profile
+            - .bash_aliases
+            - .bash_envvars
