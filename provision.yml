@@ -1,15 +1,15 @@
 ---
-- hosts: all
+- hosts: default
   sudo: yes
   roles: 
       - common
       - ruby
-      - zeromq
-      - redis
       - postgres
+      - redis
+      - zeromq
       - php
-      - golang
       - node
+      - golang
   post_tasks:
       - name: set the vagrant user as the owner of /home/vagrant
         file: owner=vagrant group=vagrant path=/home/vagrant recurse=yes
