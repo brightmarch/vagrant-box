@@ -1,4 +1,10 @@
 ---
+- name: install php-imagick dependencies
+  apt:  name={{ item }} state=present
+    - imagemagick
+    - libmagickwand-dev
+    - libmagickcore-dev
+
 - name: create destination for source
   command: mkdir -p {{ php_imagick_source_location }}
       creates={{ php_imagick_source_location }}

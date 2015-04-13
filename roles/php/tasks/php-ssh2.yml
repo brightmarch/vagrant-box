@@ -1,4 +1,7 @@
 ---
+- name: install php-ssh2 dependencies
+  apt: name=libssh2-1-dev state=present
+
 - name: create destination for php-ssh2 source
   command: mkdir -p {{ php_ssh2_source_location }}
       creates={{ php_ssh2_source_location }}

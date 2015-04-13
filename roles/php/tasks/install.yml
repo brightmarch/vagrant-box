@@ -12,11 +12,6 @@
     - libpng12-dev
     - libjpeg8-dev
     - libldap2-dev
-      # Move these
-    - libssh2-1-dev
-    - imagemagick
-    - libmagickwand-dev
-    - libmagickcore-dev
 
 
 - name: symlink the ldap libraries for compiling with php
