@@ -1,0 +1,6 @@
+---
+postgres_source: postgresql-{{ postgres_version }}
+
+postgres_source_path: '{{ postgres_source_location + postgres_source }}'
+
+postgres_tarball: '{{ postgres_source }}.tar.bz2'

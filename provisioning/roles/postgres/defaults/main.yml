@@ -3,12 +3,6 @@ postgres_encoding: 'UTF-8'
 
 postgres_version: 9.3.4
 
-postgres_source: postgresql-{{ postgres_version }}
-
-postgres_source_path: '{{ postgres_source_location + postgres_source }}'
-
 postgres_source_location: /opt/src/postgres/
-
-postgres_tarball: '{{ postgres_source }}.tar.bz2'
 
 postgres_user: postgres
