@@ -1,10 +1,4 @@
 ---
 zeromq_version: 4.0.4
 
-zeromq_source: zeromq-{{ zeromq_version }}
-
-zeromq_source_path: '{{ zeromq_source_location + zeromq_source }}'
-
 zeromq_source_location: /opt/src/zeromq/
-
-zeromq_tarball: '{{ zeromq_source }}.tar.gz'

@@ -1,2 +1,6 @@
 ---
-# vars file for zeromq
+zeromq_source: zeromq-{{ zeromq_version }}
+
+zeromq_source_path: '{{ zeromq_source_location + zeromq_source }}'
+
+zeromq_tarball: '{{ zeromq_source }}.tar.gz'
