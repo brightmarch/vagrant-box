@@ -14,7 +14,7 @@
   command: tar xf {{ zeromq_tarball }} chdir={{ zeromq_source_location }}
     creates={{ zeromq_source_path }}
 
-- name: Compile Zero MQ 
+- name: compile zero mq 
   command: '{{ item }} chdir={{ zeromq_source_path }}
       creates=/usr/local/lib/libzmq.so'
   with_items:

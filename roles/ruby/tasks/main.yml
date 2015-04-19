@@ -15,7 +15,7 @@
   command: tar xf {{ ruby_tarball }} chdir={{ ruby_source_location }}
     creates={{ ruby_source_path }}
 
-- name: Compile Ruby
+- name: compile ruby
   command: '{{ item }} chdir={{ ruby_source_path }}
       creates=/usr/local/bin/ruby'
   with_items:
