@@ -37,4 +37,3 @@
 
 - name: update the default profile
   copy: src=.bash_envvars dest=/etc/skel/.envvars
-

@@ -6,4 +6,3 @@
 - include: service.yml
   notify:
     - enable postgres
-    

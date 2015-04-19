@@ -33,5 +33,3 @@
             --with-python --without-bonjour
       - make world
       - make install
-
-
