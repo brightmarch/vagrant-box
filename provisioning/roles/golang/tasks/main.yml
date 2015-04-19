@@ -1,10 +1,10 @@
 ---
 - name: create destination for source
-  command: mkdir -p {{ golang_tarball_location }} creates={{ golang_tarball_location }}
+  command: mkdir -p {{ golang_tarball_path|dirname }} creates={{ golang_tarball_path|dirname }}
 
 - name: copy golang tarball
-  copy: src={{ golang_tarball }} dest={{ golang_tarball_location }}
+  copy: src={{ golang_tarball_path|basename }} dest={{ golang_tarball_path|dirname }}
 
 - name: install go
-  unarchive: src={{ golang_tarball }} dest=/usr/local copy=no
+  unarchive: src={{ golang_tarball_path }} dest=/usr/local copy=no
     creates=/usr/local/{{ golang_source }}
