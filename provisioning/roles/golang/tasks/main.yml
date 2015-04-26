@@ -1,6 +1,6 @@
 ---
 - name: create destination for source
-  command: mkdir -p {{ golang_tarball_path|dirname }} creates={{ golang_tarball_path|dirname }}
+  file: path={{ golang_tarball_path|dirname }} state=directory
 
 - name: copy golang tarball
   copy: src={{ golang_tarball_path|basename }} dest={{ golang_tarball_path|dirname }}

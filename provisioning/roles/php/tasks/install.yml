@@ -15,14 +15,15 @@
 
 
 - name: symlink the ldap libraries for compiling with php
-  command: ln -fs /usr/lib/x86_64-linux-gnu/{{ item }} /usr/lib/
-      creates=/usr/lib/{{ item }}
+  file: src=/usr/lib/x86_64-linux-gnu/{{ item }} path=/usr/lib/
+      state=link
+      force=yes
   with_items:
     - liblber.a
     - liblber.so
 
 - name: create destination for source
-  command: mkdir -p {{ php_source_location }} creates={{ php_source_location }}
+  file: path={{ php_source_location }} state=directory
 
 - name: copy php tarball
   copy: src={{ php_tarball }} dest={{ php_source_location }}

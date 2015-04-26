@@ -1,7 +1,6 @@
 ---
 - name: create destination for php-redis source
-  command: mkdir -p {{ php_redis_source_location }}
-      creates={{ php_redis_source_location }}
+  file: path={{ php_redis_source_location }} state=directory
 
 - name: copy php-redis tarball
   copy: src={{ php_redis_tarball }} dest={{ php_redis_source_location }}

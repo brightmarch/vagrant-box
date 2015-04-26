@@ -7,8 +7,7 @@
     - libmagickcore-dev
 
 - name: create destination for source
-  command: mkdir -p {{ php_imagick_source_location }}
-      creates={{ php_imagick_source_location }}
+  file: path={{ php_imagick_source_location }} state=directory
 
 - name: copy php-imagick tarball
   copy: src={{ php_imagick_tarball }} dest={{ php_imagick_source_location }}

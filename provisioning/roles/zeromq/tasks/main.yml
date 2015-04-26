@@ -4,8 +4,8 @@
   with_items:
     - build-essential
 
-- command: mkdir -p {{ zeromq_source_location }}
-    creates={{ zeromq_source_location }}
+- name: create destination for source
+  file: path={{ zeromq_source_location }} state=directory
 
 - name: copy zeromq tarball
   copy: src={{ zeromq_tarball }} dest={{ zeromq_source_location }}

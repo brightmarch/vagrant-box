@@ -14,8 +14,7 @@
     - libreadline-dev
 
 - name: create destination for source
-  command: mkdir -p {{ postgres_source_location }}
-      creates={{ postgres_source_location }}
+  file: path={{ postgres_source_location }} state=directory
 
 - name: copy postgres tarball
   copy: src={{ postgres_tarball }} dest={{ postgres_source_location }}

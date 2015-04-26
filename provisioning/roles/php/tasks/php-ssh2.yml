@@ -3,8 +3,7 @@
   apt: name=libssh2-1-dev state=present
 
 - name: create destination for php-ssh2 source
-  command: mkdir -p {{ php_ssh2_source_location }}
-      creates={{ php_ssh2_source_location }}
+  file: path={{ php_ssh2_source_location }} state=directory
 
 - name: copy php-ssh2 tarball
   copy: src={{ php_ssh2_tarball }} dest={{ php_ssh2_source_location }}

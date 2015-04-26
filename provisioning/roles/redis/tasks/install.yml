@@ -5,8 +5,7 @@
     - build-essential
 
 - name: create destination for source
-  command: mkdir -p {{ redis_source_location }}
-      creates={{ redis_source_location }}
+  file: path={{ redis_source_location }} state=directory
 
 - name: copy redis tarball
   copy: src={{ redis_tarball }} dest={{ redis_source_location }}

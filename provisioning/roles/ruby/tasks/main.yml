@@ -5,8 +5,7 @@
     - build-essential
 
 - name: create destination for source
-  command: mkdir -p {{ ruby_source_location }}
-      creates={{ ruby_source_location }}
+  file: path={{ ruby_source_location }} state=directory
 
 - name: copy ruby tarball
   copy: src={{ ruby_tarball }} dest={{ ruby_source_location }}
