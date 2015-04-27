@@ -14,14 +14,14 @@
 
 - name: compile php-ssh2
   shell: '{{ item }} chdir={{ php_ssh2_source_path }}
-      creates={{ php_ssh2_source_path }}/modules/ssh2.so'
+    creates={{ php_ssh2_source_path }}/modules/ssh2.so'
   with_items:
-      - phpize
-      - ./configure
-      - make && make install  # Make this a one-liner so we can use the 
-                              # modules/ssh2.so to check that it has already 
-                              # executed. That file is created during make not
-                              # make install.
+    - phpize
+    - ./configure
+    - make && make install  # Make this a one-liner so we can use the 
+                            # modules/ssh2.so to check that it has already 
+                            # executed. That file is created during make not
+                            # make install.
 
 - name: add the extension to php.ini
   lineinfile: dest=/usr/local/lib/php.ini line="extension=ssh2.so"

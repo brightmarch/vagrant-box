@@ -16,8 +16,8 @@
 
 - name: symlink the ldap libraries for compiling with php
   file: src=/usr/lib/x86_64-linux-gnu/{{ item }} path=/usr/lib/{{ item }}
-      state=link
-      force=yes
+    state=link
+    force=yes
   with_items:
     - liblber.a
     - liblber.so
@@ -30,19 +30,19 @@
 
 - name: unpack php source
   command: tar xf {{ php_tarball }} chdir={{ php_source_location }}
-      creates={{ php_source_path }}
+    creates={{ php_source_path }}
 
 - name: install php
   command: '{{ item }} chdir={{ php_source_path }} creates=/usr/local/bin/php'
   with_items:
-      - ./configure --with-openssl --with-zlib --with-curl
-            --enable-zip --with-xmlrpc --enable-soap --enable-sockets
-            --with-pgsql --with-pdo-pgsql --with-mcrypt --enable-mbstring
-            --with-libxml-dir --enable-intl --enable-pcntl
-            --enable-opcache --with-gd --with-jpeg-dir=/usr --enable-exif
-            --with-ldap=/usr
-      - make
-      - make install
+    - ./configure --with-openssl --with-zlib --with-curl
+        --enable-zip --with-xmlrpc --enable-soap --enable-sockets
+        --with-pgsql --with-pdo-pgsql --with-mcrypt --enable-mbstring
+        --with-libxml-dir --enable-intl --enable-pcntl
+        --enable-opcache --with-gd --with-jpeg-dir=/usr --enable-exif
+        --with-ldap=/usr
+    - make
+    - make install
 
 - name: copy the php.ini-development file
   command: cp php.ini-development /usr/local/lib/php.ini
@@ -52,8 +52,8 @@
 
 - name: copy the php.ini-production file
   command: cp php.ini-production /usr/local/lib/php.ini
-      chdir={{ php_source_path }}
-      creates=/usr/local/lib/php.ini
+    chdir={{ php_source_path }}
+    creates=/usr/local/lib/php.ini
   when: production
 
 - name: set the date.timezone in php.ini

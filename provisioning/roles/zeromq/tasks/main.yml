@@ -15,9 +15,8 @@
     creates={{ zeromq_source_path }}
 
 - name: compile zero mq 
-  command: '{{ item }} chdir={{ zeromq_source_path }}
-      creates=/usr/local/lib/libzmq.so'
+  command: '{{ item }} chdir={{ zeromq_source_path }} creates=/usr/local/lib/libzmq.so'
   with_items:
-      - ./configure
-      - make
-      - make install
+    - ./configure
+    - make
+    - make install

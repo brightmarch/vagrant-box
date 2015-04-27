@@ -16,11 +16,11 @@
 
 - name: compile ruby
   command: '{{ item }} chdir={{ ruby_source_path }}
-      creates=/usr/local/bin/ruby'
+    creates=/usr/local/bin/ruby'
   with_items:
-      - ./configure
-      - make
-      - make install
+    - ./configure
+    - make
+    - make install
 
 - name: install sass
   gem: name=sass version={{ sass_version }}

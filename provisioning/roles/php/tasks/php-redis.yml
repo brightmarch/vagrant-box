@@ -11,14 +11,14 @@
 
 - name: compile php-redis
   shell: '{{ item }} chdir={{ php_redis_source_path }}
-       creates={{ php_redis_source_path }}/modules/redis.so'
+    creates={{ php_redis_source_path }}/modules/redis.so'
   with_items:
-      - phpize
-      - ./configure
-      - make && make install  # Make this a one-liner so we can use the 
-                              # modules/redis.so to check that it has already
-                              # executed. That file is created during make not
-                              # make install.
+    - phpize
+    - ./configure
+    - make && make install  # Make this a one-liner so we can use the 
+                            # modules/redis.so to check that it has already
+                            # executed. That file is created during make not
+                            # make install.
 
 - name: add the extension to php.ini
   lineinfile: dest=/usr/local/lib/php.ini line="extension=redis.so"

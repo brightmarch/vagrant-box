@@ -16,7 +16,7 @@
 
 - name: install redis
   command: '{{ item }} chdir={{ redis_source_path }}
-      creates=/usr/local/bin/redis-server'
+    creates=/usr/local/bin/redis-server'
   with_items:
-      - make 
-      - make install
+    - make 
+    - make install

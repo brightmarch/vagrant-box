@@ -12,6 +12,6 @@
 - name: compile node
   command: '{{ item }} chdir={{ node_source_path }} creates=/usr/local/bin/node'
   with_items:
-      - ./configure
-      - make
-      - make install
+    - ./configure
+    - make
+    - make install

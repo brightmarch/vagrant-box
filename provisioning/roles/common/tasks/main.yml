@@ -15,11 +15,7 @@
     - htop
 
 - name: set the timezone
-  copy: content='UTC' dest=/etc/timzone
-    owner=root
-    group=root
-    mode=0644
-    backup=no
+  copy: content='UTC' dest=/etc/timzone owner=root group=root mode=0644 backup=no
   notify:
     - update timezone
 

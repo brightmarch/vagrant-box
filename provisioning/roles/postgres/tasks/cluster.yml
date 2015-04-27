@@ -6,4 +6,4 @@
   # as we would expect it for this command.
 - name: setup the database cluster
   shell: su - {{ postgres_user }} -c '/usr/local/pgsql/bin/initdb -D /home/{{ postgres_user }}/cluster -E {{ postgres_encoding }}'
-      creates=/home/{{ postgres_user }}/cluster
+    creates=/home/{{ postgres_user }}/cluster

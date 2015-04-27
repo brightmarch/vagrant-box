@@ -25,10 +25,10 @@
 
 - name: compile postgres 
   command: '{{ item }} chdir={{ postgres_source_path }}
-      creates=/usr/local/pgsql'
+    creates=/usr/local/pgsql'
   with_items:
-      - ./configure --disable-debug --enable-thread-safety --with-gssapi
-            --with-openssl --with-libxml --with-libxslt --with-ossp-uuid
-            --with-python --without-bonjour
-      - make world
-      - make install
+    - ./configure --disable-debug --enable-thread-safety --with-gssapi
+        --with-openssl --with-libxml --with-libxslt --with-ossp-uuid
+        --with-python --without-bonjour
+    - make world
+    - make install
