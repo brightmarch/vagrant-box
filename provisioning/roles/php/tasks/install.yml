@@ -15,7 +15,7 @@
 
 
 - name: symlink the ldap libraries for compiling with php
-  file: src=/usr/lib/x86_64-linux-gnu/{{ item }} path=/usr/lib/
+  file: src=/usr/lib/x86_64-linux-gnu/{{ item }} path=/usr/lib/{{ item }}
       state=link
       force=yes
   with_items:
@@ -30,7 +30,7 @@
 
 - name: unpack php source
   command: tar xf {{ php_tarball }} chdir={{ php_source_location }}
-    creates={{ php_source_path }}
+      creates={{ php_source_path }}
 
 - name: install php
   command: '{{ item }} chdir={{ php_source_path }} creates=/usr/local/bin/php'
