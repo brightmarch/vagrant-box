@@ -23,13 +23,13 @@
     - make install
 
 - name: install sass
-  gem: name=sass version={{ sass_version }}
+  gem: name=sass version={{ sass_version }} user_install=no
 
 - name: install compass
-  gem: name=compass version={{ compass_version }}
+  gem: name=compass version={{ compass_version }} user_install=no
 
 - name: install zurb foundation
-  gem: name=zurb-foundation version={{ zurb_foundation_version }}
+  gem: name=zurb-foundation version={{ zurb_foundation_version }} user_install=no
 
 - name: install god
-  gem: name=god version={{ god_version }}
+  gem: name=god version={{ god_version }} user_install=no
