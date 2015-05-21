@@ -1,7 +1,7 @@
 Bright March Common
 ===================
 
-Performs a basic set of configurations the are common for Bright March machine images.
+Performs a basic set of configurations that are common for Bright March machine images.
 
 Tasks
 -----
