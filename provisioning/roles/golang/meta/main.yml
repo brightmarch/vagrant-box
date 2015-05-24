@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Bright March
-  description: 
+  description: Go installation.
   license: MIT
   min_ansible_version: 1.8
   platforms:

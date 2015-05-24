@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Bright March
-  description: Base configurations for Development and Production environments at Bright March.
+  description: Base configurations for development and production environments at Bright March.
   license: MIT
   min_ansible_version: 1.8
   platforms:
