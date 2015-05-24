@@ -11,7 +11,7 @@ Installs PHP and the following PHP extensions.
 Requirements
 ------------
 
-This role is configured to work with Postgresql, and expects that his has been installed prior.
+This role is configured to work with Postgresql, and expects that it has been installed prior.
 
 Role Variables
 --------------
