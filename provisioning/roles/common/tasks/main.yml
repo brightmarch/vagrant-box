@@ -1,0 +1,35 @@
+---
+- name: install basic packages
+  apt:  name={{ item }} state=present update_cache=yes cache_valid_time=3600
+  with_items:
+    - bash-completion
+    - build-essential
+    - vim
+    - libssl-dev
+    - openssl
+    - git
+    - bison
+    - flex
+    - curl
+    - libxml2-utils
+    - htop
+
+- name: set the timezone
+  copy: content='UTC' dest=/etc/timzone owner=root group=root mode=0644 backup=no
+  notify:
+    - update timezone
+
+- name: generate the locale
+  locale_gen: name=en_US.UTF-8 state=present
+
+- name: update the locale
+  command: 'update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8'
+
+- name: update the default profile
+  copy: src=.profile dest=/etc/skel/.profile
+
+- name: add bash aliases
+  copy: src=.bash_aliases dest=/etc/skel/.aliases
+
+- name: update the default profile
+  copy: src=.bash_envvars dest=/etc/skel/.envvars

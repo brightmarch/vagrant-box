@@ -1,0 +1,6 @@
+---
+node_source: node-v{{ node_version }}
+
+node_source_path: '{{ node_source_location + node_source }}'
+
+node_tarball: '{{ node_source }}.tar.gz'

@@ -1,0 +1,22 @@
+---
+production: false
+
+php_version: 5.6.5
+
+php_source_location: /opt/src/php/
+
+php_imagick_version: 3.1.2
+
+php_imagick_source_location: /opt/src/php-imagick/
+
+php_ssh2_version: 0.12 
+
+php_ssh2_source_location: /opt/src/php-ssh2/
+
+php_zmq_version: 1.1.2
+
+php_zmq_source_location: /opt/src/php-zmq/
+
+php_redis_version: 2.2.5
+
+php_redis_source_location: /opt/src/php-redis/

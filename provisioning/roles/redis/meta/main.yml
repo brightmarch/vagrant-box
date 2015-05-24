@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Bright March
+  description: Redis installation.
+  license: MIT
+  min_ansible_version: 1.8
+  platforms:
+  - name: Ubuntu
+    versions:
+    - precise
+  categories:
+  - database:nosql
+  - development
+
+dependencies: []

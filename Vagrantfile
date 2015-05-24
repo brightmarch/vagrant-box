@@ -7,7 +7,10 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "hashicorp/precise64"
   config.vm.box_version  = "1.1.0"
-  config.vm.provision :shell, :path => "./provision.sh"
+
+  config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "provisioning/provision.yml"
+  end
 
   config.vm.provider "virtualbox" do |v|
     v.customize ["modifyvm", :id, "--memory", "2048"]

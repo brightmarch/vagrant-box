@@ -1,0 +1,35 @@
+---
+- name: install ruby dependencies
+  apt:  name={{ item }} state=present update_cache=yes cache_valid_time=3600
+  with_items:
+    - build-essential
+
+- name: create destination for source
+  file: path={{ ruby_source_location }} state=directory
+
+- name: copy ruby tarball
+  copy: src={{ ruby_tarball }} dest={{ ruby_source_location }}
+
+- name: unpack ruby source
+  command: tar xf {{ ruby_tarball }} chdir={{ ruby_source_location }}
+    creates={{ ruby_source_path }}
+
+- name: compile ruby
+  command: '{{ item }} chdir={{ ruby_source_path }}
+    creates=/usr/local/bin/ruby'
+  with_items:
+    - ./configure
+    - make
+    - make install
+
+- name: install sass
+  gem: name=sass version={{ sass_version }} user_install=no
+
+- name: install compass
+  gem: name=compass version={{ compass_version }} user_install=no
+
+- name: install zurb foundation
+  gem: name=zurb-foundation version={{ zurb_foundation_version }} user_install=no
+
+- name: install god
+  gem: name=god version={{ god_version }} user_install=no

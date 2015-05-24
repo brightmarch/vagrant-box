@@ -1,0 +1,4 @@
+---
+golang_version: 1.4.1
+
+golang_tarball_location: /opt/src/golang/

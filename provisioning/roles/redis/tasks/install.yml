@@ -1,0 +1,22 @@
+---
+- name: install redis dependencies
+  apt:  name={{ item }} state=present update_cache=yes cache_valid_time=3600
+  with_items:
+    - build-essential
+
+- name: create destination for source
+  file: path={{ redis_source_location }} state=directory
+
+- name: copy redis tarball
+  copy: src={{ redis_tarball }} dest={{ redis_source_location }}
+
+- name: unpack redis source
+  command: tar xf {{ redis_tarball }} chdir={{ redis_source_location }}
+    creates={{ redis_source_path }}
+
+- name: install redis
+  command: '{{ item }} chdir={{ redis_source_path }}
+    creates=/usr/local/bin/redis-server'
+  with_items:
+    - make 
+    - make install

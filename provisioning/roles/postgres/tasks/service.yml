@@ -1,0 +1,5 @@
+---
+- name: install the postgres init.d service script
+  copy: src=postgres dest=/etc/init.d/postgres mode=a+x
+  notify:
+    - enable postgres

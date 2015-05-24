@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Bright March
+  description: PHP configured for Postgres. Includes PHP-SSH2, PHP-Imagick, PHP-Redis, and PHP-ZMQ.
+  license: MIT
+  min_ansible_version: 1.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - precise
+  categories:
+  - development
+  - web
+
+dependencies: []

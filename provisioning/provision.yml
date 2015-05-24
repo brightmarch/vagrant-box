@@ -1,0 +1,25 @@
+---
+- hosts: default
+  sudo: yes
+  roles: 
+      - common
+      - ruby
+      - postgres
+      - redis
+      - zeromq
+      - php
+      - node
+      - golang
+  post_tasks:
+      - name: set the vagrant user as the owner of /home/vagrant
+        file: owner=vagrant group=vagrant path=/home/vagrant recurse=yes
+
+      - name: set up the vagrant user
+        copy: src=roles/common/files/{{ item }}
+          dest=/home/vagrant/{{ item }}
+          owner=vagrant
+          group=vagrant
+        with_items:
+            - .profile
+            - .bash_aliases
+            - .bash_envvars

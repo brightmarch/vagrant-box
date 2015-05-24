@@ -1,0 +1,8 @@
+---
+postgres_encoding: 'UTF-8'
+
+postgres_version: 9.3.4
+
+postgres_source_location: /opt/src/postgres/
+
+postgres_user: postgres

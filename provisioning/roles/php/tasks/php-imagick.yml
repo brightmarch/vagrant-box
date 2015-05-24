@@ -1,0 +1,31 @@
+---
+- name: install php-imagick dependencies
+  apt:  name={{ item }} state=present
+  with_items:
+    - imagemagick
+    - libmagickwand-dev
+    - libmagickcore-dev
+
+- name: create destination for source
+  file: path={{ php_imagick_source_location }} state=directory
+
+- name: copy php-imagick tarball
+  copy: src={{ php_imagick_tarball }} dest={{ php_imagick_source_location }}
+
+- name: unpack php-imagick source
+  command: tar xf {{ php_imagick_tarball }} chdir={{ php_imagick_source_location }}
+    creates={{ php_imagick_source_path }}
+
+- name: compile php-imagick
+  shell: '{{ item }} chdir={{ php_imagick_source_path }}
+      creates={{ php_imagick_source_path }}/modules/imagick.so'
+  with_items:
+    - phpize
+    - ./configure
+    - make && make install  # Make this a one-liner so we can use the 
+                            # modules/imagick.so to check that it has already
+                            # executed. That file is created during make not
+                            # make install.
+
+- name: add the extension to php.ini
+  lineinfile: dest=/usr/local/lib/php.ini line="extension=imagick.so"

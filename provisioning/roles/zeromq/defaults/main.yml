@@ -1,0 +1,4 @@
+---
+zeromq_version: 4.0.4
+
+zeromq_source_location: /opt/src/zeromq/

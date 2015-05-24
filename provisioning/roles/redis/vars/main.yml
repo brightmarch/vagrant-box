@@ -1,0 +1,6 @@
+---
+redis_source: redis-{{ redis_version }}
+
+redis_source_path: '{{ redis_source_location + redis_source }}'
+
+redis_tarball: '{{ redis_source }}.tar.gz'

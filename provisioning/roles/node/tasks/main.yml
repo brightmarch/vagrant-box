@@ -1,0 +1,17 @@
+---
+- name: create destination for source
+  file: path={{ node_source_location }} state=directory
+
+- name: copy node tarball
+  copy: src={{ node_tarball }} dest={{ node_source_location }}
+
+- name: unpack node source
+  command: tar xf {{ node_tarball }} chdir={{ node_source_location }}
+    creates={{ node_source_path }}
+
+- name: compile node
+  command: '{{ item }} chdir={{ node_source_path }} creates=/usr/local/bin/node'
+  with_items:
+    - ./configure
+    - make
+    - make install
