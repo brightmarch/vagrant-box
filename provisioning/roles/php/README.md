@@ -25,9 +25,10 @@ Default: `false`
 Determines if the environment is development or production. Eventually, when production is true, the role will kick off a PHP-FPM installation instead.
 
 ##### `php_version`
+
 Default: `5.6.5`
 
-Version of PHP to be installed. This will also be used to find the appropriate tarball in `php/files/`
+The version of PHP to be installed. This will also be used to find the appropriate tarball in `php/files/`.
 
 ##### `php_source_location`
 
@@ -41,7 +42,7 @@ The remote directory where the PHP tarball will be copied to and unpacked.
 
 Default: `3.1.2`
 
-Version of PHP-Imagick to be installed. This will also be used to find the appropriate tarball in `php/files/`
+The version of PHP-Imagick to be installed. This will also be used to find the appropriate tarball in `php/files/`.
 
 ##### `php_imagick_source_location`
 
@@ -55,7 +56,7 @@ The remote directory where the PHP-Imagick tarball will be copied to and unpacke
 
 Default: `0.12`
 
-Version of PHP-SSH2 to be installed. This will also be used to find the appropriate tarball in `php/files/`
+The version of PHP-SSH2 to be installed. This will also be used to find the appropriate tarball in `php/files/`.
 
 ##### `php_ssh2_source_location`
 
@@ -69,7 +70,7 @@ The remote directory where the PHP-SSH2 tarball will be copied to and unpacked.
 
 Default: `1.1.2`
 
-Version of PHP-ZMQ to be installed. This will also be used to find the appropriate tarball in `php/files/`
+The version of PHP-ZMQ to be installed. This will also be used to find the appropriate tarball in `php/files/`.
 
 ##### `php_zmq_source_location`
 
@@ -83,7 +84,7 @@ The remote directory where the PHP-ZMQ tarball will be copied to and unpacked.
 
 Default: `2.2.5`
 
-Version of PHP-Redis to be installed. This will also be used to find the appropriate tarball in `php/files/`
+The version of PHP-Redis to be installed. This will also be used to find the appropriate tarball in `php/files/`.
 
 ##### `php_redis_source_location`
 

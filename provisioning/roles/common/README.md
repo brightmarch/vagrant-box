@@ -30,7 +30,7 @@ Tasks
 Requirements
 ------------
 
-This role was intended for use with Ubuntu Precise 12.04
+This role was intended for use with Ubuntu Precise 12.04.
 
 License
 -------
