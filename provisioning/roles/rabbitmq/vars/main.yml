@@ -1,0 +1,6 @@
+---
+rabbitmq_source: rabbitmq-server_{{ rabbitmq_version }}-1_all
+
+rabbitmq_source_path: '{{ rabbitmq_source_location + rabbitmq_source }}'
+
+rabbitmq_package: '{{ rabbitmq_source }}.deb'
