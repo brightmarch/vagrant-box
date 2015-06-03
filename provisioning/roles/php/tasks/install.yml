@@ -13,7 +13,6 @@
     - libjpeg8-dev
     - libldap2-dev
 
-
 - name: symlink the ldap libraries for compiling with php
   file: src=/usr/lib/x86_64-linux-gnu/{{ item }} path=/usr/lib/{{ item }}
     state=link
@@ -40,7 +39,7 @@
         --with-pgsql --with-pdo-pgsql --with-mcrypt --enable-mbstring
         --with-libxml-dir --enable-intl --enable-pcntl
         --enable-opcache --with-gd --with-jpeg-dir=/usr --enable-exif
-        --with-ldap=/usr
+        --with-ldap=/usr --with-bcmath
     - make
     - make install
 

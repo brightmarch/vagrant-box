@@ -1,24 +1,20 @@
 Redis
 =========
-
 Ansible role for the installation of Redis.
 
 Requirements
 ------------
-
 This role was intended for use with Ubuntu Precise 12.04.
 
 Role Variables
 --------------
 
 ##### `redis_version`
-
 Default: `2.8.0`
 
 The version of Redis to be installed. This will also be used to find the appropriate tarball in `redis/files/`.
 
 ##### `redis_source_location`
-
 Default: `/opt/src/redis/`
 
 The remote directory where the Redis tarball will be copied to and unpacked.
@@ -27,6 +23,4 @@ The remote directory where the Redis tarball will be copied to and unpacked.
 
 License
 -------
-
 MIT
-
