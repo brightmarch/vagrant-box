@@ -1,21 +1,9 @@
 ---
-- name: install rabbitmq dependencies
-  apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
-  with_items:
-    - build-essential
-
-- name: create destination for source
+- name: create destination for the package
   file: path={{ rabbitmq_source_location }} state=directory
 
 - name: copy rabbitmq package
   copy: src={{ rabbitmq_package }} dest={{ rabbitmq_source_location }}
 
-- name: unpack rabbitmq source
-  command: tar xf {{ rabbitmq_package }} chdir={{ rabbitmq_source_location }}
-    creates={{ rabbitmq_source_path }}
-
-- name: compile rabbitmq
-  command: '{{ item }} chdir={{ rabbitmq_source_path }} creates=/usr/local/lib/libzmq.so'
-  with_items:
-    - dpkg -i
-    - apt-get install -f
+- name: install rabbitmq
+  apt: deb={{ rabbitmq_package_path }}
