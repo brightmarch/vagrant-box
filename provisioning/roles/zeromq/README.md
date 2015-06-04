@@ -13,7 +13,7 @@ Role Variables
 
 Default: `4.0.4`
 
-The version of ZeroMQ to be installed. This will also be used to find the appropriate tarball in `redis/files/`.
+The version of ZeroMQ to be installed. This will also be used to find the appropriate tarball in `zeromq/files/`.
 
 ##### `zeromq_source_location`
 Default: `/opt/src/zeromq/`
