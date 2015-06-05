@@ -1,7 +1,7 @@
 ---
 production: false
 
-php_version: 5.6.5
+php_version: 5.6.9
 
 php_source_location: /opt/src/php/
 

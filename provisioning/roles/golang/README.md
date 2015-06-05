@@ -1,24 +1,20 @@
 Go
 =========
-
 Ansible role for the installation of Go.
 
 Requirements
 ------------
-
 This role was intended for use with Ubuntu Precise 12.04.
 
 Role Variables
 --------------
 
 ##### `golang_version`
-
 Default: `1.4.1`
 
 The version of Go to be installed. This will also be used to find the appropriate tarball in `golang/files/`.
 
 ##### `golang_tarball_location`
-
 Default: `/opt/src/golang/`
 
 The remote directory where the Go tarball will be copied to and unpacked.
@@ -27,6 +23,4 @@ The remote directory where the Go tarball will be copied to and unpacked.
 
 License
 -------
-
 MIT
-

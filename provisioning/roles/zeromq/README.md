@@ -1,6 +1,5 @@
 ZeroMQ
 =========
-
 Ansible role for the installation of ZeroMQ.
 
 Requirements
@@ -10,15 +9,13 @@ This role was intended for use with Ubuntu Precise 12.04.
 
 Role Variables
 --------------
-
 ##### `zeromq_version`
 
 Default: `4.0.4`
 
-The version of ZeroMQ to be installed. This will also be used to find the appropriate tarball in `redis/files/`.
+The version of ZeroMQ to be installed. This will also be used to find the appropriate tarball in `zeromq/files/`.
 
 ##### `zeromq_source_location`
-
 Default: `/opt/src/zeromq/`
 
 The remote directory where the ZeroMQ tarball will be copied to and unpacked.
@@ -27,6 +24,4 @@ The remote directory where the ZeroMQ tarball will be copied to and unpacked.
 
 License
 -------
-
 MIT
-

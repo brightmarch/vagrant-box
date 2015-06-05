@@ -1,0 +1,9 @@
+---
+- name: create destination for the package
+  file: path={{ rabbitmq_source_location }} state=directory
+
+- name: copy rabbitmq package
+  copy: src={{ rabbitmq_package }} dest={{ rabbitmq_source_location }}
+
+- name: install rabbitmq
+  apt: deb={{ rabbitmq_package_path }}
