@@ -28,6 +28,9 @@ You are free to use our boxes if you like. Below are the direct links to the .bo
 * [2014-08-10] [precise64-1.0.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.0.0.box)
 
 
+## Requirements
+Ansible must be in your `$PATH` in order for Vagrant to provision the box. See the [Ansible docs](http://docs.ansible.com/intro_installation.html) installation instructions.
+
 ## Packaging
 After bringing up the provisioned box, run:
 
