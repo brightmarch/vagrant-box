@@ -11,6 +11,7 @@ An Ubuntu 12.04 64-bit box that includes:
 * php-ssh2 0.12
 * php-zmq 1.1.2
 * Postgres 9.3.4
+* RabbitMQ 3.5.3
 * Redis 2.8.0
 * Ruby 2.1.2
 * SASS 3.3.4
