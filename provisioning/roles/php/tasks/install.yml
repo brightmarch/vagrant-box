@@ -39,7 +39,7 @@
         --with-pgsql --with-pdo-pgsql --with-mcrypt --enable-mbstring
         --with-libxml-dir --enable-intl --enable-pcntl
         --enable-opcache --with-gd --with-jpeg-dir=/usr --enable-exif
-        --with-ldap=/usr --with-bcmath
+        --with-ldap=/usr --enable-bcmath
     - make
     - make install
 
