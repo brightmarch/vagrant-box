@@ -31,7 +31,7 @@ Ansible must be in your `$PATH` in order for Vagrant to provision the box. See t
 After bringing up the provisioned box, run:
 
 ```sh
-$ vagrant package --output precise64-`cat VERSION`.box
+$ vagrant package --output trusty64-`cat VERSION`.box
 ```
 
 The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file associated with this repository.
