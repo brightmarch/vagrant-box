@@ -20,10 +20,12 @@ An Ubuntu 12.04 64-bit box that includes:
 ## Boxes
 You are free to use our boxes if you like. Below are the direct links to the .box files stored on Amazon AWS.
 
+* [2015-06-04] [trusty64-2.0.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/trusty64-2.0.0.box)
 * [2015-02-09] [precise64-1.3.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.3.0.box)
 * [2015-01-21] [precise64-1.2.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.2.0.box)
 * [2014-08-19] [precise64-1.1.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.1.0.box)
 * [2014-08-10] [precise64-1.0.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.0.0.box)
+
 
 ## Packaging
 After bringing up the provisioned box, run:
@@ -35,6 +37,11 @@ $ vagrant package --output precise64-`cat VERSION`.box
 The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file associated with this repository.
 
 ## Changelog
+
+### 2.0.0
+* Upgrade to Ubuntu 14.04.
+* Added RabbitMQ.
+* Provisioning via Ansible.
 
 ### 1.3.0
 * Upgraded PHP to 5.6.5.
