@@ -43,7 +43,7 @@ The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file
 ## Changelog
 
 ### 2.0.0
-* Upgrade to Ubuntu 14.04.
+* Upgraded to Ubuntu 14.04.
 * Added RabbitMQ.
 * Provisioning via Ansible.
 
