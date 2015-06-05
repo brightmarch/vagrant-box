@@ -4,8 +4,7 @@ Ansible role for the installation of ZeroMQ.
 
 Requirements
 ------------
-
-This role was intended for use with Ubuntu Precise 12.04.
+This role was intended for use with Ubuntu Trusty 14.04 64bit.
 
 Role Variables
 --------------

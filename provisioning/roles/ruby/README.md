@@ -4,7 +4,7 @@ Ansible role for the installation of Ruby and various Gems.
 
 Requirements
 ------------
-This role was intended for use with Ubuntu Precise 12.04 64bit.
+This role was intended for use with Ubuntu Trusty 14.04 64bit.
 
 Role Variables
 --------------
