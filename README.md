@@ -21,8 +21,8 @@ An Ubuntu 12.04 64-bit box that includes:
 ## Boxes
 You are free to use our boxes if you like. Below are the direct links to the .box files stored on Amazon AWS.
 
-* [2015-06-04] [trusty64-2.0.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/trusty64-2.0.0.box)
-* [2015-02-09] [precise64-1.3.0.box](https://s3.amazonaws.com/brightmarch.build/boxes/precise64-1.3.0.box)
+* [2015-06-05] [trusty64-2.0.1.box](https://s3.amazonaws.com/brightmarch.boxes/trusty64-2.0.1.box)
+* [2015-02-09] [precise64-1.3.0.box](https://s3.amazonaws.com/brightmarch.boxes/precise64-1.3.0.box)
 
 ## Requirements
 Ansible must be in your `$PATH` in order for Vagrant to provision the box. See the [Ansible documentation](http://docs.ansible.com/intro_installation.html) for instructions on how to install Ansible.
@@ -38,6 +38,10 @@ The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file
 
 ## Changelog
 
+### 2.0.1
+* Manually installed VirtualBox 4.3.28 Guest Additions.
+* Upgraded the memory allotted to PHP from 128MB to 256MB.
+
 ### 2.0.0
 * Upgraded to Ubuntu Trusty 14.04 64bit.
 * Added RabbitMQ 3.5.3.
@@ -45,7 +49,7 @@ The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file
 * Upgraded Postgres to 9.4.2.
 * Added the `php-bcmath` extension.
 * Installed `composer` in `/usr/local/bin/composer`.
-* Provisioning via Ansible.
+* Added provisioning via Ansible.
 
 ### 1.3.0
 * Upgraded PHP to 5.6.5.
