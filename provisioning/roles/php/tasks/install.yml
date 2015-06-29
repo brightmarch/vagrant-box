@@ -7,7 +7,7 @@
     - libcurl4-openssl-dev
     - libmcrypt4
     - libmcrypt-dev
-    - libicu52
+    - libicu48
     - libicu-dev
     - libpng12-dev
     - libjpeg8-dev
