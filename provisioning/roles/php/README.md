@@ -9,7 +9,7 @@ Installs PHP and the following PHP extensions.
 
 requirements
 ------------
-This role was intended for use with Ubuntu Trusty 14.04 64bit, is configured to work with PostgreSQL, and expects that it has already been installed.
+This role was intended for use with Ubuntu LTS 64bit, is configured to work with PostgreSQL, and expects that it has already been installed.
 
 Role Variables
 --------------

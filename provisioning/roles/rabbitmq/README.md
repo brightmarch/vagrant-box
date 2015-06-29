@@ -4,7 +4,7 @@ Ansible role for the installation of RabbitMQ.
 
 Requirements
 ------------
-This role was intended for use with Ubuntu Trusty 14.04 64bit.
+This role was intended for use with Ubuntu LTS 64bit.
 
 Role Variables
 --------------
