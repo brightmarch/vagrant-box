@@ -11,15 +11,6 @@
     - libicu-dev
     - libpng12-dev
     - libjpeg8-dev
-    - libldap2-dev
-
-- name: symlink the ldap libraries for compiling with php
-  file: src=/usr/lib/x86_64-linux-gnu/{{ item }} path=/usr/lib/{{ item }}
-    state=link
-    force=yes
-  with_items:
-    - liblber.a
-    - liblber.so
 
 - name: create destination for source
   file: path={{ php_source_location }} state=directory
@@ -39,7 +30,7 @@
         --with-pgsql --with-pdo-pgsql --with-mcrypt --enable-mbstring
         --with-libxml-dir --enable-intl --enable-pcntl
         --enable-opcache --with-gd --with-jpeg-dir=/usr --enable-exif
-        --with-ldap=/usr --enable-bcmath
+        --enable-bcmath
     - make
     - make install
 
