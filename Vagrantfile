@@ -1,17 +1,14 @@
-VAGRANTFILE_API_VERSION = "2"
-Vagrant.require_version ">=1.6"
+Vagrant.require_version ">=1.7"
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "hashicorp/precise64"
+Vagrant.configure(2) do |config|
+  config.vm.box = "https://s3.amazonaws.com/brightmarch.boxes/debian78-base.box"
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "provisioning/provision.yml"
   end
 
-  config.vm.provider "virtualbox" do |v|
-    v.customize ["modifyvm", :id, "--memory", "2048"]
-    v.customize ["modifyvm", :id, "--cpus", "8"]
-    v.customize ["modifyvm", :id, "--cpuexecutioncap", "100"]
-    v.customize ["modifyvm", :id, "--hwvirtex", "on"]
+  config.vm.provider "vmware_fusion" do |v|
+    v.vmx["memsize"] = "2048"
+    v.vmx["numvcpus"] = "2"
   end
 end
