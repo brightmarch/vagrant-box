@@ -1,6 +1,6 @@
 ---
 - name: install postgres libraries
-  apt:  name={{ item }} state=present update_cache=yes cache_valid_time=3600
+  apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
   with_items:
     - build-essential
     - libkrb5-dev
@@ -14,17 +14,17 @@
     - libreadline-dev
 
 - name: create destination for source
-  file: path={{ postgres_source_location }} state=directory
+  file: path={{ postgres_source_dir }} state=directory
 
-- name: copy postgres tarball
-  copy: src={{ postgres_tarball }} dest={{ postgres_source_location }}
+- name: download postgres tarball
+  get_url: url={{ postgres_source }} dest={{ postgres_source_dir }}
 
 - name: unpack postgres source
-  command: tar xjf {{ postgres_tarball }} chdir={{ postgres_source_location }}
-    creates={{ postgres_source_path }}
+  unarchive: src={{ postgres_source_path }} dest={{ postgres_source_dir }} copy=no
+    creates={{ postgres_source_dir + postgres_dir }}
 
 - name: compile postgres 
-  command: '{{ item }} chdir={{ postgres_source_path }}
+  command: '{{ item }} chdir={{ postgres_source_dir + postgres_dir }}
     creates=/usr/local/pgsql'
   with_items:
     - ./configure --disable-debug --enable-thread-safety --with-gssapi
