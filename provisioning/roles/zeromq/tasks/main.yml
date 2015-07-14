@@ -11,7 +11,7 @@
   get_url: url={{ zeromq_source }} dest={{ zeromq_source_dir }}
 
 - name: unpack zeromq source
-  command: tar xf {{ zeromq_tarball }} chdir={{ zeromq_source_dir }}
+  unarchive: src={{ zeromq_source_path }} dest={{ zeromq_source_dir }} copy=no
     creates={{ zeromq_source_dir + zeromq_dir }}
 
 - name: compile zeromq 

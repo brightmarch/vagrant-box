@@ -1,8 +1,8 @@
-## General Aliases ##
+# Binary overrides
 alias ls='ls -laF --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 
-## Application Management ##
+# Helper aliases
 alias cd-apps='cd /var/apps/'
 alias ..='cd ..'
 

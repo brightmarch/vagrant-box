@@ -1,10 +1,10 @@
 ---
 - name: create destination for source
-  file: path={{ golang_tarball_path|dirname }} state=directory
+  file: path={{ golang_source_dir }} state=directory
 
-- name: copy golang tarball
-  copy: src={{ golang_tarball_path|basename }} dest={{ golang_tarball_path|dirname }}
+- name: download golang tarball
+  get_url: url={{ golang_source }} dest={{ golang_source_dir }}
 
-- name: install go
-  unarchive: src={{ golang_tarball_path }} dest=/usr/local copy=no
-    creates=/usr/local/{{ golang_source }}
+- name: install golang
+  unarchive: src={{ golang_source_path }} dest=/usr/local copy=no
+    creates=/usr/local/{{ golang_dir }}
