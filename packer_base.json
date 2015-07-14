@@ -1,0 +1,22 @@
+{
+    "builders": [
+        {
+            "type": "vmware-vmx",
+            "boot_wait": "10s",
+            "source_path": "wheezy64-base.vmx",
+            "ssh_username": "root",
+            "ssh_password": "vagrant",
+            "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -hP now",
+            "headless": true,
+            "vm_name": "wheezy64-base"
+        }
+    ],
+
+    "post-processors": [
+        {
+            "type": "vagrant",
+            "compression_level": 9,
+            "output": "wheezy64-base.box"
+        }
+    ]
+}
