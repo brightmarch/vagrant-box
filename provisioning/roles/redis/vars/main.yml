@@ -1,6 +1,6 @@
 ---
-redis_source: redis-{{ redis_version }}
-
-redis_source_path: '{{ redis_source_location + redis_source }}'
-
-redis_tarball: '{{ redis_source }}.tar.gz'
+redis_dir: 'redis-{{ redis_version }}'
+redis_tarball: '{{ redis_dir }}.tar.gz'
+redis_source: 'http://download.redis.io/releases/{{ redis_tarball }}'
+redis_source_dir: '/opt/src/redis/'
+redis_source_path: '{{ redis_source_dir + redis_tarball }}'

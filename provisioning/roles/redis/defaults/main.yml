@@ -1,4 +1,2 @@
 ---
 redis_version: 3.0.2
-
-redis_source_location: /opt/src/redis/
