@@ -24,3 +24,6 @@
             - .profile
             - .bash_aliases
             - .bash_envvars
+
+      - name: download the insecure key for the vagrant user
+        command: "wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub -O /home/vagrant/.ssh/authorized_keys"
