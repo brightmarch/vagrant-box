@@ -1,13 +1,19 @@
 {
+    "variables": {
+        "vmx_path": "",
+        "box_name": ""
+    },
+
     "builders": [
         {
             "type": "vmware-vmx",
-            "source_path": "",
-            "ssh_username": "root",
+            "boot_wait": "10s",
+            "source_path": "{{user `vmx_path`}}",
+            "ssh_username": "vagrant",
             "ssh_password": "vagrant",
-            "shutdown_command": "shutdown -h now",
+            "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -hP now",
             "headless": true,
-            "vm_name": "debian78-base"
+            "vm_name": "{{user `box_name`}}"
         }
     ],
 
@@ -15,7 +21,7 @@
         {
             "type": "vagrant",
             "compression_level": 9,
-            "output": "debian78-base.box"
+            "output": "{{user `box_name`}}.box"
         }
     ]
 }
