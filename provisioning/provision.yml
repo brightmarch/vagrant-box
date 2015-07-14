@@ -4,12 +4,12 @@
   roles: 
       - common
       - ruby
-      #- postgres
+      - postgres
       - redis
       - zeromq
-      #- php
+      - php
       - golang
-      #- rabbitmq
+      - rabbitmq
 
   post_tasks:
       - name: set the vagrant user as the owner of /home/vagrant

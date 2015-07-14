@@ -1,6 +1,6 @@
 ---
 - name: install php libraries
-  apt:  name={{ item }} state=present update_cache=yes cache_valid_time=3600
+  apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
   with_items:
     - build-essential
     - autoconf
@@ -13,17 +13,17 @@
     - libjpeg8-dev
 
 - name: create destination for source
-  file: path={{ php_source_location }} state=directory
+  file: path={{ php_source_dir }} state=directory
 
-- name: copy php tarball
-  copy: src={{ php_tarball }} dest={{ php_source_location }}
+- name: download php tarball
+  get_url: url={{ php_source }} dest={{ php_source_dir }}
 
 - name: unpack php source
-  command: tar xf {{ php_tarball }} chdir={{ php_source_location }}
-    creates={{ php_source_path }}
+  unarchive: src={{ php_source_path }} dest={{ php_source_dir }} copy=no
+    creates={{ php_source_dir + php_dir }}
 
 - name: install php
-  command: '{{ item }} chdir={{ php_source_path }} creates=/usr/local/bin/php'
+  command: '{{ item }} chdir={{ php_source_dir + php_dir }} creates=/usr/local/bin/php'
   with_items:
     - ./configure --with-openssl --with-zlib --with-curl
         --enable-zip --with-xmlrpc --enable-soap --enable-sockets
@@ -36,13 +36,13 @@
 
 - name: copy the php.ini-development file
   command: cp php.ini-development /usr/local/lib/php.ini
-      chdir={{ php_source_path }}
+      chdir={{ php_source_dir + php_dir }}
       creates=/usr/local/lib/php.ini
   when: not production
 
 - name: copy the php.ini-production file
   command: cp php.ini-production /usr/local/lib/php.ini
-    chdir={{ php_source_path }}
+      chdir={{ php_source_dir + php_dir }}
     creates=/usr/local/lib/php.ini
   when: production
 

@@ -1,35 +1,30 @@
 ---
-# PHP Variables
-php_source: php-{{ php_version }}
+php_dir: 'php-{{ php_version }}'
+php_tarball: '{{ php_dir }}.tar.gz'
+php_source: 'http://php.net/get/php-{{ php_version }}.tar.gz/from/this/mirror'
+php_source_dir: '/opt/src/php/'
+php_source_path: '{{ php_source_dir + php_tarball }}'
 
-php_source_path: '{{ php_source_location + php_source }}'
+php_imagick_dir: 'imagick-{{ php_imagick_version }}'
+php_imagick_tarball: '{{ php_imagick_dir }}.tgz'
+php_imagick_source: 'http://pecl.php.net/get/imagick-{{ php_imagick_version }}.tgz'
+php_imagick_source_dir: '/opt/src/php/'
+php_imagick_source_path: '{{ php_imagick_source_dir + php_imagick_tarball }}'
 
-php_tarball: '{{ php_source }}.tar.gz'
+php_redis_dir: 'phpredis-{{ php_redis_version }}'
+php_redis_tarball: '{{ php_redis_dir }}.tar.gz'
+php_redis_source: 'https://github.com/phpredis/phpredis/archive/{{ php_redis_version }}.tar.gz'
+php_redis_source_dir: '/opt/src/php/'
+php_redis_source_path: '{{ php_redis_source_dir + php_redis_tarball }}'
 
-# PHP Imagick Variables
-php_imagick_source: imagick-{{ php_imagick_version }}
+php_ssh2_dir: 'ssh2-{{ php_ssh2_version }}'
+php_ssh2_tarball: '{{ php_ssh2_dir }}.tgz'
+php_ssh2_source: 'http://pecl.php.net/get/ssh2-{{ php_ssh2_version }}.tgz'
+php_ssh2_source_dir: '/opt/src/php/'
+php_ssh2_source_path: '{{ php_ssh2_source_dir + php_ssh2_tarball }}'
 
-php_imagick_source_path: '{{ php_imagick_source_location + php_imagick_source }}'
-
-php_imagick_tarball: 'php-{{ php_imagick_source }}.tgz'
-
-# PHP SSH2 Variables
-php_ssh2_source: ssh2-{{ php_ssh2_version }}
-
-php_ssh2_source_path: '{{ php_ssh2_source_location + php_ssh2_source }}'
-
-php_ssh2_tarball: 'php-{{ php_ssh2_source }}.tgz'
-
-# PHP ZMQ Variables
-php_zmq_source: zmq-{{ php_zmq_version }}
-
-php_zmq_source_path: '{{ php_zmq_source_location + php_zmq_source }}'
-
-php_zmq_tarball: 'php-{{ php_zmq_source }}.tgz'
-
-# PHP Redis Variables
-php_redis_source: phpredis-{{ php_redis_version }}
-
-php_redis_source_path: '{{ php_redis_source_location + php_redis_source }}'
-
-php_redis_tarball: 'php-redis-{{ php_redis_version }}.tar.gz'
+php_zmq_dir: 'zmq-{{ php_zmq_version }}'
+php_zmq_tarball: '{{ php_zmq_dir }}.tgz'
+php_zmq_source: 'http://pecl.php.net/get/zmq-{{ php_zmq_version }}.tgz'
+php_zmq_source_dir: '/opt/src/php/'
+php_zmq_source_path: '{{ php_zmq_source_dir + php_zmq_tarball }}'

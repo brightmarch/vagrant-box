@@ -1,24 +1,24 @@
 ---
 - name: install php-imagick dependencies
-  apt:  name={{ item }} state=present
+  apt: name={{ item }} state=present
   with_items:
     - imagemagick
     - libmagickwand-dev
     - libmagickcore-dev
 
 - name: create destination for source
-  file: path={{ php_imagick_source_location }} state=directory
+  file: path={{ php_imagick_source_dir }} state=directory
 
-- name: copy php-imagick tarball
-  copy: src={{ php_imagick_tarball }} dest={{ php_imagick_source_location }}
+- name: download php-imagick tarball
+  get_url: url={{ php_imagick_source }} dest={{ php_imagick_source_dir }}
 
 - name: unpack php-imagick source
-  command: tar xf {{ php_imagick_tarball }} chdir={{ php_imagick_source_location }}
-    creates={{ php_imagick_source_path }}
+  unarchive: src={{ php_imagick_source_path }} dest={{ php_imagick_source_dir }} copy=no
+    creates={{ php_imagick_source_dir + php_imagick_dir }}
 
-- name: compile php-imagick
-  shell: '{{ item }} chdir={{ php_imagick_source_path }}
-      creates={{ php_imagick_source_path }}/modules/imagick.so'
+- name: install php-imagick
+  shell: '{{ item }} chdir={{ php_imagick_source_dir + php_imagick_dir }}
+      creates={{ php_imagick_source_dir + php_imagick_dir }}/modules/imagick.so'
   with_items:
     - phpize
     - ./configure
@@ -27,5 +27,5 @@
                             # executed. That file is created during make not
                             # make install.
 
-- name: add the extension to php.ini
+- name: add imagick to php.ini
   lineinfile: dest=/usr/local/lib/php.ini line="extension=imagick.so"

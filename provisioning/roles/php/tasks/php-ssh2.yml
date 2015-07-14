@@ -3,25 +3,22 @@
   apt: name=libssh2-1-dev state=present
 
 - name: create destination for php-ssh2 source
-  file: path={{ php_ssh2_source_location }} state=directory
+  file: path={{ php_ssh2_source_dir }} state=directory
 
-- name: copy php-ssh2 tarball
-  copy: src={{ php_ssh2_tarball }} dest={{ php_ssh2_source_location }}
+- name: download php-ssh2 tarball
+  get_url: url={{ php_ssh2_source }} dest={{ php_ssh2_source_dir }}
 
 - name: unpack php-ssh2 source
-  command: tar xf {{ php_ssh2_tarball }} chdir={{ php_ssh2_source_location }}
-    creates={{ php_ssh2_source_path }}
+  unarchive: src={{ php_ssh2_source_path }} dest={{ php_ssh2_source_dir }} copy=no
+    creates={{ php_ssh2_source_dir + php_ssh2_dir }}
 
 - name: compile php-ssh2
-  shell: '{{ item }} chdir={{ php_ssh2_source_path }}
-    creates={{ php_ssh2_source_path }}/modules/ssh2.so'
+  shell: '{{ item }} chdir={{ php_ssh2_source_dir + php_ssh2_dir }}
+      creates={{ php_ssh2_source_dir + php_ssh2_dir }}/modules/ssh2.so'
   with_items:
     - phpize
     - ./configure
-    - make && make install  # Make this a one-liner so we can use the 
-                            # modules/ssh2.so to check that it has already 
-                            # executed. That file is created during make not
-                            # make install.
+    - make && make install
 
 - name: add the extension to php.ini
   lineinfile: dest=/usr/local/lib/php.ini line="extension=ssh2.so"

@@ -1,24 +1,21 @@
 ---
 - name: create destination for php-zmq source
-  file: path={{ php_zmq_source_location }} state=directory
+  file: path={{ php_zmq_source_dir }} state=directory
 
-- name: copy php-zmq tarball
-  copy: src={{ php_zmq_tarball }} dest={{ php_zmq_source_location }}
+- name: download php-zmq tarball
+  get_url: url={{ php_zmq_source }} dest={{ php_zmq_source_dir }}
 
 - name: unpack php-zmq source
-  command: tar xf {{ php_zmq_tarball }} chdir={{ php_zmq_source_location }}
-    creates={{ php_zmq_source_path }}
+  unarchive: src={{ php_zmq_source_path }} dest={{ php_zmq_source_dir }} copy=no
+    creates={{ php_zmq_source_dir + php_zmq_dir }}
 
 - name: compile php-zmq
-  shell: '{{ item }} chdir={{ php_zmq_source_path }}
-    creates={{ php_zmq_source_path }}/modules/zmq.so'
+  shell: '{{ item }} chdir={{ php_zmq_source_dir + php_zmq_dir }}
+      creates={{ php_zmq_source_dir + php_zmq_dir }}/modules/zmq.so'
   with_items:
     - phpize
     - ./configure
-    - make && make install  # Make this a one-liner so we can use the 
-                            # modules/zmq.so to check that it has already 
-                            # executed. That file is created during make not
-                            # make install.
+    - make && make install
 
 - name: add the extension to php.ini
   lineinfile: dest=/usr/local/lib/php.ini line="extension=zmq.so"
