@@ -13,7 +13,7 @@
     - curl
     - libxml2-utils
     - htop
-    #- ruby-full
+    - ruby-full
 
 - name: set the timezone
   copy: content='UTC' dest=/etc/timzone owner=root group=root mode=0644 backup=no

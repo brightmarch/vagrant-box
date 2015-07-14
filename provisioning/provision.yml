@@ -27,3 +27,6 @@
 
       - name: download the insecure key for the vagrant user
         command: "wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub -O /home/vagrant/.ssh/authorized_keys"
+
+      - name: cleanup
+        command: "rm -rf /opt/src/"
