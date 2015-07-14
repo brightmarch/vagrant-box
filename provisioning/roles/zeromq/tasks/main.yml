@@ -1,21 +1,21 @@
 ---
 - name: install zeromq dependencies
-  apt:  name={{ item }} state=present update_cache=yes cache_valid_time=3600
+  apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
   with_items:
     - build-essential
 
 - name: create destination for source
-  file: path={{ zeromq_source_location }} state=directory
+  file: path={{ zeromq_source_dir }} state=directory
 
-- name: copy zeromq tarball
-  copy: src={{ zeromq_tarball }} dest={{ zeromq_source_location }}
+- name: download zeromq tarball
+  get_url: url={{ zeromq_source }} dest={{ zeromq_source_dir }}
 
 - name: unpack zeromq source
-  command: tar xf {{ zeromq_tarball }} chdir={{ zeromq_source_location }}
-    creates={{ zeromq_source_path }}
+  command: tar xf {{ zeromq_tarball }} chdir={{ zeromq_source_dir }}
+    creates={{ zeromq_source_dir + zeromq_dir }}
 
-- name: compile zero mq 
-  command: '{{ item }} chdir={{ zeromq_source_path }} creates=/usr/local/lib/libzmq.so'
+- name: compile zeromq 
+  command: '{{ item }} chdir={{ zeromq_source_dir + zeromq_dir }} creates=/usr/local/lib/libzmq.so'
   with_items:
     - ./configure
     - make
