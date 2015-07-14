@@ -1,0 +1,21 @@
+{
+    "builders": [
+        {
+            "type": "vmware-vmx",
+            "source_path": "",
+            "ssh_username": "root",
+            "ssh_password": "vagrant",
+            "shutdown_command": "shutdown -h now",
+            "headless": true,
+            "vm_name": "debian78-base"
+        }
+    ],
+
+    "post-processors": [
+        {
+            "type": "vagrant",
+            "compression_level": 9,
+            "output": "debian78-base.box"
+        }
+    ]
+}
