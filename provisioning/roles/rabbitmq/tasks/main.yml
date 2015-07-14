@@ -3,7 +3,7 @@
   file: path={{ rabbitmq_source_dir }} state=directory
 
 - name: download rabbitmq package
-  get_url: src={{ rabbitmq_source }} dest={{ rabbitmq_source_dir }}
+  get_url: url={{ rabbitmq_source }} dest={{ rabbitmq_source_dir }}
 
 - name: install rabbitmq
   apt: deb={{ rabbitmq_package_path }}
