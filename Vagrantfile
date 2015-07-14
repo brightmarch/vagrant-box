@@ -1,7 +1,8 @@
 Vagrant.require_version ">=1.7"
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "debian7.8-amd64-base"
+  config.vm.box = "brightmarch/debian7.8-amd64-base"
+  config.ssh.insert_key = false
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "provisioning/provision.yml"
