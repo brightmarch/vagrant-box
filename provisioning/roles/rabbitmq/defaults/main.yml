@@ -1,4 +1,2 @@
 ---
 rabbitmq_version: 3.5.3
-
-rabbitmq_source_location: /opt/src/rabbitmq/
