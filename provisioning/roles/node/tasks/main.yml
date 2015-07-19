@@ -1,0 +1,22 @@
+---
+- name: install node libraries
+  apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
+  with_items:
+    - build-essential
+
+- name: create destination for source
+  file: path={{ node_source_dir }} state=directory
+
+- name: download node tarball
+  get_url: url={{ node_source }} dest={{ node_source_dir }}
+
+- name: unpack node source
+  unarchive: src={{ node_source_path }} dest={{ node_source_dir }} copy=no
+    creates={{ node_source_dir + node_dir }}
+
+- name: install node
+  command: '{{ item }} chdir={{ node_source_dir + node_dir }} creates=/usr/local/bin/node'
+  with_items:
+    - ./configure
+    - make
+    - make install

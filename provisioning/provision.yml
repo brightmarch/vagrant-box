@@ -8,6 +8,7 @@
       - redis
       - zeromq
       - php
+      - node
       - golang
       - rabbitmq
 
@@ -30,6 +31,3 @@
 
       - name: cleanup
         command: "rm -rf /opt/src/"
-
-      - name: compress
-        command: "dd if=/dev/zero of=/EMPTY bs=1M;rm -rf /EMPTY;sync"

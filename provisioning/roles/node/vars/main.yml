@@ -1,0 +1,6 @@
+---
+node_dir: 'node-v{{ node_version }}'
+node_tarball: '{{ node_dir }}.tar.gz'
+node_source: 'https://nodejs.org/dist/v{{ node_version}}/node-v{{ node_version }}.tar.gz'
+node_source_dir: '/opt/src/node/'
+node_source_path: '{{ node_source_dir + node_tarball }}'

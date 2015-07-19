@@ -4,6 +4,7 @@ A Debian Wheezy 7.8 64-bit box that includes:
 * Compass 0.12.4
 * Go 1.4.2
 * God 0.13.4
+* Node 0.12.7
 * PHP 5.6.10
 * php-imagick 3.1.2
 * php-redis 2.2.7
@@ -29,6 +30,9 @@ Ansible must be in your `$PATH` in order for Vagrant to provision the box. See t
 ## Building and Packaging
 
 ## Changelog
+
+### 1.1.0
+* Added Node 0.12.7.
 
 ### 1.0.0
 * Initial release of the new Debian based Bright March box based on VMWare Fusion.
