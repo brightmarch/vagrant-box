@@ -7,10 +7,12 @@
     - libcurl4-openssl-dev
     - libmcrypt4
     - libmcrypt-dev
-    - libicu48
+    - libicu52
     - libicu-dev
     - libpng12-dev
-    - libjpeg8-dev
+    - libjpeg62
+    - libjpeg-dev
+    - pkg-config
 
 - name: create destination for source
   file: path={{ php_source_dir }} state=directory

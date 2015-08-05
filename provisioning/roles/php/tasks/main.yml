@@ -1,6 +1,6 @@
 ---
 - include: install.yml
-- include: php-imagick.yml
+#- include: php-imagick.yml
 - include: php-redis.yml
 - include: php-ssh2.yml
 - include: php-zmq.yml
