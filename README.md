@@ -39,5 +39,5 @@ The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file
 * Upgraded to Debian Jessie 8.1 64bit.
 * Upgraded PHP to 5.6.11.
 * Removed `php-imagick` because it was a pain to get compiled and I just don't have that time.
-* Downgraded Node to 0.10.0 because of some bullshit infighting in the Node and IO communities and about Jest and JSDom and who gives a shit it's what is needed to make JSDom work. 
+* Downgraded Node to 0.10.0 because of some bullshit in-fighting in the Node and IO.js communities about Jest and JSDom and who gives a shit it's what is needed to make JSDom work. 
 * Removed RabbitMQ because a project we're working on really isn't going to use it just yet and I didn't want an unused service just sitting there.
