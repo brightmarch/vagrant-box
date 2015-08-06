@@ -51,6 +51,9 @@ sh VBoxLinuxAdditions.run
 
 ## Changelog
 
+### 2.0.2
+* Reduced box size by 300MB.
+
 ### 2.0.1
 * Added Phing 2.11.0 for building PHP applications.
 * More README details on how to package the box.
