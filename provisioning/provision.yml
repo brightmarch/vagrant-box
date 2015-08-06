@@ -10,7 +10,6 @@
       - php
       - node
       - golang
-      #- rabbitmq
 
   post_tasks:
       - name: set the vagrant user as the owner of /home/vagrant
@@ -27,4 +26,4 @@
             - .bash_envvars
 
       - name: cleanup
-        command: "rm -rf /opt/src/*"
+        command: "rm -rf /opt/src"

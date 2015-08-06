@@ -1,10 +1,10 @@
 # Bright March Vagrant Box
-A Debian Jessie 8.10 64-bit box that includes:
+A Debian Jessie 8.10 64-bit box for VirtualBox 5.0 that includes:
 
 * Compass 0.12.4
-* Composer latest
+* Composer
 * Go 1.4.2
-* Node 0.10.0
+* Node 0.10.29
 * Phing 2.11.0
 * PHP 5.6.11
 * php-redis 2.2.7
@@ -34,10 +34,26 @@ $ vagrant package --output precise64-`cat VERSION`.box
 
 The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file associated with this repository.
 
+**Note**: The `vagrant-vbguest` plugin is very out of date and I dislike it. As such, you should manually install [VirtualBox Guest Additions 5.0](http://download.virtualbox.org/virtualbox/5.0.0/VBoxGuestAdditions_5.0.0.iso) to match VirtualBox 5.0.
+
+To manually install the Guest Additions, run the following commands as `root` after shelling into the box.
+
+```
+cd ~
+wget http://download.virtualbox.org/virtualbox/5.0.0/VBoxGuestAdditions_5.0.0.iso
+mkdir -p /mnt/cdrom
+mount -o loop VBoxGuestAdditions_5.0.0.iso /mnt/cdrom
+apt-get install XXX
+cd /mnt/cdrom
+./VBoxLinux.run
+```
+
 ## Changelog
 
 ### 2.0.1
 * Added Phing 2.11.0 for building PHP applications.
+* More README details on how to package the box.
+* Upgraded Node to 0.10.29.
 
 ### 2.0.0
 * Switched back to Virtualbox because it is more widely supported, free, and easier to package.

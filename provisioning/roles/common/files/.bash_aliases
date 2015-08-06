@@ -21,3 +21,5 @@ function gitroot {
 if [ -f ~/.bash_envvars ]; then
     . ~/.bash_envvars
 fi
+
+# Application specific aliases
