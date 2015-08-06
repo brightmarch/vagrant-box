@@ -28,26 +28,25 @@ Ansible must be in your `$PATH` in order for Vagrant to provision the box. See t
 ## Building and Packaging
 After bringing up the provisioned box, run:
 
-```
+```sh
 vagrant package --output precise64-`cat VERSION`.box
 ```
 
 The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file associated with this repository.
 
-**Note**: The `vagrant-vbguest` plugin is very out of date and I dislike it. As such, you should manually install [VirtualBox Guest Additions 5.0](http://download.virtualbox.org/virtualbox/5.0.0/VBoxGuestAdditions_5.0.0.iso) to match VirtualBox 5.0.
+**Note**: The `vagrant-vbguest` plugin is very out of date and I dislike it. As such, you should manually install [VirtualBox Guest Additions 5.0.0](http://download.virtualbox.org/virtualbox/5.0.0/VBoxGuestAdditions_5.0.0.iso) to match VirtualBox 5.0.0.
 
-To manually install the Guest Additions, run the following commands as `root` after shelling into the box.
+Manually installing the Guest Additions is easy. Begin by shelling into the newly built Vagrant VM. Switch to the `root` user using `sudo`. From there, use the commands below to install the Guest Additions ISO.
 
-* Install the Linux kernel header files necessary: `apt-get install linux-headers-`uname -r` -y`
-
-```
+```sh
 apt-get install linux-headers-`uname -r` -y
 
 wget http://download.virtualbox.org/virtualbox/5.0.0/VBoxGuestAdditions_5.0.0.iso
 mkdir -p /mnt/cdrom
 mount -o loop VBoxGuestAdditions_5.0.0.iso /mnt/cdrom
+
 cd /mnt/cdrom
-./VBoxLinuxAdditions.run
+sh VBoxLinuxAdditions.run
 ```
 
 ## Changelog
