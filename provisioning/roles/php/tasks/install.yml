@@ -55,3 +55,8 @@
   shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
   args:
       creates: /usr/local/bin/composer
+
+- name: install phing
+  shell: wget http://phing.info/get/phing-latest.phar -O /usr/local/bin/phing && chmod +x /usr/local/bin/phing
+  args:
+    creates: /usr/local/bin/phing
