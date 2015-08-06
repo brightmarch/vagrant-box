@@ -2,8 +2,10 @@
 A Debian Jessie 8.10 64-bit box that includes:
 
 * Compass 0.12.4
+* Composer latest
 * Go 1.4.2
 * Node 0.10.0
+* Phing 2.11.0
 * PHP 5.6.11
 * php-redis 2.2.7
 * php-ssh2 0.12
@@ -33,6 +35,9 @@ $ vagrant package --output precise64-`cat VERSION`.box
 The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file associated with this repository.
 
 ## Changelog
+
+### 2.0.1
+* Added Phing 2.11.0 for building PHP applications.
 
 ### 2.0.0
 * Switched back to Virtualbox because it is more widely supported, free, and easier to package.
