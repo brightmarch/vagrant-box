@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Bright March
-  description: PHP configured for Postgres. Includes PHP-SSH2, PHP-Imagick, PHP-Redis, and PHP-ZMQ.
+  description: PHP configured for Postgres. Includes PHP-SSH2, PHP-Redis, and PHP-ZMQ.
   license: MIT
   min_ansible_version: 1.2
   platforms:

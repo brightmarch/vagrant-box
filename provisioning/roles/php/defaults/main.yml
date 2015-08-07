@@ -1,8 +1,7 @@
 ---
 production: false
 
-php_version: 5.6.11
-php_imagick_version: 3.1.2
+php_version: 5.6.12
 php_redis_version: 2.2.7
 php_ssh2_version: 0.12 
 php_zmq_version: 1.1.2
