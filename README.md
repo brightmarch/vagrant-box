@@ -6,7 +6,7 @@ A Debian Jessie 8.10 64-bit box for VirtualBox 5.0 that includes:
 * Go 1.4.2
 * Node 0.10.29
 * Phing 2.11.0
-* PHP 5.6.11
+* PHP 5.6.12
 * php-redis 2.2.7
 * php-ssh2 0.12
 * php-zmq 1.1.2
@@ -50,6 +50,9 @@ sh VBoxLinuxAdditions.run
 ```
 
 ## Changelog
+
+### 2.0.3
+* Upgraded PHP to 5.6.12.
 
 ### 2.0.2
 * Reduced box size by 300MB.
