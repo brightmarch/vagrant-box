@@ -37,7 +37,7 @@ Manually installing the Guest Additions is easy. Begin by shelling into the newl
 ```sh
 apt-get install linux-headers-`uname -r` -y
 
-wget http://download.virtualbox.org/virtualbox/5.0.0/VBoxGuestAdditions_5.0.16.iso
+wget http://download.virtualbox.org/virtualbox/5.0.16/VBoxGuestAdditions_5.0.16.iso
 mkdir -p /mnt/cdrom
 mount -o loop VBoxGuestAdditions_5.0.16.iso /mnt/cdrom
 
@@ -58,7 +58,7 @@ After the Guest Additions are installed, you can unmount the ISO and delete the 
 * Removed php-zmq.
 * Removed ZeroMQ.
 * Removed RabbitMQ.
-* Removed Ruby gems Compass, SASS, Foundation and God.
+* Removed Ruby gems Compass, SASS, Foundation, and God.
 
 ### 2.0.3
 * Upgraded PHP to 5.6.12.
