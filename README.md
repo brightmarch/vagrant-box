@@ -28,7 +28,7 @@ After bringing up the provisioned box, run:
 vagrant package --output debian-8.3-amd64-`cat VERSION`.box
 ```
 
-The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file associated with this repository.
+The `<VERSION>` placeholder should be replaced by incrementing the `VERSION` file associated with this repository.
 
 **Note**: The `vagrant-vbguest` plugin is very out of date and I dislike it. As such, you should manually install [VirtualBox Guest Additions 5.0.16](http://download.virtualbox.org/virtualbox/5.0.16/VBoxGuestAdditions_5.0.16.iso) to match VirtualBox 5.0.16.
 
