@@ -3,6 +3,7 @@ A Debian Jessie 8.10 64-bit box for VirtualBox 5.0 that includes:
 
 * Go 1.6
 * Node 4.3.2
+* npm 2.14.12
 * Phing 2.13.0
 * PHP 7.0.4
 * PHP Composer alpha1
@@ -23,7 +24,7 @@ Ansible must be in your `$PATH` in order for Vagrant to provision the box. See t
 After bringing up the provisioned box, run:
 
 ```sh
-vagrant package --output debian-8.1-amd64-`cat VERSION`.box
+vagrant package --output debian-8.3-amd64-`cat VERSION`.box
 ```
 
 The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file associated with this repository.
@@ -44,6 +45,17 @@ sh VBoxLinuxAdditions.run
 ```
 
 ## Changelog
+
+### 2.1.0
+* Upgraded Node to 4.3.2.
+* Upgraded PHP to 7.0.4.
+* Upgraded Postgres to 9.5.1.
+* Upgraded Redis to 3.0.7.
+* Removed php-ssh.
+* Removed php-zmq.
+* Removed ZeroMQ.
+* Removed RabbitMQ.
+* Removed Ruby gems Compass, SASS, Foundation and God.
 
 ### 2.0.3
 * Upgraded PHP to 5.6.12.

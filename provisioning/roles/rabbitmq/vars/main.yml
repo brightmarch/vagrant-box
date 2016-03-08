@@ -1,6 +1,0 @@
----
-rabbitmq_source: 'https://www.rabbitmq.com/releases/rabbitmq-server/v{{ rabbitmq_version }}/rabbitmq-server_{{ rabbitmq_version }}-1_all.deb'
-rabbitmq_source_dir: '/opt/src/rabbitmq/'
-
-rabbitmq_package: 'rabbitmq-server_{{ rabbitmq_version }}-1_all.deb'
-rabbitmq_package_path: '{{ rabbitmq_source_dir + rabbitmq_package }}'

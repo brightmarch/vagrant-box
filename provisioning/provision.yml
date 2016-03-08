@@ -3,10 +3,8 @@
   sudo: yes
   roles: 
       - common
-      #- ruby
       - postgres
       - redis
-      #- zeromq
       - php
       - node
       - golang
