@@ -1,6 +1,6 @@
 ---
 golang_dir: 'go'
 golang_tarball: '{{ golang_dir + golang_version }}.linux-amd64.tar.gz'
-golang_source: 'https://storage.googleapis.com/golang/go{{ golang_version }}.linux-amd64.tar.gz'
+golang_source: 'https://storage.googleapis.com/golang/{{ golang_tarball }}'
 golang_source_dir: '/opt/src/golang/'
 golang_source_path: '{{ golang_source_dir + golang_tarball }}'

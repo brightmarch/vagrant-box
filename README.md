@@ -1,21 +1,15 @@
 # Bright March Vagrant Box
 A Debian Jessie 8.10 64-bit box for VirtualBox 5.0 that includes:
 
-* Compass 0.12.4
-* Composer
-* Go 1.4.2
-* Node 0.10.29
-* Phing 2.11.0
-* PHP 5.6.12
-* php-redis 2.2.7
-* php-ssh2 0.12
-* php-zmq 1.1.2
-* Postgres 9.4.4
-* Redis 3.0.2
+* Go 1.6
+* Node 4.3.2
+* Phing 2.13.0
+* PHP 7.0.4
+* PHP Composer alpha1
+* php-redis php7
+* Postgres 9.5.1
+* Redis 3.0.7
 * Ruby 2.1.5
-* SASS 3.3.4
-* ZeroMQ 4.0.4
-* ZURB Foundation 4.3.2
 
 ## Boxes
 You are free to use our boxes if you like. They are hosted using Hashicorp's Atlas service.
