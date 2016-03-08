@@ -1,5 +1,5 @@
 # Bright March Vagrant Box
-A Debian Jessie 8.10 64-bit box for VirtualBox 5.0 that includes:
+A Debian Jessie 8.3 64-bit box for VirtualBox 5.0 that includes:
 
 * Go 1.6
 * Node 4.3.2
@@ -15,6 +15,7 @@ A Debian Jessie 8.10 64-bit box for VirtualBox 5.0 that includes:
 ## Boxes
 You are free to use our boxes if you like. They are hosted using Hashicorp's Atlas service.
 
+* [brightmarch/debian-8.3-amd64](https://atlas.hashicorp.com/brightmarch/boxes/debian-8.3-amd64)
 * [brightmarch/debian-8.1-amd64](https://atlas.hashicorp.com/brightmarch/boxes/debian-8.1-amd64)
 
 ## Requirements
@@ -29,20 +30,22 @@ vagrant package --output debian-8.3-amd64-`cat VERSION`.box
 
 The `<VERSION>` placeholder should be replace by incrementing the `VERSION` file associated with this repository.
 
-**Note**: The `vagrant-vbguest` plugin is very out of date and I dislike it. As such, you should manually install [VirtualBox Guest Additions 5.0.0](http://download.virtualbox.org/virtualbox/5.0.0/VBoxGuestAdditions_5.0.0.iso) to match VirtualBox 5.0.0.
+**Note**: The `vagrant-vbguest` plugin is very out of date and I dislike it. As such, you should manually install [VirtualBox Guest Additions 5.0.16](http://download.virtualbox.org/virtualbox/5.0.16/VBoxGuestAdditions_5.0.16.iso) to match VirtualBox 5.0.16.
 
 Manually installing the Guest Additions is easy. Begin by shelling into the newly built Vagrant VM. Switch to the `root` user using `sudo`. From there, use the commands below to install the Guest Additions ISO.
 
 ```sh
 apt-get install linux-headers-`uname -r` -y
 
-wget http://download.virtualbox.org/virtualbox/5.0.0/VBoxGuestAdditions_5.0.0.iso
+wget http://download.virtualbox.org/virtualbox/5.0.0/VBoxGuestAdditions_5.0.16.iso
 mkdir -p /mnt/cdrom
-mount -o loop VBoxGuestAdditions_5.0.0.iso /mnt/cdrom
+mount -o loop VBoxGuestAdditions_5.0.16.iso /mnt/cdrom
 
 cd /mnt/cdrom
 sh VBoxLinuxAdditions.run
 ```
+
+After the Guest Additions are installed, you can unmount the ISO and delete the file.
 
 ## Changelog
 
