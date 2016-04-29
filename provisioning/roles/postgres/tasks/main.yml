@@ -4,3 +4,6 @@
   with_items:
     - postgresql-9.4
     - postgresql-client-9.4
+
+- name: set connection settings in pg_hba.conf
+  replace: dest=/etc/postgresql/9.4/main/pg_hba.conf regexp=" md5" replace=" trust"
