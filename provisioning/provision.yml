@@ -1,13 +1,13 @@
 ---
 - hosts: default
-  sudo: yes
+  become: yes
   roles: 
       - common
       - postgres
       - redis
       - php
       - node
-      - golang
+      #- golang
 
   post_tasks:
       - name: set the vagrant user as the owner of /home/vagrant

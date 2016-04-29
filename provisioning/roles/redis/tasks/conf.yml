@@ -1,9 +1,0 @@
----
-- file: path=/etc/redis state=directory
-
-- command: cp redis.conf /etc/redis/redis.conf chdir={{ redis_source_dir + redis_dir }}
-    creates=/etc/redis/redis.conf
-  register: result
-
-- lineinfile: line='daemonize yes' regexp='daemonize\s+no' dest=/etc/redis/redis.conf
-  when: result|changed

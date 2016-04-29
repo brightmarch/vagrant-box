@@ -1,9 +1,0 @@
----
-postgres_dir: 'postgresql-{{ postgres_version }}'
-postgres_tarball: '{{ postgres_dir }}.tar.gz'
-postgres_source: 'https://ftp.postgresql.org/pub/source/v{{ postgres_version }}/{{ postgres_tarball }}'
-postgres_source_dir: '/opt/src/postgresql/'
-postgres_source_path: '{{ postgres_source_dir + postgres_tarball }}'
-
-postgres_encoding: 'UTF-8'
-postgres_user: postgres

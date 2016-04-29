@@ -1,5 +1,3 @@
 ---
 production: false
-
-php_version: 7.0.4
-php_redis_version: php7
+php_version: 7.0.5

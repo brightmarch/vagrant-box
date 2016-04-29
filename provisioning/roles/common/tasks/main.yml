@@ -15,6 +15,7 @@
     - htop
     - ruby-full
     - python-apt
+    - sudo
 
 - name: set the timezone
   copy: content='UTC' dest=/etc/timzone owner=root group=root mode=0644 backup=no

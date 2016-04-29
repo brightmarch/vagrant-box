@@ -1,5 +1,50 @@
 ---
-- include: install.yml
-- include: php-redis.yml
-#- include: php-ssh2.yml
-#- include: php-zmq.yml
+- name: download dotdeb GPG key
+  get_url: url=https://www.dotdeb.org/dotdeb.gpg dest=/root/dotdeb.gpg
+
+- name: add dotdeb GPG key
+  command: "apt-key add /root/dotdeb.gpg"
+
+- name: add dotdeb to repository list
+  lineinfile: dest=/etc/apt/sources.list line="deb http://packages.dotdeb.org jessie all"
+- lineinfile: dest=/etc/apt/sources.list line="deb-src http://packages.dotdeb.org jessie all"
+
+- name: update aptitude repositories
+  command: "apt-get update"
+
+- name: install php
+  apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
+  with_items:
+    - php7.0-common
+    - php7.0-json
+    - php7.0-curl
+    - php7.0-cli
+    - php7.0-pgsql
+    - php7.0-opcache
+    - php7.0-intl
+    - php7.0-xmlrpc
+    - php7.0-redis
+    - php7.0-igbinary
+    - php7.0-readline
+
+- name: set the date.timezone in php.ini
+  lineinfile: dest=/etc/php/7.0/cli/php.ini line="date.timezone=UTC"
+
+- name: set size parameters in php.ini
+  lineinfile:
+    dest: /etc/php/7.0/cli/php.ini
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: "^post_max_size = 8M", line: "post_max_size = 32M" }
+    - { regexp: "^upload_max_filesize = 2M", line: "upload_max_filesize = 24M" }
+
+- name: install composer
+  shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+  args:
+    creates: /usr/local/bin/composer
+
+- name: install phing
+  shell: wget http://phing.info/get/phing-latest.phar -O /usr/local/bin/phing && chmod +x /usr/local/bin/phing
+  args:
+    creates: /usr/local/bin/phing

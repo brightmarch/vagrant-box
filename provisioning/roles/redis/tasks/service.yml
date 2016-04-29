@@ -1,5 +1,0 @@
----
-- name: install the redis init.d service script
-  copy: src=redis dest=/etc/init.d/redis mode=a+x
-  notify:
-    - enable redis

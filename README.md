@@ -2,13 +2,12 @@
 A Debian Jessie 8.3 64-bit box for VirtualBox 5.0 that includes:
 
 * Go 1.6
-* Node 4.3.2
+* Node 5.11.0
 * npm 2.14.12
-* Phing 2.13.0
-* PHP 7.0.4
-* PHP Composer alpha1
-* php-redis php7
-* Postgres 9.5.1
+* Phing 2.14.0
+* PHP 7.0.5
+* PHP Composer 1.0.2
+* Postgres 9.4.6
 * Redis 3.0.7
 * Ruby 2.1.5
 

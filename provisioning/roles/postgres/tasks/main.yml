@@ -1,4 +1,6 @@
 ---
-- include: install.yml
-- include: cluster.yml
-- include: service.yml
+- name: install postgres
+  apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
+  with_items:
+    - postgresql-9.4
+    - postgresql-client-9.4

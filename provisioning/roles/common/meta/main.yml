@@ -1,11 +1,11 @@
 ---
 galaxy_info:
   author: Bright March
-  description: Base configurations for development and production environments at Bright March.
+  description: Base configurations for the Bright March development box.
   license: MIT
   min_ansible_version: 1.8
   platforms:
-  - name: Ubuntu
+  - name: Debian
     versions:
     - precise
   categories:
