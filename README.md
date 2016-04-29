@@ -1,14 +1,14 @@
 # Bright March Vagrant Box
-A Debian Jessie 8.3 64-bit box for VirtualBox 5.0 that includes:
+A Debian Jessie 8.4 64-bit box for VirtualBox 5.0 that includes:
 
 * Go 1.6
 * Node 5.11.0
-* npm 2.14.12
-* Phing 2.14.0
-* PHP 7.0.5
-* PHP Composer 1.0.2
+* npm 3.8.6
+* PHP 7.0.6
+* PHP Composer 1.0.3
+* PHP Phing 2.14.0
 * Postgres 9.4.6
-* Redis 3.0.7
+* Redis 2.8.17
 * Ruby 2.1.5
 
 ## Boxes
@@ -24,21 +24,21 @@ Ansible must be in your `$PATH` in order for Vagrant to provision the box. See t
 After bringing up the provisioned box, run:
 
 ```sh
-vagrant package --output debian-8.3-amd64-`cat VERSION`.box
+vagrant package --output debian-8.4-amd64-`cat VERSION`.box
 ```
 
 The `<VERSION>` placeholder should be replaced by incrementing the `VERSION` file associated with this repository.
 
-**Note**: The `vagrant-vbguest` plugin is very out of date and I dislike it. As such, you should manually install [VirtualBox Guest Additions 5.0.16](http://download.virtualbox.org/virtualbox/5.0.16/VBoxGuestAdditions_5.0.16.iso) to match VirtualBox 5.0.16.
+**Note**: The `vagrant-vbguest` plugin is very out of date and I dislike it. As such, you should manually install [VirtualBox Guest Additions 5.0.20](http://download.virtualbox.org/virtualbox/5.0.20/VBoxGuestAdditions_5.0.20.iso) to match VirtualBox 5.0.20.
 
 Manually installing the Guest Additions is easy. Begin by shelling into the newly built Vagrant VM. Switch to the `root` user using `sudo`. From there, use the commands below to install the Guest Additions ISO.
 
 ```sh
 apt-get install linux-headers-`uname -r` -y
 
-wget http://download.virtualbox.org/virtualbox/5.0.16/VBoxGuestAdditions_5.0.16.iso
+wget http://download.virtualbox.org/virtualbox/5.0.20/VBoxGuestAdditions_5.0.20.iso
 mkdir -p /mnt/cdrom
-mount -o loop VBoxGuestAdditions_5.0.16.iso /mnt/cdrom
+mount -o loop VBoxGuestAdditions_5.0.20.iso /mnt/cdrom
 
 cd /mnt/cdrom
 sh VBoxLinuxAdditions.run
@@ -47,6 +47,15 @@ sh VBoxLinuxAdditions.run
 After the Guest Additions are installed, you can unmount the ISO and delete the file.
 
 ## Changelog
+
+### 2.2.0
+* Major change from manually compiling software to using Aptitude for Postgres, Redis, and PHP. Node is still manually compiled.
+* Upgraded Node to 5.11.0.
+* Upgraded PHP to 7.0.6.
+* Upgraded PHP Composer to 1.0.3.
+* Upgraded PHP Phing to 2.14.0.
+* Downgraded Postgres to 9.4.6.
+* Downgraded Redis to 2.8.17.
 
 ### 2.1.0
 * Upgraded Node to 4.3.2.

@@ -9,6 +9,9 @@
   lineinfile: dest=/etc/apt/sources.list line="deb http://packages.dotdeb.org jessie all"
 - lineinfile: dest=/etc/apt/sources.list line="deb-src http://packages.dotdeb.org jessie all"
 
+- name: update repositories
+  apt: update_cache=yes
+
 - name: install php
   apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
   with_items:
