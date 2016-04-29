@@ -6,8 +6,8 @@
       - postgres
       - redis
       - php
-      #- node
-      #- golang
+      - node
+      - golang
 
   post_tasks:
       - name: set the vagrant user as the owner of /home/vagrant

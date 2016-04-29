@@ -8,8 +8,6 @@
     - libssl-dev
     - openssl
     - git
-    - bison
-    - flex
     - curl
     - libxml2-utils
     - htop
