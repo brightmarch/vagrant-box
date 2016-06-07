@@ -14,6 +14,7 @@ A Debian Jessie 8.4 64-bit box for VirtualBox 5.0 that includes:
 ## Boxes
 You are free to use our boxes if you like. They are hosted using Hashicorp's Atlas service.
 
+* [brightmarch/debian-8.4-amd64](https://atlas.hashicorp.com/brightmarch/boxes/debian-8.4-amd64)
 * [brightmarch/debian-8.3-amd64](https://atlas.hashicorp.com/brightmarch/boxes/debian-8.3-amd64)
 * [brightmarch/debian-8.1-amd64](https://atlas.hashicorp.com/brightmarch/boxes/debian-8.1-amd64)
 
