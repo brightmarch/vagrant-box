@@ -1,4 +1,16 @@
 ---
+- name: download dotdeb GPG key
+  get_url: url=https://www.dotdeb.org/dotdeb.gpg dest=/root/dotdeb.gpg
+
+- name: add dotdeb GPG key
+  command: "apt-key add /root/dotdeb.gpg"
+
+- name: add dotdeb to repository list
+  lineinfile: dest=/etc/apt/sources.list line="deb http://packages.dotdeb.org jessie all"
+
+- name: update repositories
+  apt: update_cache=yes
+
 - name: install redis
   apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
   with_items:
