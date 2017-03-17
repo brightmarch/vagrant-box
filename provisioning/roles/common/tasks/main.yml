@@ -1,15 +1,16 @@
 ---
+- name: update repositories
+  apt: update_cache=yes
+
 - name: install basic packages
   apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
   with_items:
     - bash-completion
     - build-essential
     - vim
-    - libssl-dev
     - openssl
     - git
     - curl
-    - libxml2-utils
     - htop
     - ruby-full
     - python-apt
@@ -17,6 +18,24 @@
     - apt-transport-https
     - lsb-release
     - ca-certificates
+    - autoconf
+    - libjpeg62-turbo-dbg
+    - libssl-dev
+    - libxml2-dev
+    - libbz2-dev
+    - libcurl4-openssl-dev
+    - libjpeg-dev
+    - libpng12-dev
+    - libfreetype6-dev
+    - libxml2-dev
+    - libxml2-utils
+    - libxslt1-dev
+    - libpq-dev
+    - libicu-dev
+    - libreadline-dev
+    - libssl-dev
+    - pkg-config
+    - redis-server
 
 - name: set the timezone
   copy: content='UTC' dest=/etc/timzone owner=root group=root mode=0644 backup=no

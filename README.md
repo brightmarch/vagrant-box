@@ -1,19 +1,19 @@
 # Bright March Vagrant Box
 A Debian Jessie 8.4 64-bit box for VirtualBox 5.0 that includes:
 
-* Go 1.6
-* Node 5.11.0
-* npm 3.8.6
-* PHP 7.0.6
-* PHP Composer 1.0.3
-* PHP Phing 2.14.0
-* Postgres 9.4.6
+* Node 6.10.0
+* npm 3.10.10
+* PHP 7.1.13
+* PHP Composer 1.4.1
+* PHP Phing 2.16.0
+* Postgres 9.4.10
 * Redis 2.8.17
 * Ruby 2.1.5
 
 ## Boxes
 You are free to use our boxes if you like. They are hosted using Hashicorp's Atlas service.
 
+* [brightmarch/debian-8.7-amd64](https://atlas.hashicorp.com/brightmarch/boxes/debian-8.7-amd64)
 * [brightmarch/debian-8.4-amd64](https://atlas.hashicorp.com/brightmarch/boxes/debian-8.4-amd64)
 * [brightmarch/debian-8.3-amd64](https://atlas.hashicorp.com/brightmarch/boxes/debian-8.3-amd64)
 * [brightmarch/debian-8.1-amd64](https://atlas.hashicorp.com/brightmarch/boxes/debian-8.1-amd64)
@@ -25,21 +25,21 @@ Ansible must be in your `$PATH` in order for Vagrant to provision the box. See t
 After bringing up the provisioned box, run:
 
 ```sh
-vagrant package --output debian-8.4-amd64-`cat VERSION`.box
+vagrant package --output debian-8.7-amd64-`cat VERSION`.box
 ```
 
 The `<VERSION>` placeholder should be replaced by incrementing the `VERSION` file associated with this repository.
 
-**Note**: The `vagrant-vbguest` plugin is very out of date and I dislike it. As such, you should manually install [VirtualBox Guest Additions 5.0.20](http://download.virtualbox.org/virtualbox/5.0.20/VBoxGuestAdditions_5.0.20.iso) to match VirtualBox 5.0.20.
+**Note**: The `vagrant-vbguest` plugin is very out of date and I dislike it. As such, you should manually install [VirtualBox Guest Additions 5.1.18](http://download.virtualbox.org/virtualbox/5.1.18/VBoxGuestAdditions_5.1.18.iso) to match VirtualBox 5.1.18.
 
 Manually installing the Guest Additions is easy. Begin by shelling into the newly built Vagrant VM. Switch to the `root` user using `sudo`. From there, use the commands below to install the Guest Additions ISO.
 
 ```sh
 apt-get install linux-headers-`uname -r` -y
 
-wget http://download.virtualbox.org/virtualbox/5.0.20/VBoxGuestAdditions_5.0.20.iso
+wget http://download.virtualbox.org/virtualbox/5.1.18/VBoxGuestAdditions_5.1.18.iso
 mkdir -p /mnt/cdrom
-mount -o loop VBoxGuestAdditions_5.0.20.iso /mnt/cdrom
+mount -o loop VBoxGuestAdditions_5.1.18.iso /mnt/cdrom
 
 cd /mnt/cdrom
 sh VBoxLinuxAdditions.run
@@ -48,6 +48,15 @@ sh VBoxLinuxAdditions.run
 After the Guest Additions are installed, you can unmount the ISO and delete the file.
 
 ## Changelog
+
+### 2.3.0
+* Moved back to manually compiling PHP.
+* Upgraded Node to 6.10.0.
+* Upgraded PHP to 7.1.3.
+* Upgraded PHP Composer to 1.4.1.
+* Upgraded PHP Phing to 2.16.0.
+* Upgraded Postgres to 9.4.10.
+* Removed Go because we don't use it.
 
 ### 2.2.0
 * Major change from manually compiling software to using Aptitude for Postgres, Redis, and PHP. Node is still manually compiled.

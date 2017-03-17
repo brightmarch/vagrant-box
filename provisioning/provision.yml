@@ -4,7 +4,7 @@
   roles: 
       - common
       - postgres
-      - redis
+      #- redis
       - php
       - node
 

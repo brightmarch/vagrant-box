@@ -1,0 +1,6 @@
+---
+php_dir: 'php-{{ php_version }}'
+php_tarball: '{{ php_dir }}.tar.gz'
+php_source: 'http://php.net/get/php-{{ php_version }}.tar.gz/from/this/mirror'
+php_source_dir: '/opt/src/php/'
+php_source_path: '{{ php_source_dir + php_tarball }}'
