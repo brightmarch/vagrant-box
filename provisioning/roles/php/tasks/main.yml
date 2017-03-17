@@ -1,13 +1,9 @@
 ---
-- name: download dotdeb GPG key
-  get_url: url=https://www.dotdeb.org/dotdeb.gpg dest=/root/dotdeb.gpg
+- name: download sury GPG key
+  get_url: url=https://packages.sury.org/php/apt.gpg dest=/etc/apt/trusted.gpg.d/php.gpg
 
-- name: add dotdeb GPG key
-  command: "apt-key add /root/dotdeb.gpg"
-
-- name: add dotdeb to repository list
-  lineinfile: dest=/etc/apt/sources.list line="deb http://packages.dotdeb.org jessie all"
-- lineinfile: dest=/etc/apt/sources.list line="deb-src http://packages.dotdeb.org jessie all"
+- name: add sury to repository list
+  lineinfile: dest=/etc/apt/sources.list line="deb https://packages.sury.org/php/ jessie main"
 
 - name: update repositories
   apt: update_cache=yes
@@ -15,24 +11,24 @@
 - name: install php
   apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
   with_items:
-    - php7.0-common
-    - php7.0-json
-    - php7.0-curl
-    - php7.0-cli
-    - php7.0-pgsql
-    - php7.0-opcache
-    - php7.0-intl
-    - php7.0-xmlrpc
-    - php7.0-redis
-    - php7.0-igbinary
-    - php7.0-readline
+    - php7.1-common
+    - php7.1-json
+    - php7.1-curl
+    - php7.1-cli
+    - php7.1-pgsql
+    - php7.1-opcache
+    - php7.1-intl
+    - php7.1-xmlrpc
+    - php7.1-redis
+    - php7.1-igbinary
+    - php7.1-readline
 
 - name: set the date.timezone in php.ini
-  lineinfile: dest=/etc/php/7.0/cli/php.ini line="date.timezone=UTC"
+  lineinfile: dest=/etc/php/7.1/cli/php.ini line="date.timezone=UTC"
 
 - name: set size parameters in php.ini
   lineinfile:
-    dest: /etc/php/7.0/cli/php.ini
+    dest: /etc/php/7.1/cli/php.ini
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
   with_items:
