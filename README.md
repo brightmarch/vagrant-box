@@ -49,7 +49,7 @@ After the Guest Additions are installed, you can unmount the ISO and delete the 
 
 ## Changelog
 
-### 2.3.0
+### 2.4.0
 * Moved back to manually compiling PHP.
 * Upgraded Node to 6.10.0.
 * Upgraded PHP to 7.1.3.
