@@ -35,7 +35,6 @@
     - libreadline-dev
     - libssl-dev
     - pkg-config
-    - redis-server
 
 - name: set the timezone
   copy: content='UTC' dest=/etc/timzone owner=root group=root mode=0644 backup=no

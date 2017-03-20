@@ -1,5 +1,5 @@
 # Bright March Vagrant Box
-A Debian Jessie 8.4 64-bit box for VirtualBox 5.0 that includes:
+A Debian Jessie 8.4 64-bit box for VirtualBox 5.1 that includes:
 
 * Node 6.10.0
 * npm 3.10.10
@@ -30,19 +30,24 @@ vagrant package --output debian-8.7-amd64-`cat VERSION`.box
 
 The `<VERSION>` placeholder should be replaced by incrementing the `VERSION` file associated with this repository.
 
-**Note**: The `vagrant-vbguest` plugin is very out of date and I dislike it. As such, you should manually install [VirtualBox Guest Additions 5.0.36](http://download.virtualbox.org/virtualbox/5.0.36/VBoxGuestAdditions_5.0.36.iso) to match VirtualBox 5.0.36.
+**Note**: The `vagrant-vbguest` plugin is very out of date and I dislike it. As such, you should manually install [VirtualBox Guest Additions 5.1.18](http://download.virtualbox.org/virtualbox/5.1.18/VBoxGuestAdditions_5.1.18.iso) to match VirtualBox 5.1.18.
 
 Manually installing the Guest Additions is easy. Begin by shelling into the newly built Vagrant VM. Switch to the `root` user using `sudo`. From there, use the commands below to install the Guest Additions ISO.
 
 ```sh
+cd /root
 apt-get install linux-headers-`uname -r` -y
 
-wget http://download.virtualbox.org/virtualbox/5.0.36/VBoxGuestAdditions_5.0.36.iso
+wget http://download.virtualbox.org/virtualbox/5.1.18/VBoxGuestAdditions_5.1.18.iso
 mkdir -p /mnt/cdrom
-mount -o loop VBoxGuestAdditions_5.0.36.iso /mnt/cdrom
+mount -o loop VBoxGuestAdditions_5.1.18.iso /mnt/cdrom
 
 cd /mnt/cdrom
 sh VBoxLinuxAdditions.run
+
+cd /root
+umount /mnt/cdrom
+rm -f /root/VBoxGuestAdditions_5.1.18.iso
 ```
 
 After the Guest Additions are installed, you can unmount the ISO and delete the file.

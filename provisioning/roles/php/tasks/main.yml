@@ -28,7 +28,7 @@
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
   with_items:
-    - { regexp: "^memory_limit = 128M", line: "memory_limit = 256M" }
+    - { regexp: "^memory_limit = 128M", line: "memory_limit = -1" }
     - { regexp: "^post_max_size = 8M", line: "post_max_size = 32M" }
     - { regexp: "^upload_max_filesize = 2M", line: "upload_max_filesize = 24M" }
 
