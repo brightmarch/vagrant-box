@@ -41,6 +41,12 @@ wget -q http://phing.info/get/phing-latest.phar -O /usr/local/bin/phing && chmod
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 apt-get install nodejs
 
+# User Setup
+wget -q https://raw.githubusercontent.com/brightmarch/vagrant-box/master/files/.profile -O /home/vagrant/.profile
+wget -q https://raw.githubusercontent.com/brightmarch/vagrant-box/master/files/.profile -O /etc/skel/.profile
+
+chown -R vagrant:vagrant /home/vagrant/
+
 # Cleanup
 apt-get -y autoremove
 apt-get -y clean
