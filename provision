@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get update
+apt-get -y upgrade
+
+# Locale
+echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
+locale-gen en_US.UTF-8
+
+# Timezone
+ln -sf /usr/share/zoneinfo/UTC /etc/localtime
+
+# Base Packages
+apt-get install -y bash-completion build-essential vim openssl git curl htop python-apt sudo apt-transport-https lsb-release ca-certificates unzip
+
+# Redis and Postgres
+apt-get install -y redis-server postgresql-9.4 postgresql-client-9.4
+
+# Postgres Configuration
+sed -i "s/ md5/ trust/" /etc/postgresql/9.4/main/pg_hba.conf
+
+# PHP 7.1
+wget -q https://packages.sury.org/php/apt.gpg -O /etc/apt/trusted.gpg.d/php.gpg
+echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list
+
+apt-get update
+apt-get install -y php7.1-common php7.1-cli php7.1-json php7.1-curl php7.1-pgsql php7.1-opcache php7.1-intl php7.1-xml php7.1-xmlrpc php7.1-redis php7.1-igbinary php7.1-readline php7.1-mbstring php7.1-zip
+
+# PHP Configuration
+sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/7.1/cli/php.ini
+sed -i "s/post_max_size = .*/post_max_size = 32M/" /etc/php/7.1/cli/php.ini
+sed -i "s/upload_max_filesize = .*/upload_max_filesize = 24M/" /etc/php/7.1/cli/php.ini
+
+# PHP Commands
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+wget -q http://phing.info/get/phing-latest.phar -O /usr/local/bin/phing && chmod +x /usr/local/bin/phing
+
+# Node.js
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+apt-get install nodejs
+
+# Cleanup
+apt-get -y autoremove
+apt-get -y clean
+
+# Add Swap Memory
+/bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+chmod 0600 /var/swap.1
+/sbin/mkswap /var/swap.1
+/sbin/swapon /var/swap.1
+
+# Minimize The Disk Image
+dd if=/dev/zero of=/EMPTY bs=1M
+rm -f /EMPTY
+sync

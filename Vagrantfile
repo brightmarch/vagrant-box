@@ -4,9 +4,13 @@ Vagrant.configure(2) do |config|
   config.vm.box = "debian/jessie64"
   config.vm.box_version = "8.7"
 
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "provisioning/provision.yml"
-  end
+  config.ssh.insert_key = false
+
+  #config.vm.provision "ansible" do |ansible|
+  #  ansible.playbook = "provisioning/provision.yml"
+  #end
+
+  config.vm.provision :shell, :path => "./provision"
 
   config.vm.provider "virtualbox" do |v|
     v.gui = false

@@ -12,7 +12,7 @@
 - name: compile php
   command: '{{ item }} chdir={{ php_source_dir + php_dir }} creates=/usr/local/bin/php'
   with_items:
-    - ./configure --with-pdo-pgsql --with-zlib-dir --enable-mbstring --enable-soap --with-openssl --with-curl --with-zlib --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-pcntl --enable-mbregex --enable-bcmath --with-pcre-regex --with-xmlrpc --enable-opcache --enable-intl --with-gd --enable-zip --with-jpeg-dir=/usr --with-png-dir=/usr --enable-gd-native-ttf --with-gettext --with-readline --enable-calendar --enable-sysvmsg --enable-sysvsem --enable-sysvshm
+    - ./configure --with-pdo-pgsql --with-zlib-dir --enable-mbstring --enable-soap --with-openssl --with-curl --with-zlib --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-pcntl --enable-mbregex --enable-bcmath --with-pcre-regex --with-xmlrpc --enable-opcache --enable-intl --with-gd --enable-zip --with-jpeg-dir=/usr --with-png-dir=/usr --enable-gd-native-ttf --with-gettext --with-readline --enable-calendar --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-shmop
     - make
     - make install
 

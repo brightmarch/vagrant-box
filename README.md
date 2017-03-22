@@ -25,7 +25,7 @@ Ansible must be in your `$PATH` in order for Vagrant to provision the box. See t
 After bringing up the provisioned box, run:
 
 ```sh
-vagrant package --output debian-8.7-amd64-`cat VERSION`.box
+vagrant package --output debian8-amd64-`cat VERSION`.box
 ```
 
 The `<VERSION>` placeholder should be replaced by incrementing the `VERSION` file associated with this repository.
@@ -53,6 +53,9 @@ rm -f /root/VBoxGuestAdditions_5.1.18.iso
 After the Guest Additions are installed, you can unmount the ISO and delete the file.
 
 ## Changelog
+
+### 2.5.0
+* Added the php-shmop extension.
 
 ### 2.4.0
 * Moved back to manually compiling PHP.
