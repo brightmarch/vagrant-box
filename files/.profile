@@ -22,7 +22,7 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 # Command Line
-export PS1="[\[\033[01;32m\]vagrant:\w\[\033[00m\]] (\[\033[01;32m\]\u@\H \$(date +%H:%M:%S)\[\033[00m\])# "
+export PS1="[\[\033[01;96m\]vagrant:\w\[\033[00m\]] (\[\033[01;96m\]\u@\H \$(date +%H:%M:%S)\[\033[00m\])# "
 
 # Binary Overrides
 alias ls='ls -laF --color=auto --group-directories-first'
