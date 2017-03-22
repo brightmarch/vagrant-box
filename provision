@@ -42,9 +42,9 @@ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 apt-get install nodejs
 
 # User Setup
-wget -q https://raw.githubusercontent.com/brightmarch/vagrant-box/master/files/.profile -O /home/vagrant/.profile
 wget -q https://raw.githubusercontent.com/brightmarch/vagrant-box/master/files/.profile -O /etc/skel/.profile
 
+cp /etc/skel/.profile /home/vagrant/.profile
 chown -R vagrant:vagrant /home/vagrant/
 
 # Cleanup
