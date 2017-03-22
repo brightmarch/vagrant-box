@@ -44,8 +44,4 @@ function gitroot {
     done
 }
 
-if [ -f ~/.bash_envvars ]; then
-    . ~/.bash_envvars
-fi
-
 # Application Aliases
