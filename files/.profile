@@ -21,5 +21,31 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-PATH="$PATH:/usr/local/pgsql/bin:/usr/local/go/bin"
-GOROOT="$HOME/go"
+# Command Line
+export PS1="[\[\033[01;32m\]vagrant:\w\[\033[00m\]] (\[\033[01;32m\]\u@\H \$(date +%H:%M:%S)\[\033[00m\])# "
+
+# Binary Overrides
+alias ls='ls -laF --color=auto --group-directories-first'
+alias grep='grep --color=auto'
+
+# Helper Aliases
+alias ..='cd ..'
+
+function gitroot {
+    cwd=`pwd`
+    while [ ! -d ".git" ]; do
+        pwd=`pwd`
+        if [ $pwd == "/" ]; then
+            echo "Could not find .git directory, keeping you in $cwd"
+            cd $cwd
+            break
+        fi
+    cd ..
+    done
+}
+
+if [ -f ~/.bash_envvars ]; then
+    . ~/.bash_envvars
+fi
+
+# Application Aliases
