@@ -1,26 +1,30 @@
 # Bright March Vagrant Box
-A Debian Jessie 8.4 64-bit box for VirtualBox 5.1 that includes:
+A Debian Jessie 8.7 64-bit box for VirtualBox 5.1 that includes:
 
-* Node 6.10.0
+* Node 6.12.2
 * npm 3.10.10
-* PHP 7.1.13
-* PHP Composer 1.4.1
+* PHP 7.2.0
+* PHP Composer 1.5.6
 * PHP Phing 2.16.0
 * Postgres 9.4.10
 * Redis 2.8.17
-* Ruby 2.1.5
 
-## Boxes
-You are free to use our boxes if you like. They are hosted using Hashicorp's Atlas service.
+## Box
+You are free to use our box if you like. They are hosted using Hashicorp's Atlas service.
 
 * [brightmarch/debian-jessie64](https://atlas.hashicorp.com/brightmarch/boxes/debian-jessie64)
-* [brightmarch/debian-8.7-amd64](https://atlas.hashicorp.com/brightmarch/boxes/debian-8.7-amd64)
-* [brightmarch/debian-8.4-amd64](https://atlas.hashicorp.com/brightmarch/boxes/debian-8.4-amd64)
 
 ## Requirements
 Before building the box, please ensure the [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest) plugin and VirtualBox 5.1.x (with guest extensions) are installed.
 
 ## Changelog
+
+### 3.2.0
+* Upgraded Node to 6.12.2.
+* Upgraded PHP to 7.2.0.
+
+### 3.1.0
+* Upgraded PHP to 7.1.8.
 
 ### 3.0.0
 * New naming convention for the box. It will now stay `brightmarch/debian-jessie64` with a separate version number for each release.
@@ -70,9 +74,6 @@ Before building the box, please ensure the [vagrant-vbguest](https://github.com/
 * Upgraded Node to 0.10.29.
 
 ### 2.0.0
-* Switched back to Virtualbox because it is more widely supported, free, and easier to package.
+* Switched back to Virtualbox.
 * Upgraded to Debian Jessie 8.1 64bit.
 * Upgraded PHP to 5.6.11.
-* Removed `php-imagick` because it was a pain to get compiled and I just don't have that time.
-* Downgraded Node to 0.10.0 because of some bullshit in-fighting in the Node and IO.js communities about Jest and JSDom and who gives a shit it's what is needed to make JSDom work. 
-* Removed RabbitMQ because a project we're working on really isn't going to use it just yet and I didn't want an unused service just sitting there.
