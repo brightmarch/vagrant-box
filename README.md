@@ -6,7 +6,7 @@ A Debian Jessie 8.7 64-bit box for VirtualBox 5.1 that includes:
 * PHP 7.2.0
 * PHP Composer 1.5.6
 * PHP Phing 2.16.0
-* Postgres 9.4.10
+* Postgres 9.4.15
 * Redis 2.8.17
 
 ## Box
