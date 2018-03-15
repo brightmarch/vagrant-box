@@ -12,7 +12,7 @@ A Debian Jessie 8.10.0 64-bit box for VirtualBox 5.1 that includes:
 ## Box
 You are free to use our box if you like. They are hosted using Hashicorp's Atlas service.
 
-* [brightmarch/debian-jessie64](https://atlas.hashicorp.com/brightmarch/boxes/debian-jessie64)
+* [brightmarch/debian-jessie64](https://app.vagrantup.com/brightmarch/boxes/debian-jessie64)
 
 ## Requirements
 Before building the box, please ensure the [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest) plugin and VirtualBox 5.1.x (with guest extensions) are installed.
