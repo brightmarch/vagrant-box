@@ -1,8 +1,8 @@
 # Bright March Vagrant Box
-A Debian Jessie 8.11.0 64-bit box for VirtualBox 5.2 that includes:
+A Debian Jessie 8.11.0 64-bit box for VirtualBox 6.0 that includes:
 
-* PHP 7.2.12
-* PHP Composer 1.7.3
+* PHP 7.2.13
+* PHP Composer 1.8.0
 * PHP Phing 2.16.1
 * Postgres 9.4.19
 * Redis 2.8.17
@@ -13,7 +13,7 @@ You are free to use our box if you like. They are hosted using Hashicorp's Atlas
 * [brightmarch/debian-jessie64](https://app.vagrantup.com/brightmarch/boxes/debian-jessie64)
 
 ## Requirements
-Before building the box, please ensure the [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest) plugin and VirtualBox 5.2.x (with guest extensions) are installed.
+Before building the box, please ensure the [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest) plugin and VirtualBox 6.0.x (with guest extensions) are installed.
 
 ## Packaging
 Package the box with the following command:
@@ -23,6 +23,10 @@ vagrant package --output=debian-jessie64-`cat VERSION`.box
 ```
 
 ## Changelog
+
+### 3.6.0
+* Upgraded PHP to 7.2.13.
+* Compiled on VirtualBox 6.0.0.
 
 ### 3.5.1
 * Removed Node and NPM.
