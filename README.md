@@ -24,6 +24,9 @@ vagrant package --output=debian-jessie64-`cat VERSION`.box
 
 ## Changelog
 
+### 3.6.1
+* Re-built with the VirtualBox Guest Additions.
+
 ### 3.6.0
 * Upgraded PHP to 7.2.13.
 * Compiled on VirtualBox 6.0.0.
