@@ -16,22 +16,40 @@ ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 apt-get install -y bash-completion build-essential vim openssl git curl htop python-apt sudo apt-transport-https lsb-release ca-certificates unzip
 
 # Redis and Postgres
-apt-get install -y redis-server postgresql-9.4 postgresql-client-9.4
+$POSTGRESVERSION=9.4
+apt-get install -y redis-server postgresql-`$POSTGRESVERSION` postgresql-client-`$POSTGRESVERSION`
 
 # Postgres Configuration
-sed -i "s/ md5/ trust/" /etc/postgresql/9.4/main/pg_hba.conf
+sed -i "s/ md5/ trust/" /etc/postgresql/`$POSTGRESVERSION`/main/pg_hba.conf
 
-# PHP 7.2
+# PHP
+$PHPVERSION=7.3
 wget -q https://packages.sury.org/php/apt.gpg -O /etc/apt/trusted.gpg.d/php.gpg
 echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list
 
 apt-get update
-apt-get install -y php7.2-common php7.2-cli php7.2-json php7.2-curl php7.2-pgsql php7.2-opcache php7.2-intl php7.2-xml php7.2-xmlrpc php7.2-redis php7.2-igbinary php7.2-readline php7.2-mbstring php7.2-zip php7.2-gd php7.2-bcmath php7.2-soap
+apt-get install -y php`$PHPVERSION`-common
+apt-get install -y php`$PHPVERSION`-cli
+apt-get install -y php`$PHPVERSION`-json
+apt-get install -y php`$PHPVERSION`-curl
+apt-get install -y php`$PHPVERSION`-pgsql
+apt-get install -y php`$PHPVERSION`-opcache
+apt-get install -y php`$PHPVERSION`-intl
+apt-get install -y php`$PHPVERSION`-xml
+apt-get install -y php`$PHPVERSION`-xmlrpc
+apt-get install -y php`$PHPVERSION`-redis
+apt-get install -y php`$PHPVERSION`-igbinary
+apt-get install -y php`$PHPVERSION`-readline
+apt-get install -y php`$PHPVERSION`-mbstring
+apt-get install -y php`$PHPVERSION`-zip
+apt-get install -y php`$PHPVERSION`-gd
+apt-get install -y php`$PHPVERSION`-bcmath
+apt-get install -y php`$PHPVERSION`-soap
 
 # PHP Configuration
-sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/7.2/cli/php.ini
-sed -i "s/post_max_size = .*/post_max_size = 32M/" /etc/php/7.2/cli/php.ini
-sed -i "s/upload_max_filesize = .*/upload_max_filesize = 24M/" /etc/php/7.2/cli/php.ini
+sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/$PHPVERSION/cli/php.ini
+sed -i "s/post_max_size = .*/post_max_size = 32M/" /etc/php/$PHPVERSION/cli/php.ini
+sed -i "s/upload_max_filesize = .*/upload_max_filesize = 24M/" /etc/php/$PHPVERSION/cli/php.ini
 
 # PHP Commands
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
