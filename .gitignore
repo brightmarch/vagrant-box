@@ -2,5 +2,6 @@
 *.box
 *.swp
 *.swo
+*.log
 .DS_Store
 packer_cache
