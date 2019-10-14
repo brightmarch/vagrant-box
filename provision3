@@ -81,6 +81,7 @@ chown -R vagrant:vagrant /home/vagrant/
 # Cleanup
 apt-get -y autoremove
 apt-get -y clean
+rm -rf $SOURCEDIR
 
 # Add Swap Memory
 /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
