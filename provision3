@@ -10,13 +10,6 @@ export DEBIAN_FRONTEND=noninteractive
 rm -rf $SOURCEDIR
 mkdir $SOURCEDIR
 
-# Locale
-echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
-locale-gen en_US.UTF-8
-
-# Timezone
-ln -sf /usr/share/zoneinfo/UTC /etc/localtime
-
 # Base Packages
 apt-get install -y bash-completion build-essential vim openssl git curl htop sudo lsb-release ca-certificates unzip zip openssl ssl-cert autoconf pkg-config
 apt-get install -y libxml2 libxml2-dev libpng-dev libpq-dev libreadline-dev libzip-dev libssl-dev libcurl4 libcurl4-openssl-dev libsodium-dev libxslt-dev
