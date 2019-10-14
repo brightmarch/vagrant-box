@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
+SOURCEDIR=/media/src
 PHPVERSION=7.3.10
-POSTGRESVERSION=10
+POSTGRESVERSION=11
 
 export DEBIAN_FRONTEND=noninteractive
 
-apt-get update
-apt-get -y upgrade
+# Source Directory
+rm -rf $SOURCEDIR
+mkdir $SOURCEDIR
 
 # Locale
 echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
@@ -16,35 +18,62 @@ locale-gen en_US.UTF-8
 ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 
 # Base Packages
-apt-get install -y bash-completion build-essential vim openssl git curl htop sudo lsb-release ca-certificates unzip zip openssl ssl-cert
+apt-get install -y bash-completion build-essential vim openssl git curl htop sudo lsb-release ca-certificates unzip zip openssl ssl-cert autoconf pkg-config
+apt-get install -y libxml2 libxml2-dev libpng-dev libpq-dev libreadline-dev libzip-dev libssl-dev libcurl4 libcurl4-openssl-dev libsodium-dev libxslt-dev
 
 # Redis and Postgres
-apt-get install -y redis-server postgresql-$POSTGRESVERSION postgresql-client-$POSTGRESVERSION
+apt-get install -y redis-server
+apt-get install -y postgresql
+apt-get install -y postgresql-client
 
 # Postgres Configuration
 sed -i "s/ md5/ trust/" /etc/postgresql/$POSTGRESVERSION/main/pg_hba.conf
 
 # PHP
-apt-get install -y libxml2-dev libpng-dev libpq-dev libreadline-dev libzip-dev libssl-dev libcurl4 libcurl4-openssl-dev libsodium-dev libxslt-dev
-
-PHPDIR=/media/php
 PHPFILE=php-$PHPVERSION.tar.gz
+PHPDIR=php-$PHPVERSION
 PHPINIFILE=/usr/local/lib/php.ini
 
-mkdir $PHPDIR && cd $PHPDIR
-wget https://www.php.net/distributions/$PHPFILE
+cd $SOURCEDIR
+wget -q https://www.php.net/distributions/$PHPFILE
 tar -xzf $PHPFILE
 cd php-$PHPVERSION
 
-./configure --disable-fpm --enable-intl --enable-mbstring --with-pgsql --enable-pcntl --with-readline --enable-soap --enable-sockets --with-xmlrpc --enable-zip --with-gd --enable-bcmath --with-xmlrpc
-make && make install
+./configure --disable-fpm --enable-intl --enable-mbstring --with-pdo-pgsql --with-pgsql --enable-pcntl --with-readline --enable-soap --enable-sockets --with-xmlrpc --enable-zip --with-gd --enable-bcmath --with-xmlrpc --with-curl --with-gettext --with-openssl --with-sodium --with-zlib --with-xsl
 
-cp php.ini-production $PHPINIFILE
+make -j5 && make install
+cp php.ini-development $PHPINIFILE
+
+# PHP Igbinary
+PHPIGBINARYVERSION=3.0.1
+PHPIGBINARYFILE=igbinary-$PHPIGBINARYVERSION.tgz
+PHPIGBINARYDIR=igbinary-$PHPIGBINARYVERSION
+
+cd $PHPDIR
+wget -q http://pecl.php.net/get/$PHPIGBINARYFILE
+tar -xzf $PHPIGBINARYFILE
+cd $PHPIGBINARYDIR
+phpize && ./configure && make -j5 && make install
+
+# PHP Redis
+PHPREDISVERSION=5.0.2
+PHPREDISFILE=redis-$PHPREDISVERSION.tgz
+PHPREDISDIR=redis-$PHPREDISVERSION
+
+cd $PHPDIR
+wget -q http://pecl.php.net/get/$PHPREDISFILE
+tar -xzf $PHPREDISFILE
+cd $PHPREDISDIR
+phpize && ./configure && make -j5 && make install
 
 # PHP Configuration
 sed -i "s/;date.timezone.*/date.timezone = UTC/" $PHPINIFILE
 sed -i "s/post_max_size = .*/post_max_size = 32M/" $PHPINIFILE
 sed -i "s/upload_max_filesize = .*/upload_max_filesize = 24M/" $PHPINIFILE
+sed -i "s/memory_limit = .*/memory_limit = 1024M/" $PHPINIFILE
+
+echo "extension=igbinary" >> $PHPINIFILE
+echo "extension=redis" >> $PHPINIFILE
 
 # PHP Commands
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

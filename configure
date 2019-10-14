@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get update -y
+apt-get upgrade -y
+apt-get dist-upgrade -y

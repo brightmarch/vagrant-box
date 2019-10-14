@@ -1,7 +1,7 @@
-.vagrant
 *.box
+*.log
+*.iso
 *.swp
 *.swo
-*.log
 .DS_Store
-packer_cache
+.vagrant

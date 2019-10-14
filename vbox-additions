@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+export DEBIAN_FRONTEND=noninteractive
+mkdir -p /mnt/vbox
+
+apt-get install -y linux-headers-`uname -r` dkms
+mount /vagrant/VBoxGuestAdditions_6.0.10.iso /mnt/vbox
+
+sh /mnt/vbox/VBoxLinuxAdditions.run
