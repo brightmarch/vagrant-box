@@ -1,74 +1,36 @@
 #!/usr/bin/env bash
 
-SOURCEDIR=/media/src
-PHPVERSION=7.3.10
+PHPVERSION=7.3
 POSTGRESVERSION=11
 
 export DEBIAN_FRONTEND=noninteractive
 
-# Source Directory
-rm -rf $SOURCEDIR
-mkdir $SOURCEDIR
-
-# Base Packages
+# Install Base Packages
 apt-get install -y bash-completion build-essential vim openssl git curl htop sudo lsb-release ca-certificates unzip zip openssl ssl-cert autoconf pkg-config
 apt-get install -y libxml2 libxml2-dev libpng-dev libpq-dev libreadline-dev libzip-dev libssl-dev libcurl4 libcurl4-openssl-dev libsodium-dev libxslt-dev
 
-# Redis and Postgres
+# Install Redis and Postgres
 apt-get install -y redis-server
 apt-get install -y postgresql
 apt-get install -y postgresql-client
 
-# Postgres Configuration
+# Configure Postgres
 sed -i "s/ md5/ trust/" /etc/postgresql/$POSTGRESVERSION/main/pg_hba.conf
 
-# PHP
-PHPFILE=php-$PHPVERSION.tar.gz
-PHPDIR=php-$PHPVERSION
-PHPINIFILE=/usr/local/lib/php.ini
+# Install PHP
+apt-get install -y php-common php-cli php-json php-curl php-pgsql php-opcache php-intl php-xml php-xmlrpc php-redis php-igbinary php-readline php-mbstring php-zip php-gd php-bcmath php-soap
 
-cd $SOURCEDIR
-wget -q https://www.php.net/distributions/$PHPFILE
-tar -xzf $PHPFILE
-cd php-$PHPVERSION
+# Configure PHP
+PHPINIFILE=/etc/php/$PHPVERSION/cli/php.ini
 
-./configure --disable-fpm --enable-intl --enable-mbstring --with-pdo-pgsql --with-pgsql --enable-pcntl --with-readline --enable-soap --enable-sockets --with-xmlrpc --enable-zip --with-gd --enable-bcmath --with-xmlrpc --with-curl --with-gettext --with-openssl --with-sodium --with-zlib --with-xsl
-
-make -j5 && make install
-cp php.ini-development $PHPINIFILE
-
-# PHP Igbinary
-PHPIGBINARYVERSION=3.0.1
-PHPIGBINARYFILE=igbinary-$PHPIGBINARYVERSION.tgz
-PHPIGBINARYDIR=igbinary-$PHPIGBINARYVERSION
-
-cd $PHPDIR
-wget -q http://pecl.php.net/get/$PHPIGBINARYFILE
-tar -xzf $PHPIGBINARYFILE
-cd $PHPIGBINARYDIR
-phpize && ./configure && make -j5 && make install
-
-# PHP Redis
-PHPREDISVERSION=5.0.2
-PHPREDISFILE=redis-$PHPREDISVERSION.tgz
-PHPREDISDIR=redis-$PHPREDISVERSION
-
-cd $PHPDIR
-wget -q http://pecl.php.net/get/$PHPREDISFILE
-tar -xzf $PHPREDISFILE
-cd $PHPREDISDIR
-phpize && ./configure && make -j5 && make install
-
-# PHP Configuration
+sed -i "s/error_reporting = .*/error_reporting = E_ALL/" $PHPINIFILE
+sed -i "s/display_errors = .*/display_errors = On/" $PHPINIFILE
 sed -i "s/;date.timezone.*/date.timezone = UTC/" $PHPINIFILE
 sed -i "s/post_max_size = .*/post_max_size = 32M/" $PHPINIFILE
 sed -i "s/upload_max_filesize = .*/upload_max_filesize = 24M/" $PHPINIFILE
 sed -i "s/memory_limit = .*/memory_limit = 1024M/" $PHPINIFILE
 
-echo "extension=igbinary" >> $PHPINIFILE
-echo "extension=redis" >> $PHPINIFILE
-
-# PHP Commands
+# Install Global PHP Commands
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 wget -q http://phing.info/get/phing-latest.phar -O /usr/local/bin/phing && chmod +x /usr/local/bin/phing
 
@@ -81,7 +43,9 @@ chown -R vagrant:vagrant /home/vagrant/
 # Cleanup
 apt-get -y autoremove
 apt-get -y clean
-rm -rf $SOURCEDIR
+
+find /var/cache -type f -exec rm -rf {} \;
+find /var/log/ -name *.log -exec rm -f {} \;
 
 # Add Swap Memory
 /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
@@ -89,7 +53,7 @@ chmod 0600 /var/swap.1
 /sbin/mkswap /var/swap.1
 /sbin/swapon /var/swap.1
 
-# Minimize The Disk Image
+# Minimize Disk Image
 dd if=/dev/zero of=/EMPTY bs=1M
 rm -f /EMPTY
 sync
