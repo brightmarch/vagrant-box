@@ -4,6 +4,8 @@ export DEBIAN_FRONTEND=noninteractive
 mkdir -p /mnt/vbox
 
 apt-get install -y linux-headers-`uname -r` dkms
+
+wget https://download.virtualbox.org/virtualbox/6.0.10/VBoxGuestAdditions_6.0.10.iso -O /vagrant/VBoxGuestAdditions_6.0.10.iso
 mount /vagrant/VBoxGuestAdditions_6.0.10.iso /mnt/vbox
 
 sh /mnt/vbox/VBoxLinuxAdditions.run

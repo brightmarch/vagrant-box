@@ -34,6 +34,10 @@ sed -i "s/memory_limit = .*/memory_limit = 1024M/" $PHPINIFILE
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 wget -q http://phing.info/get/phing-latest.phar -O /usr/local/bin/phing && chmod +x /usr/local/bin/phing
 
+curl -sS https://get.symfony.com/cli/installer | bash
+mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+chmod +x /usr/local/bin/symfony
+
 # Install Node and NVM
 su - vagrant -c ". /vagrant/provision4"
 
