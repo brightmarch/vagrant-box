@@ -22,8 +22,10 @@ apt-get install -y postgresql-client
 sed -i "s/ md5/ trust/" /etc/postgresql/$POSTGRESVERSION/main/pg_hba.conf
 
 # Install PHP
-mkdir -p /opt/src/
+mkdir -p "/opt/src/"
 mkdir -p "/opt/php/$PHPMINOR/"
+
+cd "/opt/src/"
 
 rm -f "/opt/src/php-$PHPPATCH.tar.gz"
 wget "https://www.php.net/distributions/php-$PHPPATCH.tar.gz" -q -O "/opt/src/php-$PHPPATCH.tar.gz"
