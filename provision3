@@ -48,6 +48,8 @@ sed -i "s/upload_max_filesize = .*/upload_max_filesize = 24M/" $PHPINIFILE
 sed -i "s/memory_limit = .*/memory_limit = -1/" $PHPINIFILE
 
 # Install Global PHP Commands
+PATH="/opt/php/$PHPMINOR/bin:$PATH"
+
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 wget -q http://phing.info/get/phing-latest.phar -O /usr/local/bin/phing && chmod +x /usr/local/bin/phing
 
