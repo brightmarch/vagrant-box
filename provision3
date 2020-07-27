@@ -25,33 +25,44 @@ sed -i "s/ md5/ trust/" /etc/postgresql/$POSTGRESVERSION/main/pg_hba.conf
 mkdir -p "/opt/src/"
 mkdir -p "/opt/php/$PHPMINOR/"
 
+# Build PHP
 cd "/opt/src/"
-
 rm -f "/opt/src/php-$PHPPATCH.tar.gz"
+
 wget "https://www.php.net/distributions/php-$PHPPATCH.tar.gz" -q -O "/opt/src/php-$PHPPATCH.tar.gz"
 tar -xzf "/opt/src/php-$PHPPATCH.tar.gz"
 
+cd "/opt/src/php-$PHPPATCH/"
+
+./configure "--prefix=/opt/php/$PHPMINOR/" --with-pdo-pgsql --with-zlib-dir --enable-mbstring --enable-soap --with-openssl --with-curl --with-zlib --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-pcntl --enable-mbregex --enable-bcmath  --with-xmlrpc --enable-opcache --enable-intl --enable-gd --with-zip --with-jpeg --with-gettext --with-readline --enable-calendar --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-shmop 
+
+make -j5 && make install
+cp /opt/src/php-$PHPPATCH/php.ini-development $PHPINIFILE
+
+PATH="/opt/php/$PHPMINOR/bin:$PATH"
+
+# Build PHP Redis
+cd "/opt/src/"
 rm -f "/opt/src/php-redis-$PHPREDISPATCH.tgz"
+
 wget "https://pecl.php.net/get/redis-$PHPREDISPATCH.tgz" -q -O "/opt/src/php-redis-$PHPREDISPATCH.tgz"
 tar -xzf "/opt/src/php-redis-$PHPREDISPATCH.tgz"
 mv "/opt/src/redis-$PHPREDISPATCH" "/opt/src/php-redis-$PHPREDISPATCH"
 
-cd "/opt/src/php-$PHPPATCH/"
-
-./configure --prefix=/opt/php/$PHPMINOR/ --with-pdo-pgsql --with-zlib-dir --enable-mbstring --enable-soap --with-openssl --with-curl --with-zlib --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-pcntl --enable-mbregex --enable-bcmath  --with-xmlrpc --enable-opcache --enable-intl --enable-gd --with-zip --with-jpeg --with-gettext --with-readline --enable-calendar --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-shmop 
+cd "/opt/src/php-redis-$PHPREDISPATCH/"
+"/opt/php/$PHPMINOR/bin/phpize"
+./configure "--with-php-config=/opt/php/$PHPMINOR/bin/php-config"
 
 make -j5 && make install
-cp /opt/src/php-$PHPPATCH/php.ini-development $PHPINIFILE
 
 # Configure PHP
 sed -i "s/;date.timezone.*/date.timezone = UTC/" $PHPINIFILE
 sed -i "s/post_max_size = .*/post_max_size = 32M/" $PHPINIFILE
 sed -i "s/upload_max_filesize = .*/upload_max_filesize = 24M/" $PHPINIFILE
 sed -i "s/memory_limit = .*/memory_limit = -1/" $PHPINIFILE
+echo "extension=redis" >> $PHPINIFILE
 
 # Install Global PHP Commands
-PATH="/opt/php/$PHPMINOR/bin:$PATH"
-
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 wget -q http://phing.info/get/phing-latest.phar -O /usr/local/bin/phing && chmod +x /usr/local/bin/phing
 
