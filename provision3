@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 
-PHPVERSION=7.3
+PHPMINOR=7.4
+PHPPATCH=7.4.8
+PHPREDISPATCH=5.3.1
+PHPINIFILE=/opt/php/$PHPMINOR/lib/php.ini
+
 POSTGRESVERSION=11
 
 export DEBIAN_FRONTEND=noninteractive
 
 # Install Base Packages
-apt-get install -y bash-completion build-essential vim openssl git curl htop sudo lsb-release ca-certificates unzip zip openssl ssl-cert autoconf pkg-config
-apt-get install -y libxml2 libxml2-dev libpng-dev libpq-dev libreadline-dev libzip-dev libssl-dev libcurl4 libcurl4-openssl-dev libsodium-dev libxslt-dev
+apt-get install -y bash-completion build-essential vim openssl git curl htop sudo lsb-release ca-certificates unzip zip openssl ssl-cert autoconf pkg-config rsync
+apt-get install -y libxml2 libxml2-dev libsqlite3-dev libjpeg-dev libonig-dev libicu-dev libpng-dev libpq-dev libbz2-dev libreadline-dev libzip-dev libssl-dev libcurl4 libxslt1-dev libcurl4-openssl-dev libsodium-dev libxslt-dev
 
 # Install Redis and Postgres
 apt-get install -y redis-server
@@ -18,17 +22,30 @@ apt-get install -y postgresql-client
 sed -i "s/ md5/ trust/" /etc/postgresql/$POSTGRESVERSION/main/pg_hba.conf
 
 # Install PHP
-apt-get install -y php-common php-cli php-json php-curl php-pgsql php-opcache php-intl php-xml php-xmlrpc php-redis php-igbinary php-readline php-mbstring php-zip php-gd php-bcmath php-soap
+mkdir -p /opt/src/
+mkdir -p "/opt/php/$PHPMINOR/"
+
+rm -f "/opt/src/php-$PHPPATCH.tar.gz"
+wget "https://www.php.net/distributions/php-$PHPPATCH.tar.gz" -q -O "/opt/src/php-$PHPPATCH.tar.gz"
+tar -xzf "/opt/src/php-$PHPPATCH.tar.gz"
+
+rm -f "/opt/src/php-redis-$PHPREDISPATCH.tgz"
+wget "https://pecl.php.net/get/redis-$PHPREDISPATCH.tgz" -q -O "/opt/src/php-redis-$PHPREDISPATCH.tgz"
+tar -xzf "/opt/src/php-redis-$PHPREDISPATCH.tgz"
+mv "/opt/src/redis-$PHPREDISPATCH" "/opt/src/php-redis-$PHPREDISPATCH"
+
+cd "/opt/src/php-$PHPPATCH/"
+
+./configure --prefix=/opt/php/$PHPMINOR/ --with-pdo-pgsql --with-zlib-dir --enable-mbstring --enable-soap --with-openssl --with-curl --with-zlib --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-pcntl --enable-mbregex --enable-bcmath  --with-xmlrpc --enable-opcache --enable-intl --enable-gd --with-zip --with-jpeg --with-gettext --with-readline --enable-calendar --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-shmop 
+
+make -j5 && make install
+cp /opt/src/php-$PHPPATCH/php.ini-development $PHPINIFILE
 
 # Configure PHP
-PHPINIFILE=/etc/php/$PHPVERSION/cli/php.ini
-
-sed -i "s/error_reporting = .*/error_reporting = E_ALL/" $PHPINIFILE
-sed -i "s/display_errors = .*/display_errors = On/" $PHPINIFILE
 sed -i "s/;date.timezone.*/date.timezone = UTC/" $PHPINIFILE
 sed -i "s/post_max_size = .*/post_max_size = 32M/" $PHPINIFILE
 sed -i "s/upload_max_filesize = .*/upload_max_filesize = 24M/" $PHPINIFILE
-sed -i "s/memory_limit = .*/memory_limit = 1024M/" $PHPINIFILE
+sed -i "s/memory_limit = .*/memory_limit = -1/" $PHPINIFILE
 
 # Install Global PHP Commands
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -38,9 +55,6 @@ curl -sS https://get.symfony.com/cli/installer | bash
 mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 chmod +x /usr/local/bin/symfony
 
-# Install Node and NVM
-su - vagrant -c ". /vagrant/provision4"
-
 # User Setup
 wget -q https://raw.githubusercontent.com/brightmarch/vagrant-box/master/files/.profile -O /etc/skel/.profile
 
@@ -48,6 +62,7 @@ cp /etc/skel/.profile /home/vagrant/.profile
 chown -R vagrant:vagrant /home/vagrant/
 
 # Cleanup
+rm -rf /opt/src/*
 apt-get -y autoremove
 apt-get -y clean
 
