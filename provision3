@@ -34,7 +34,7 @@ tar -xzf "/opt/src/php-$PHPPATCH.tar.gz"
 
 cd "/opt/src/php-$PHPPATCH/"
 
-./configure "--prefix=/opt/php/$PHPMINOR/" --disable-cgi --with-pdo-pgsql --with-zlib-dir --enable-mbstring --enable-soap --with-openssl --with-curl --with-zlib --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-pcntl --enable-mbregex --enable-bcmath  --with-xmlrpc --enable-opcache --enable-intl --enable-gd --with-zip --with-jpeg --with-gettext --with-readline --enable-calendar --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-shmop
+./configure "--prefix=/opt/php/$PHPMINOR/" --disable-cgi --with-pdo-pgsql --with-zlib-dir --enable-mbstring --enable-soap --with-openssl --with-curl --with-zlib --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-pcntl --enable-mbregex --enable-bcmath  --with-xmlrpc --enable-opcache --enable-intl --with-gd --enable-zip --with-gettext --with-readline --enable-calendar --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-shmop
 
 make && make install
 cp /opt/src/php-$PHPPATCH/php.ini-development $PHPINIFILE
