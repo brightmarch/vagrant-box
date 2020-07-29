@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-PHPMINOR=7.4
-PHPPATCH=7.4.8
+PHPMINOR=7.3
+PHPPATCH=7.3.20
 PHPREDISPATCH=5.3.1
 PHPINIFILE=/opt/php/$PHPMINOR/lib/php.ini
 
@@ -34,7 +34,7 @@ tar -xzf "/opt/src/php-$PHPPATCH.tar.gz"
 
 cd "/opt/src/php-$PHPPATCH/"
 
-./configure "--prefix=/opt/php/$PHPMINOR/" --disable-cgi --with-pdo-pgsql --with-zlib-dir --enable-mbstring --enable-soap --with-openssl --with-curl --with-zlib --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-pcntl --enable-mbregex --enable-bcmath  --with-xmlrpc --enable-opcache --enable-intl --enable-gd --with-zip --with-jpeg --with-gettext --with-readline --enable-calendar --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-shmop CFLAGS="-O3"
+./configure "--prefix=/opt/php/$PHPMINOR/" --disable-cgi --with-pdo-pgsql --with-zlib-dir --enable-mbstring --enable-soap --with-openssl --with-curl --with-zlib --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-pcntl --enable-mbregex --enable-bcmath  --with-xmlrpc --enable-opcache --enable-intl --enable-gd --with-zip --with-jpeg --with-gettext --with-readline --enable-calendar --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-shmop
 
 make && make install
 cp /opt/src/php-$PHPPATCH/php.ini-development $PHPINIFILE
@@ -80,6 +80,7 @@ chown -R vagrant:vagrant /home/vagrant/
 
 # Cleanup
 rm -rf /opt/src/*
+rm -rf /opt/VBoxGuestAdditions*
 apt-get -y autoremove
 apt-get -y clean
 
