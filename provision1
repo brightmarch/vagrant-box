@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export DEBIAN_FRONTEND=noninteractive
+VBOX_VERSION=6.1.12
 
 # Locale
 echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
@@ -9,7 +10,11 @@ locale-gen en_US.UTF-8
 # Timezone
 ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 
-# Upgrades
-apt-get update -y
-apt-get upgrade -y
-apt-get dist-upgrade -y
+# Install Guest Additions
+mkdir -p "/mnt/vbox"
+apt-get install -y linux-headers-`uname -r` dkms
+
+wget "https://download.virtualbox.org/virtualbox/$VBOX_VERSION/VBoxGuestAdditions_$VBOX_VERSION.iso" -O "/vagrant/VBoxGuestAdditions_$VBOX_VERSION.iso"
+
+mount "/vagrant/VBoxGuestAdditions_$VBOX_VERSION.iso" /mnt/vbox
+sh /mnt/vbox/VBoxLinuxAdditions.run

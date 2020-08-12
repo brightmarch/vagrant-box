@@ -1,13 +1,4 @@
 #!/usr/bin/env bash
 
-VBOX_VERSION=6.1.12
-
 export DEBIAN_FRONTEND=noninteractive
-mkdir -p /mnt/vbox
 
-apt-get install -y linux-headers-`uname -r` dkms
-
-wget "https://download.virtualbox.org/virtualbox/$VBOX_VERSION/VBoxGuestAdditions_$VBOX_VERSION.iso" -O "/vagrant/VBoxGuestAdditions_$VBOX_VERSION.iso"
-mount "/vagrant/VBoxGuestAdditions_$VBOX_VERSION.iso" /mnt/vbox
-
-sh /mnt/vbox/VBoxLinuxAdditions.run
