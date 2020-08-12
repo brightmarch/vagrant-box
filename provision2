@@ -31,13 +31,14 @@ mkdir -p "/opt/freetype/$FREETYPEMINOR"
 cd "/opt/src/"
 
 rm -f "/opt/src/freetype-$FREETYPEPATCH.tar.gz"
+rm -rf "/opt/src/freetype-$FREETYPEPATCH"
 
 wget "https://download.savannah.gnu.org/releases/freetype/freetype-$FREETYPEPATCH.tar.gz" -q -O "/opt/src/freetype-$FREETYPEPATCH.tar.gz"
 tar -xzf "/opt/src/freetype-$FREETYPEPATCH.tar.gz"
 
 cd "/opt/src/freetype-$FREETYPEPATCH"
 
-./configure "--prefix=/opt/freetype/$FREETYPEMINOR" --enable-freetype-config
+./configure "--prefix=/opt/freetype/$FREETYPEMINOR" --enable-freetype-config --with-bzip2=yes
 make && make install
 
 # Install PHP
@@ -52,15 +53,16 @@ tar -xzf "/opt/src/php-$PHPPATCH.tar.gz"
 
 cd "/opt/src/php-$PHPPATCH/"
 
-./configure "--prefix=/opt/php/$PHPMINOR/" --disable-cgi --with-pdo-pgsql --with-zlib-dir --enable-mbstring --enable-soap --with-openssl --with-curl --with-zlib --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-pcntl --enable-mbregex --enable-bcmath  --with-xmlrpc --enable-opcache --enable-intl --with-gd --enable-zip --with-gettext --with-readline --enable-calendar --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-shmop --enable-exif --with-jpeg-dir=/usr/lib --with-png-dir=/usr/lib "--with-freetype-dir=/opt/src/freetype-$FREETYPEPATCH"
+PKG_CONFIG_PATH="/opt/freetype/$FREETYPEMINOR/lib/pkgconfig" ./configure "--prefix=/opt/php/$PHPMINOR/" --disable-cgi --with-pdo-pgsql --with-zlib-dir --enable-mbstring --enable-soap --with-openssl --with-curl --with-zlib --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-pcntl --enable-mbregex --enable-bcmath  --with-xmlrpc --enable-opcache --enable-intl --with-gd --enable-zip --with-gettext --with-readline --enable-calendar --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-shmop --enable-exif --with-jpeg-dir=/usr/lib --with-png-dir=/usr/lib "--with-freetype-dir=/opt/freetype/freetype-$FREETYPEMINOR"
 make && make install
 
 cp /opt/src/php-$PHPPATCH/php.ini-development $PHPINIFILE
 
+# Build PHP Redis
 PATH="/opt/php/$PHPMINOR/bin:$PATH"
 
-# Build PHP Redis
 cd "/opt/src/"
+
 rm -f "/opt/src/php-redis-$PHPREDISPATCH.tgz"
 rm -rf "/opt/src/php-redis-$PHPREDISPATCH"
 
@@ -69,9 +71,9 @@ tar -xzf "/opt/src/php-redis-$PHPREDISPATCH.tgz"
 mv "/opt/src/redis-$PHPREDISPATCH" "/opt/src/php-redis-$PHPREDISPATCH"
 
 cd "/opt/src/php-redis-$PHPREDISPATCH/"
+
 "/opt/php/$PHPMINOR/bin/phpize"
 ./configure "--with-php-config=/opt/php/$PHPMINOR/bin/php-config"
-
 make && make install
 
 # Configure PHP
