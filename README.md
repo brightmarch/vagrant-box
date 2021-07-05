@@ -1,28 +1,31 @@
 # Bright March Vagrant Box
-A Debian Buster 10.3.0 64-bit box for VirtualBox 6.0 that includes:
+A Debian Buster 10.4.0 64-bit box for VirtualBox 6.1 that includes:
 
-* PHP 7.3.14
-* PHP Composer 1.10.1
+* PHP 7.3.21
+* PHP Composer 1.10.9
 * PHP Phing 2.16.3
-* Postgres 11.5.1
+* Postgres 11.7
 * Redis 5.0.3
 
 ## Box
 You are free to use our box if you like. They are hosted using Hashicorp's Atlas service.
 
-* [brightmarch/debian-jessie64](https://app.vagrantup.com/brightmarch/boxes/debian-jessie64)
-
-## Requirements
-Before building the box, please ensure the [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest) plugin and VirtualBox 6.0.x (with guest extensions) are installed.
+* [brightmarch/debian-buster64](https://app.vagrantup.com/brightmarch/boxes/debian-buster64)
 
 ## Packaging
 Package the box with the following command:
 
 ```
-vagrant package --output=debian-jessie64-`cat VERSION`.box
+vagrant package --output=debian-buster64-`cat VERSION`.box
 ```
 
 ## Changelog
+### 4.3.0
+* Upgraded PHP to 7.3.21.
+* Upgraded PHP Composer to 1.10.9.
+* Upgraded Postgres to 11.7.
+* Packaged using VirtualBox 6.1.12.
+
 ### 4.0.3
 * Added the `symfony` command line tool.
 * Upgraded PHP to 7.3.14.
