@@ -1,14 +1,10 @@
 #!/usr/bin/env bash
 
 export DEBIAN_FRONTEND=noninteractive
-VBOX_VERSION=6.1.12
+VBOX_VERSION=6.1.18
 
-# Locale
-echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
+# Generate Locale
 locale-gen en_US.UTF-8
-
-# Timezone
-ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 
 # Install Guest Additions
 mkdir -p "/mnt/vbox"

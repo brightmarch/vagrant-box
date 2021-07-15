@@ -18,7 +18,7 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-PATH="/opt/php/7.3/bin:$PATH"
+PATH="/opt/php/7.4/bin:$PATH"
 
 # Command Line
 export PS1="[\[\033[01;96m\]vagrant:\w\[\033[00m\]] (\[\033[01;96m\]\u@\H \$(date +%H:%M:%S)\[\033[00m\])# "
