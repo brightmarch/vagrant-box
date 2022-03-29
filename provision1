@@ -10,7 +10,7 @@ locale-gen en_US.UTF-8
 mkdir -p "/mnt/vbox"
 apt-get install -y linux-headers-`uname -r` dkms
 
-wget "https://download.virtualbox.org/virtualbox/$VBOX_VERSION/VBoxGuestAdditions_$VBOX_VERSION.iso" -O "/vagrant/VBoxGuestAdditions_$VBOX_VERSION.iso"
+wget "https://download.virtualbox.org/virtualbox/$VBOX_VERSION/VBoxGuestAdditions_$VBOX_VERSION.iso" -q -O "/vagrant/VBoxGuestAdditions_$VBOX_VERSION.iso"
 
 mount "/vagrant/VBoxGuestAdditions_$VBOX_VERSION.iso" /mnt/vbox
 sh /mnt/vbox/VBoxLinuxAdditions.run

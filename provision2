@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
-PHPMINOR=7.4
-PHPPATCH=7.4.21
-PHPREDISPATCH=5.3.4
+export DEBIAN_FRONTEND=noninteractive
+
+# Package Versions
+PHPMINOR=8.0
+PHPPATCH=8.0.15
+PHPREDISPATCH=5.3.6
 PHPINIFILE=/opt/php/$PHPMINOR/lib/php.ini
 
 FREETYPEMINOR=2.10
 FREETYPEPATCH=2.10.2
 
 POSTGRESMINOR=11
-
-export DEBIAN_FRONTEND=noninteractive
 
 # Install Base Packages
 apt-get install -y bash-completion build-essential vim openssl git curl htop sudo lsb-release ca-certificates unzip zip openssl ssl-cert autoconf pkg-config rsync bison nginx
@@ -24,6 +25,7 @@ apt-get install -y postgresql-client
 # Configure Postgres
 sed -i "s/ md5/ trust/" /etc/postgresql/$POSTGRESMINOR/main/pg_hba.conf
 
+# Source Directory
 mkdir -p "/opt/src/"
 
 # Install Freetype
@@ -53,14 +55,13 @@ tar -xzf "/opt/src/php-$PHPPATCH.tar.gz"
 
 cd "/opt/src/php-$PHPPATCH/"
 
-PKG_CONFIG_PATH="/opt/freetype/$FREETYPEMINOR/lib/pkgconfig" ./configure "--prefix=/opt/php/$PHPMINOR/" --with-pdo-pgsql --with-zlib-dir --enable-mbstring --enable-soap --with-openssl --with-curl --with-zlib --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-pcntl --enable-mbregex --enable-bcmath  --with-xmlrpc --enable-opcache --enable-intl --enable-gd --with-zip --with-gettext --with-readline --enable-calendar --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-shmop --enable-exif --enable-fpm --with-sodium --with-jpeg --with-freetype --with-fpm-user=www-data --with-fpm-group=www-data
+PKG_CONFIG_PATH="/opt/freetype/$FREETYPEMINOR/lib/pkgconfig" ./configure "--prefix=/opt/php/$PHPMINOR/" --with-pdo-pgsql --with-zlib-dir --enable-mbstring --enable-soap --with-openssl --with-curl --with-zlib --with-bz2 --with-zlib --enable-sockets --enable-pcntl --enable-mbregex --enable-bcmath  --enable-opcache --enable-intl --enable-gd --with-zip --with-gettext --with-readline --enable-calendar --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-shmop --enable-exif --enable-fpm --with-sodium --with-jpeg --with-freetype --with-fpm-user=www-data --with-fpm-group=www-data
 make && make install
 
 cp /opt/src/php-$PHPPATCH/php.ini-development $PHPINIFILE
-
-# Build PHP Redis
 PATH="/opt/php/$PHPMINOR/bin:$PATH"
 
+# Build PHP Redis
 cd "/opt/src/"
 
 rm -f "/opt/src/php-redis-$PHPREDISPATCH.tgz"
@@ -68,8 +69,8 @@ rm -rf "/opt/src/php-redis-$PHPREDISPATCH"
 
 wget "https://pecl.php.net/get/redis-$PHPREDISPATCH.tgz" -q -O "/opt/src/php-redis-$PHPREDISPATCH.tgz"
 tar -xzf "/opt/src/php-redis-$PHPREDISPATCH.tgz"
-mv "/opt/src/redis-$PHPREDISPATCH" "/opt/src/php-redis-$PHPREDISPATCH"
 
+mv "/opt/src/redis-$PHPREDISPATCH" "/opt/src/php-redis-$PHPREDISPATCH"
 cd "/opt/src/php-redis-$PHPREDISPATCH/"
 
 "/opt/php/$PHPMINOR/bin/phpize"
@@ -78,15 +79,15 @@ make && make install
 
 # Configure PHP
 sed -i "s/;date.timezone.*/date.timezone = UTC/" $PHPINIFILE
-sed -i "s/post_max_size = .*/post_max_size = 32M/" $PHPINIFILE
-sed -i "s/upload_max_filesize = .*/upload_max_filesize = 24M/" $PHPINIFILE
-sed -i "s/memory_limit = .*/memory_limit = -1/" $PHPINIFILE
+sed -i "s/post_max_size = .*/post_max_size = 48M/" $PHPINIFILE
+sed -i "s/upload_max_filesize = .*/upload_max_filesize = 32M/" $PHPINIFILE
+sed -i "s/memory_limit = .*/memory_limit = 256M/" $PHPINIFILE
 
 echo "extension=redis" >> $PHPINIFILE
 echo "zend_extension=opcache" >> $PHPINIFILE
 
 # Install Global PHP Commands
-curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+curl -sS https://getcomposer.org/installer | /opt/php/$PHPMINOR/bin/php -- --install-dir=/usr/local/bin --filename=composer
 wget -q http://phing.info/get/phing-latest.phar -O /usr/local/bin/phing && chmod +x /usr/local/bin/phing
 
 curl -sS https://get.symfony.com/cli/installer | bash
@@ -100,6 +101,7 @@ cp /etc/skel/.profile /home/vagrant/.profile
 chown -R vagrant:vagrant /home/vagrant/
 
 # Cleanup
+cd /
 rm -rf /opt/src/*
 rm -rf /opt/VBoxGuestAdditions*
 apt-get -y autoremove

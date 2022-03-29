@@ -1,10 +1,11 @@
 # Bright March Vagrant Box
 A Debian Buster 10.4.0 64-bit box for VirtualBox 6.1 that includes:
 
-* PHP 7.3.21
-* PHP Composer 1.10.9
-* PHP Phing 2.16.3
-* Postgres 11.7
+* Nginx 1.14.2
+* PHP 8.0.15
+* PHP Composer 2.1.3
+* PHP Phing 2.16.4
+* Postgres 11.12
 * Redis 5.0.3
 
 ## Box
@@ -20,11 +21,17 @@ vagrant package --output=debian-buster64-`cat VERSION`.box
 ```
 
 ## Changelog
-### 4.3.0
-* Upgraded PHP to 7.3.21.
-* Upgraded PHP Composer to 1.10.9.
-* Upgraded Postgres to 11.7.
-* Packaged using VirtualBox 6.1.12.
+### 5.0.0
+* Upgraded PHP to 8.0.15.
+* Upgraded PHP Composer to 2.2.6.
+* Packaged using VirtualBox 6.1.18.
+
+### 4.4.0
+* Install Nginx 1.14.2.
+* Upgraded PHP to 7.4.21 with PHP-FPM.
+* Upgraded PHP Composer to 2.1.3.
+* Upgraded Postgres to 11.12.
+* Packaged using VirtualBox 6.1.18.
 
 ### 4.0.3
 * Added the `symfony` command line tool.
